@@ -1,3 +1,4 @@
+import 'package:covid19/autoAvaliationPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -63,25 +64,30 @@ class HomePageAppBar extends StatelessWidget implements PreferredSizeWidget {
               decoration: BoxDecoration(
                   color: Color(0xFF64f460),
                   borderRadius: BorderRadius.circular(13)),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                Icon(Icons.sentiment_very_satisfied, size: 36, color: Colors.white,),
-                Text("Bem",
-                    style: TextStyle(
-                      fontFamily: 'Montserrat',
-                      color: Colors.white,
-                      fontSize: 21,
-                      fontWeight: FontWeight.w700,
-                      fontStyle: FontStyle.normal,
-                      letterSpacing: -0.231,
-                    )
-                ),
-                Icon(Icons.sentiment_very_satisfied, size: 36, color: Color(0xFF64f460),),
+            child: FlatButton(
+              onPressed: () {
+
+              },
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  Icon(Icons.sentiment_very_satisfied, size: 36, color: Colors.white,),
+                  Text("Bem",
+                      style: TextStyle(
+                        fontFamily: 'Montserrat',
+                        color: Colors.white,
+                        fontSize: 21,
+                        fontWeight: FontWeight.w700,
+                        fontStyle: FontStyle.normal,
+                        letterSpacing: -0.231,
+                      )
+                  ),
+                  Icon(Icons.sentiment_very_satisfied, size: 36, color: Color(0x0064f460),),
 
 
-              ],
+                ],
+              ),
             ),
           ),
           Container(
@@ -91,25 +97,29 @@ class HomePageAppBar extends StatelessWidget implements PreferredSizeWidget {
               decoration: BoxDecoration(
                   color: Color(0xFFf65f68),
                   borderRadius: BorderRadius.circular(13)),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                Icon(Icons.sentiment_very_dissatisfied, size: 36, color: Colors.white,),
-                Text("Mal",
-                    style: TextStyle(
-                      fontFamily: 'Montserrat',
-                      color: Colors.white,
-                      fontSize: 21,
-                      fontWeight: FontWeight.w700,
-                      fontStyle: FontStyle.normal,
-                      letterSpacing: -0.231,
-                    )
+              child: FlatButton(
+                onPressed: () {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => AutoAvaliationPage()));
+                },
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    Icon(Icons.sentiment_very_dissatisfied, size: 36, color: Colors.white,),
+                    Text("Mal",
+                        style: TextStyle(
+                          fontFamily: 'Montserrat',
+                          color: Colors.white,
+                          fontSize: 21,
+                          fontWeight: FontWeight.w700,
+                          fontStyle: FontStyle.normal,
+                          letterSpacing: -0.231,
+                        )
+                    ),
+                    Icon(Icons.sentiment_very_satisfied, size: 36, color: Color(0x00f65f68),),
+                  ],
                 ),
-                Icon(Icons.sentiment_very_satisfied, size: 36, color: Color(0xFFf65f68),),
-
-
-              ],
             ),
           ),
           Container(
