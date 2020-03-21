@@ -1,6 +1,8 @@
 import 'dart:async';
 
+import 'package:covid19/global/homePageAppBar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:location/location.dart';
 
 class HomePage extends StatefulWidget {
@@ -12,7 +14,7 @@ class _HomePageState extends State<HomePage> {
   Timer timer;
 
   _funct() async {
-    Location location = new Location();
+    Location location = Location();
 
     bool _serviceEnabled;
     PermissionStatus _permissionGranted;
@@ -56,16 +58,162 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Home'),
-      ),
-      body: Column(
-        children: <Widget>[
-          RaisedButton(
-            child: Text('teste'),
-            onPressed: () {},
-          ),
-        ],
+      appBar: HomePageAppBar(),
+      body: Container(
+        width: MediaQuery.of(context).size.width,
+        color: Color(0xffefefef),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Container(
+                  margin: EdgeInsets.only(top: 30),
+                  width: 143,
+                  height: 153,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(18)),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
+                        width: 66,
+                        height: 66,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(50)),
+                        ),
+                        child: Icon(Icons.favorite, size: 60, color: Color(0xff27b3ff),)
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(top: 10),
+                        child: Text("Diagnostico",
+                            style: TextStyle(
+                              fontFamily: 'Montserrat',
+                              color: Color(0xff707070),
+                              fontSize: 12,
+                              fontWeight: FontWeight.w600,
+                              fontStyle: FontStyle.normal,
+                              letterSpacing: -0.132,
+                            )),
+                      )
+                    ],
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(top: 20),
+                  width: 143,
+                  height: 153,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(18)),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
+                        width: 66,
+                        height: 66,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(50)),
+                        ),
+                        child: Icon(Icons.note, size: 60, color: Color(0xff27b3ff),)
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(top: 10),
+                        child: Text("Notícias",
+                            style: TextStyle(
+                              fontFamily: 'Montserrat',
+                              color: Color(0xff707070),
+                              fontSize: 12,
+                              fontWeight: FontWeight.w600,
+                              fontStyle: FontStyle.normal,
+                              letterSpacing: -0.132,
+                            )),
+                      )
+                    ],
+                  ),
+                )
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Container(
+                  margin: EdgeInsets.only(top: 30),
+                  width: 143,
+                  height: 153,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(18)),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
+                        width: 66,
+                        height: 66,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(50)),
+                        ),
+                        child: Icon(Icons.lightbulb_outline, size: 60, color: Color(0xff27b3ff),)
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(top: 10),
+                        child: Text("Dicas",
+                            style: TextStyle(
+                              fontFamily: 'Montserrat',
+                              color: Color(0xff707070),
+                              fontSize: 12,
+                              fontWeight: FontWeight.w600,
+                              fontStyle: FontStyle.normal,
+                              letterSpacing: -0.132,
+                            )),
+                      )
+                    ],
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(top: 20),
+                  width: 143,
+                  height: 153,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(18)),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
+                        width: 66,
+                        height: 66,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(50)),
+                        ),
+                        child: Icon(Icons.help, size: 60, color: Color(0xff27b3ff),)
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(top: 10),
+                        child: Text("Ajuda",
+                            style: TextStyle(
+                              fontFamily: 'Montserrat',
+                              color: Color(0xff707070),
+                              fontSize: 12,
+                              fontWeight: FontWeight.w600,
+                              fontStyle: FontStyle.normal,
+                              letterSpacing: -0.132,
+                            )),
+                      )
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
