@@ -93,7 +93,7 @@ class NewsList extends StatelessWidget {
 
   _launchURL(url) async {
     if (await canLaunch(url)) {
-      await launch(url, forceWebView: true); //forceWebView
+      await launch(url, forceSafariVC: true); //forceWebView
     } else {
       throw 'Could not launch $url';
     }
@@ -130,14 +130,14 @@ class NewsList extends StatelessWidget {
                     subtitle: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                      Container(
-                      child: Text(
-                        news[index].description,
-                        softWrap: true,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 2,
-                      ),
-                    ),
+                        Container(
+                          child: Text(
+                            news[index].description,
+                            softWrap: true,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
+                          ),
+                        ),
                         Padding(
                           padding: EdgeInsets.only(top: 10, bottom: 10),
                           child: Container(
@@ -149,20 +149,18 @@ class NewsList extends StatelessWidget {
                             ),
                           ),
                         ),
-
-                    ],),
-                    trailing:
-                      Container(
-                        width: 60.0,
-                        height: 60.0,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: NetworkImage(news[index].urlToImage)
-                          ),
-                          borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                        ),
+                      ],
+                    ),
+                    trailing: Container(
+                      width: 60.0,
+                      height: 60.0,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image: NetworkImage(news[index].urlToImage)),
+                        borderRadius: BorderRadius.all(Radius.circular(8.0)),
                       ),
+                    ),
                   ),
                   elevation: 0,
                 ),
