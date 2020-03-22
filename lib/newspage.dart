@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
+import 'package:covid19/global/backAppBar.dart';
 
 class NewsPageConstants {
   static String baseUrl = "https://newsapi.org/v2/";
@@ -13,12 +14,8 @@ class NewsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.grey,
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          title: Center(
-            child: Text("Notícias", style: TextStyle(color: Colors.blue)),
-          ),
-          iconTheme: IconThemeData(color: Colors.white),
+        appBar: BackAppBar(
+          title: 'Notícias',
         ),
         body: SafeArea(
           child: Column(children: <Widget>[
@@ -112,7 +109,7 @@ class NewsList extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 Card(
-                  margin: EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
+                  margin: EdgeInsets.only(top: 10.0, left: 20.0, right: 20.0),
                   child: ListTile(
                     isThreeLine: true,
                     onTap: () async {
@@ -130,30 +127,44 @@ class NewsList extends StatelessWidget {
                         ),
                       ),
                     ),
-                    subtitle: Container(
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                      Container(
                       child: Text(
                         news[index].description,
                         softWrap: true,
                         overflow: TextOverflow.ellipsis,
-                        maxLines: 4,
+                        maxLines: 2,
                       ),
                     ),
-                    trailing: Column(children: <Widget>[
+                        Padding(
+                          padding: EdgeInsets.only(top: 10, bottom: 10),
+                          child: Container(
+                            child: Text(
+                              'Há ${DateTime.now().difference(DateTime.parse(news[index].publishedAt)).inHours} horas',
+                              softWrap: true,
+                              style: TextStyle(
+                                  fontSize: 14.0, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ),
+
+                    ],),
+                    trailing:
                       Container(
-                          child: CircleAvatar(
-                        radius: 20.0,
-                        backgroundColor: Colors.transparent,
-                        backgroundImage: NetworkImage(news[index].urlToImage),
-                      )),
-                      Text(
-                        '${DateTime.now().difference(DateTime.parse(news[index].publishedAt)).inHours} horas atrás',
-                        softWrap: true,
-                        style: TextStyle(
-                            fontSize: 9.0, fontWeight: FontWeight.bold),
+                        width: 60.0,
+                        height: 60.0,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: NetworkImage(news[index].urlToImage)
+                          ),
+                          borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                        ),
                       ),
-                    ]),
                   ),
-                  elevation: 6,
+                  elevation: 0,
                 ),
               ]);
         });
