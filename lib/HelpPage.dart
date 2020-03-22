@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:core';
 import 'dart:async';
+import 'package:covid19/global/generalAppBar.dart';
 import 'package:covid19/mobx/imports.dart';
 import 'package:csv/csv.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +24,7 @@ class _HelpPageState extends State<HelpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: GeneralAppBar(title: 'Ajuda',),
       body: MapSample(),
     );
   }
