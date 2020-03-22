@@ -1,8 +1,13 @@
 import 'dart:convert';
+import 'dart:core';
 import 'dart:async';
+import 'package:covid19/global/generalAppBar.dart';
 import 'package:covid19/mobx/imports.dart';
+import 'package:csv/csv.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:maps_launcher/maps_launcher.dart';
 
 class HelpPage extends StatefulWidget {
   @override
@@ -12,29 +17,14 @@ class HelpPage extends StatefulWidget {
 class _HelpPageState extends State<HelpPage> {
   @override
   void initState() {
-    teste();
     super.initState();
   }
-
   //https://i3geo.saude.gov.br/i3geo/ogc.php?service=WFS&version=1.0.0&request=GetFeature&typeName=ubs_funcionamento&outputFormat=JSON
-  Future<void> teste () async {
-    String data = await DefaultAssetBundle.of(context).loadString("assets/dataframe.json");
-    final jsonResult = json.decode(data);
-    var latitude = jsonResult['lat'];
-    var longitude = jsonResult['long'];
-    var name = jsonResult['no_fantasia'];
-    var place = jsonResult['no_logradouro'];
-    var number = jsonResult['nu_telefone'];
-    var cep = jsonResult['co_cep'];
-    var uf = jsonResult['uf'];
-    var city = jsonResult['cidade'];
-    print(latitude);
-  }
   
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: GeneralAppBar(title: 'Ajuda',),
       body: MapSample(),
     );
   }
@@ -48,36 +38,94 @@ class MapSample extends StatefulWidget {
 class MapSampleState extends State<MapSample> {
   Completer<GoogleMapController> _controller = Completer();
 
-  static final CameraPosition _kGooglePlex = CameraPosition(
+  static final CameraPosition _initialPosition = CameraPosition(
     target: LatLng(handleLocations.latitude, handleLocations.longitude),
     zoom: handleLocations.accuracy,
   );
 
-  static final CameraPosition _kLake = CameraPosition(
+  static final CameraPosition _currentPosition = CameraPosition(
       bearing: 192.8334901395799,
       target: LatLng(handleLocations.latitude, handleLocations.longitude),
       zoom: handleLocations.accuracy);
+
+  Set<Marker> _markers = {};
+
+  BitmapDescriptor pinLocationIcon;
+
+  @override
+  void initState() {
+    BitmapDescriptor.fromAssetImage(
+        ImageConfiguration(devicePixelRatio: 2.5),
+        'assets/pin.png').then((onValue) {
+      pinLocationIcon = onValue;
+    });
+    super.initState();
+  }
+
+/*
+  loadAsset() async {
+    final myData = await rootBundle.loadString("assets/dataframe.csv");
+    List<List<dynamic>> csvTable = CsvToListConverter().convert(myData);
+
+    data = csvTable;
+    print(data.map((e) {
+      return e;
+    }).toList()[1][1]);
+  }
+*/
+
+  Set<Marker> _createMarker() {
+    return <Marker>[
+      Marker(
+        markerId: MarkerId("marker_1"),
+        position: LatLng(handleLocations.latitude, handleLocations.longitude),
+        icon: pinLocationIcon,
+      ),
+    ].toSet();
+  }
+
 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       body: GoogleMap(
-        mapType: MapType.hybrid,
-        initialCameraPosition: _kGooglePlex,
+        myLocationEnabled: true,
+        markers: _markers,
+        myLocationButtonEnabled: false,
+        mapToolbarEnabled: false,
+        buildingsEnabled: false,
+        mapType: MapType.normal,
+        initialCameraPosition: _initialPosition,
         onMapCreated: (GoogleMapController controller) {
           _controller.complete(controller);
-        },
+          setState(() {
+            for(int i = 0; i < handleLocations.ubsNames.length-1; i++) {
+              double minusLat = handleLocations.latitude - double.parse(handleLocations.ubsLatitudes[i]);
+              double minusLong = handleLocations.longitude - double.parse(handleLocations.ubsLongitudes[i]);
+              if(minusLat.abs() <= 0.1 && minusLong.abs() <= 0.1) {
+                _markers.add(
+                    Marker(
+                      infoWindow: InfoWindow(title: handleLocations.ubsNames[i].replaceAll("'", ''), snippet: 'Clique aqui para navegar ate o local!', onTap:  () => MapsLauncher.launchCoordinates(double.parse(handleLocations.ubsLatitudes[i]), double.parse(handleLocations.ubsLongitudes[i]))),
+                      markerId: MarkerId(handleLocations.ubsNames[i]),
+                      position: LatLng(double.parse(handleLocations.ubsLatitudes[i]), double.parse(handleLocations.ubsLongitudes[i])),
+                      icon: pinLocationIcon,
+                    )
+                );
+              }
+            }
+          });
+          },
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.white,
-        onPressed: _goToTheLake,
-        child: Icon(Icons.my_location, color: Colors.black54,),
+        onPressed: _goToCurrentPosition,
+        child: Icon(Icons.my_location, color: Color(0xff27b3ff),),
       ),
     );
   }
 
-  Future<void> _goToTheLake() async {
+  Future<void> _goToCurrentPosition() async {
     final GoogleMapController controller = await _controller.future;
-    controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
+    controller.animateCamera(CameraUpdate.newCameraPosition(_currentPosition));
   }
 }
