@@ -30,6 +30,8 @@ dependencies:
   url_launcher: ^4.0.3
   http: ^0.12.0+4
   google_maps_flutter: ^0.5.25
+  csv: ^4.0.3
+
 
 dev_dependencies:
   flutter_test:
