@@ -6,6 +6,7 @@ import 'package:csv/csv.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:maps_launcher/maps_launcher.dart';
 
 class HelpPage extends StatefulWidget {
   @override
@@ -15,36 +16,9 @@ class HelpPage extends StatefulWidget {
 class _HelpPageState extends State<HelpPage> {
   @override
   void initState() {
-    teste();
     super.initState();
   }
   //https://i3geo.saude.gov.br/i3geo/ogc.php?service=WFS&version=1.0.0&request=GetFeature&typeName=ubs_funcionamento&outputFormat=JSON
-  Future<void> teste () async {
-    String latitudes = await DefaultAssetBundle.of(context).loadString('assets/lat.txt');
-    String longitudes = await DefaultAssetBundle.of(context).loadString('assets/long.txt');
-    String no_fantasias = await DefaultAssetBundle.of(context).loadString('assets/no_fantasia.txt');
-    String no_logradouros = await DefaultAssetBundle.of(context).loadString('assets/no_logradouro.txt');
-    String nu_telefone = await DefaultAssetBundle.of(context).loadString('assets/nu_telefone.txt');
-    String co_ceps = await DefaultAssetBundle.of(context).loadString('assets/co_cep.txt');
-    String ufs = await DefaultAssetBundle.of(context).loadString('assets/uf.txt');
-    String cidades = await DefaultAssetBundle.of(context).loadString('assets/cidade.txt');
-
-
-    //String data = await DefaultAssetBundle.of(context).loadString("assets/dataframe.json");
-    //final jsonResult = json.decode(data);
-    handleLocations.setUBS(latitudes.split(','), longitudes.split(','), no_fantasias.split(','), no_logradouros.split(','), nu_telefone.split(','), co_ceps.split(','), ufs.split(','), cidades.split(','));
-    //print(handleLocations.ubsNames.length);
-    /*handleLocations.setUBS(
-        jsonResult['lat'],
-        jsonResult['long'],
-        jsonResult['no_fantasia'],
-        jsonResult['no_logradouro'],
-        jsonResult['nu_telefone'],
-        jsonResult['co_cep'],
-        jsonResult['uf'],
-        jsonResult['cidade']
-    );*/
-  }
   
   @override
   Widget build(BuildContext context) {
@@ -116,7 +90,8 @@ class MapSampleState extends State<MapSample> {
       body: GoogleMap(
         myLocationEnabled: true,
         markers: _markers,
-        myLocationButtonEnabled: true,
+        myLocationButtonEnabled: false,
+        mapToolbarEnabled: false,
         buildingsEnabled: false,
         mapType: MapType.normal,
         initialCameraPosition: _initialPosition,
@@ -129,6 +104,7 @@ class MapSampleState extends State<MapSample> {
               if(minusLat.abs() <= 0.1 && minusLong.abs() <= 0.1) {
                 _markers.add(
                     Marker(
+                      infoWindow: InfoWindow(title: handleLocations.ubsNames[i].replaceAll("'", ''), snippet: 'Clique aqui para navegar ate o local!', onTap:  () => MapsLauncher.launchCoordinates(double.parse(handleLocations.ubsLatitudes[i]), double.parse(handleLocations.ubsLongitudes[i]))),
                       markerId: MarkerId(handleLocations.ubsNames[i]),
                       position: LatLng(double.parse(handleLocations.ubsLatitudes[i]), double.parse(handleLocations.ubsLongitudes[i])),
                       icon: pinLocationIcon,
@@ -139,7 +115,11 @@ class MapSampleState extends State<MapSample> {
           });
           },
       ),
-
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.white,
+        onPressed: _goToCurrentPosition,
+        child: Icon(Icons.my_location, color: Color(0xff27b3ff),),
+      ),
     );
   }
 
