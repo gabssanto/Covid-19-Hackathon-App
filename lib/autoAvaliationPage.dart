@@ -14,6 +14,7 @@ class AutoAvaliationPage extends StatefulWidget {
 
 class _AutoAvaliationPageState extends State<AutoAvaliationPage> {
   var _height = 80.00;
+  static const finalHeight = 1035.00;
 
   Duration _duration = new Duration(milliseconds: 500);
 
@@ -66,7 +67,7 @@ class _AutoAvaliationPageState extends State<AutoAvaliationPage> {
               child: ListView(
                 children: <Widget>[
                   Container(
-                      margin: EdgeInsets.only(left: 15, right: 15, top: 15),
+                      margin: EdgeInsets.only(left: 15, right: 15, top: 15, bottom: 15),
                       height: _height,
                       width: MediaQuery.of(context).size.width,
                       //duration: _duration,
@@ -388,7 +389,7 @@ class _AutoAvaliationPageState extends State<AutoAvaliationPage> {
                                         child: FlatButton(
                                           onPressed: () {
                                             setState(() {
-                                              _height = 1000.00;
+                                              _height = finalHeight;
                                               _question2 = 2;
                                               _buttonYesColorN1 = Color(0xffe8e8e8);
                                               _buttonYesTextN1 = Colors.black38;
@@ -446,6 +447,7 @@ class _AutoAvaliationPageState extends State<AutoAvaliationPage> {
                                         child: FlatButton(
                                           onPressed: () {
                                             setState(() {
+                                              _height = 225.00;
                                               _question3 = 1;
                                               _buttonYesColorN1a = Color(0xff27b3ff);
                                               _buttonYesTextN1a = Colors.white;
@@ -482,6 +484,7 @@ class _AutoAvaliationPageState extends State<AutoAvaliationPage> {
                                         child: FlatButton(
                                           onPressed: () {
                                             setState(() {
+                                              _height = finalHeight;
                                               _question3 = 2;
                                               _buttonYesColorN1a = Color(0xffe8e8e8);
                                               _buttonYesTextN1a = Colors.black38;
@@ -571,6 +574,240 @@ class _AutoAvaliationPageState extends State<AutoAvaliationPage> {
                                                 )
                                             ),
                                           ),
+                                          Row(
+                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                            children: <Widget>[
+                                              AnimatedContainer(
+                                                duration: _durationButton,
+                                                margin: EdgeInsets.only(top: 10),
+                                                width: 144,
+                                                height: 35,
+                                                decoration: new BoxDecoration(
+                                                    color: _buttonYesColorN1a,
+                                                    borderRadius: BorderRadius.circular(6)
+                                                ),
+                                                child: FlatButton(
+                                                  onPressed: () {
+                                                    setState(() {
+                                                      _height = 225.00;
+                                                      _question3 = 1;
+                                                      _buttonYesColorN1a = Color(0xff27b3ff);
+                                                      _buttonYesTextN1a = Colors.white;
+                                                      _buttonNoColorN1a = Color(0xffe8e8e8);
+                                                      _buttonNoTextN1a = Colors.black38;
+                                                    });
+                                                  },
+                                                  child: Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                    children: <Widget>[
+                                                      Text("Febre",
+                                                          style: TextStyle(
+                                                            fontFamily: 'Montserrat',
+                                                            color: _buttonYesTextN1a,
+                                                            fontSize: 14,
+                                                            fontWeight: FontWeight.w500,
+                                                            fontStyle: FontStyle.normal,
+                                                            letterSpacing: -0.154,
+                                                          )
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                              Container(
+                                                margin: EdgeInsets.only(top: 10),
+                                                width: 144,
+                                                height: 35,
+                                                decoration: new BoxDecoration(
+                                                    color: _buttonNoColorN1a,
+                                                    borderRadius: BorderRadius.circular(6)
+                                                ),
+                                                child: FlatButton(
+                                                  onPressed: () {
+                                                    setState(() {
+                                                      _height = finalHeight;
+                                                      _question3 = 2;
+                                                      _buttonYesColorN1a = Color(0xffe8e8e8);
+                                                      _buttonYesTextN1a = Colors.black38;
+                                                      _buttonNoColorN1a = Color(0xff27b3ff);
+                                                      _buttonNoTextN1a = Colors.white;
+                                                    });
+                                                  },
+                                                  child: Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                    children: <Widget>[
+                                                      Text("Tosse",
+                                                          style: TextStyle(
+                                                            fontFamily: 'Montserrat',
+                                                            color: _buttonNoTextN1a,
+                                                            fontSize: 14,
+                                                            fontWeight: FontWeight.w500,
+                                                            fontStyle: FontStyle.normal,
+                                                            letterSpacing: -0.154,
+
+                                                          )
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Row(
+                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                            children: <Widget>[
+                                              AnimatedContainer(
+                                                duration: _durationButton,
+                                                margin: EdgeInsets.only(top: 10),
+                                                width: 144,
+                                                height: 35,
+                                                decoration: new BoxDecoration(
+                                                    color: _buttonYesColorN1a,
+                                                    borderRadius: BorderRadius.circular(6)
+                                                ),
+                                                child: FlatButton(
+                                                  onPressed: () {
+                                                    setState(() {
+                                                      _height = 225.00;
+                                                      _question3 = 1;
+                                                      _buttonYesColorN1a = Color(0xff27b3ff);
+                                                      _buttonYesTextN1a = Colors.white;
+                                                      _buttonNoColorN1a = Color(0xffe8e8e8);
+                                                      _buttonNoTextN1a = Colors.black38;
+                                                    });
+                                                  },
+                                                  child: Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                    children: <Widget>[
+                                                      Text("Escarro",
+                                                          style: TextStyle(
+                                                            fontFamily: 'Montserrat',
+                                                            color: _buttonYesTextN1a,
+                                                            fontSize: 14,
+                                                            fontWeight: FontWeight.w500,
+                                                            fontStyle: FontStyle.normal,
+                                                            letterSpacing: -0.154,
+                                                          )
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                              Container(
+                                                margin: EdgeInsets.only(top: 10),
+                                                width: 144,
+                                                height: 35,
+                                                decoration: new BoxDecoration(
+                                                    color: _buttonNoColorN1a,
+                                                    borderRadius: BorderRadius.circular(6)
+                                                ),
+                                                child: FlatButton(
+                                                  onPressed: () {
+                                                    setState(() {
+                                                      _height = finalHeight;
+                                                      _question3 = 2;
+                                                      _buttonYesColorN1a = Color(0xffe8e8e8);
+                                                      _buttonYesTextN1a = Colors.black38;
+                                                      _buttonNoColorN1a = Color(0xff27b3ff);
+                                                      _buttonNoTextN1a = Colors.white;
+                                                    });
+                                                  },
+                                                  child: Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                    children: <Widget>[
+                                                      Text("Congestão Nasal",
+                                                          style: TextStyle(
+                                                            fontFamily: 'Montserrat',
+                                                            color: _buttonNoTextN1a,
+                                                            fontSize: 14,
+                                                            fontWeight: FontWeight.w500,
+                                                            fontStyle: FontStyle.normal,
+                                                            letterSpacing: -0.154,
+
+                                                          )
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Row(
+                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                            children: <Widget>[
+                                              AnimatedContainer(
+                                                duration: _durationButton,
+                                                margin: EdgeInsets.only(top: 10),
+                                                width: 144,
+                                                height: 35,
+                                                decoration: new BoxDecoration(
+                                                    color: _buttonYesColorN1a,
+                                                    borderRadius: BorderRadius.circular(6)
+                                                ),
+                                                child: FlatButton(
+                                                  onPressed: () {
+                                                    setState(() {
+                                                      _height = 225.00;
+                                                      _question3 = 1;
+                                                      _buttonYesColorN1a = Color(0xff27b3ff);
+                                                      _buttonYesTextN1a = Colors.white;
+                                                      _buttonNoColorN1a = Color(0xffe8e8e8);
+                                                      _buttonNoTextN1a = Colors.black38;
+                                                    });
+                                                  },
+                                                  child: Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                    children: <Widget>[
+                                                      Text("Corrimento Nasal",
+                                                          style: TextStyle(
+                                                            fontFamily: 'Montserrat',
+                                                            color: _buttonYesTextN1a,
+                                                            fontSize: 14,
+                                                            fontWeight: FontWeight.w500,
+                                                            fontStyle: FontStyle.normal,
+                                                            letterSpacing: -0.154,
+                                                          )
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                              Container(
+                                                margin: EdgeInsets.only(top: 10),
+                                                width: 144,
+                                                height: 35,
+                                                decoration: new BoxDecoration(
+                                                    color: Colors.white,
+                                                    borderRadius: BorderRadius.circular(6)
+                                                ),
+                                                child: Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                  children: <Widget>[
+                                                    Text("",
+                                                        style: TextStyle(
+                                                          fontFamily: 'Montserrat',
+                                                          color: _buttonNoTextN1a,
+                                                          fontSize: 14,
+                                                          fontWeight: FontWeight.w500,
+                                                          fontStyle: FontStyle.normal,
+                                                          letterSpacing: -0.154,
+
+                                                        )
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
+                                          ),
                                           Container(
                                             margin: EdgeInsets.only(top:10),
                                             child: Text("Apresenta dificuldade para respirar?",
@@ -584,6 +821,88 @@ class _AutoAvaliationPageState extends State<AutoAvaliationPage> {
 
                                                 )
                                             ),
+                                          ),
+                                          Row(
+                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                            children: <Widget>[
+                                              AnimatedContainer(
+                                                duration: _durationButton,
+                                                margin: EdgeInsets.only(top: 10),
+                                                width: 144,
+                                                height: 35,
+                                                decoration: new BoxDecoration(
+                                                    color: _buttonYesColorN1a,
+                                                    borderRadius: BorderRadius.circular(6)
+                                                ),
+                                                child: FlatButton(
+                                                  onPressed: () {
+                                                    setState(() {
+                                                      _height = 225.00;
+                                                      _question3 = 1;
+                                                      _buttonYesColorN1a = Color(0xff27b3ff);
+                                                      _buttonYesTextN1a = Colors.white;
+                                                      _buttonNoColorN1a = Color(0xffe8e8e8);
+                                                      _buttonNoTextN1a = Colors.black38;
+                                                    });
+                                                  },
+                                                  child: Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                    children: <Widget>[
+                                                      Text("Sim",
+                                                          style: TextStyle(
+                                                            fontFamily: 'Montserrat',
+                                                            color: _buttonYesTextN1a,
+                                                            fontSize: 14,
+                                                            fontWeight: FontWeight.w500,
+                                                            fontStyle: FontStyle.normal,
+                                                            letterSpacing: -0.154,
+                                                          )
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                              Container(
+                                                margin: EdgeInsets.only(top: 10),
+                                                width: 144,
+                                                height: 35,
+                                                decoration: new BoxDecoration(
+                                                    color: _buttonNoColorN1a,
+                                                    borderRadius: BorderRadius.circular(6)
+                                                ),
+                                                child: FlatButton(
+                                                  onPressed: () {
+                                                    setState(() {
+                                                      _height = finalHeight;
+                                                      _question3 = 2;
+                                                      _buttonYesColorN1a = Color(0xffe8e8e8);
+                                                      _buttonYesTextN1a = Colors.black38;
+                                                      _buttonNoColorN1a = Color(0xff27b3ff);
+                                                      _buttonNoTextN1a = Colors.white;
+                                                    });
+                                                  },
+                                                  child: Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                    children: <Widget>[
+                                                      Text("Não",
+                                                          style: TextStyle(
+                                                            fontFamily: 'Montserrat',
+                                                            color: _buttonNoTextN1a,
+                                                            fontSize: 14,
+                                                            fontWeight: FontWeight.w500,
+                                                            fontStyle: FontStyle.normal,
+                                                            letterSpacing: -0.154,
+
+                                                          )
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                           Container(
                                             margin: EdgeInsets.only(top:10),
@@ -599,6 +918,88 @@ class _AutoAvaliationPageState extends State<AutoAvaliationPage> {
                                                 )
                                             ),
                                           ),
+                                          Row(
+                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                            children: <Widget>[
+                                              AnimatedContainer(
+                                                duration: _durationButton,
+                                                margin: EdgeInsets.only(top: 10),
+                                                width: 144,
+                                                height: 35,
+                                                decoration: new BoxDecoration(
+                                                    color: _buttonYesColorN1a,
+                                                    borderRadius: BorderRadius.circular(6)
+                                                ),
+                                                child: FlatButton(
+                                                  onPressed: () {
+                                                    setState(() {
+                                                      _height = 225.00;
+                                                      _question3 = 1;
+                                                      _buttonYesColorN1a = Color(0xff27b3ff);
+                                                      _buttonYesTextN1a = Colors.white;
+                                                      _buttonNoColorN1a = Color(0xffe8e8e8);
+                                                      _buttonNoTextN1a = Colors.black38;
+                                                    });
+                                                  },
+                                                  child: Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                    children: <Widget>[
+                                                      Text("Sim",
+                                                          style: TextStyle(
+                                                            fontFamily: 'Montserrat',
+                                                            color: _buttonYesTextN1a,
+                                                            fontSize: 14,
+                                                            fontWeight: FontWeight.w500,
+                                                            fontStyle: FontStyle.normal,
+                                                            letterSpacing: -0.154,
+                                                          )
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                              Container(
+                                                margin: EdgeInsets.only(top: 10),
+                                                width: 144,
+                                                height: 35,
+                                                decoration: new BoxDecoration(
+                                                    color: _buttonNoColorN1a,
+                                                    borderRadius: BorderRadius.circular(6)
+                                                ),
+                                                child: FlatButton(
+                                                  onPressed: () {
+                                                    setState(() {
+                                                      _height = finalHeight;
+                                                      _question3 = 2;
+                                                      _buttonYesColorN1a = Color(0xffe8e8e8);
+                                                      _buttonYesTextN1a = Colors.black38;
+                                                      _buttonNoColorN1a = Color(0xff27b3ff);
+                                                      _buttonNoTextN1a = Colors.white;
+                                                    });
+                                                  },
+                                                  child: Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                    children: <Widget>[
+                                                      Text("Não",
+                                                          style: TextStyle(
+                                                            fontFamily: 'Montserrat',
+                                                            color: _buttonNoTextN1a,
+                                                            fontSize: 14,
+                                                            fontWeight: FontWeight.w500,
+                                                            fontStyle: FontStyle.normal,
+                                                            letterSpacing: -0.154,
+
+                                                          )
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
                                           Container(
                                             margin: EdgeInsets.only(top:10),
                                             child: Text("Tem dificuldade para engolir os alimentos?",
@@ -612,6 +1013,88 @@ class _AutoAvaliationPageState extends State<AutoAvaliationPage> {
 
                                                 )
                                             ),
+                                          ),
+                                          Row(
+                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                            children: <Widget>[
+                                              AnimatedContainer(
+                                                duration: _durationButton,
+                                                margin: EdgeInsets.only(top: 10),
+                                                width: 144,
+                                                height: 35,
+                                                decoration: new BoxDecoration(
+                                                    color: _buttonYesColorN1a,
+                                                    borderRadius: BorderRadius.circular(6)
+                                                ),
+                                                child: FlatButton(
+                                                  onPressed: () {
+                                                    setState(() {
+                                                      _height = 225.00;
+                                                      _question3 = 1;
+                                                      _buttonYesColorN1a = Color(0xff27b3ff);
+                                                      _buttonYesTextN1a = Colors.white;
+                                                      _buttonNoColorN1a = Color(0xffe8e8e8);
+                                                      _buttonNoTextN1a = Colors.black38;
+                                                    });
+                                                  },
+                                                  child: Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                    children: <Widget>[
+                                                      Text("Sim",
+                                                          style: TextStyle(
+                                                            fontFamily: 'Montserrat',
+                                                            color: _buttonYesTextN1a,
+                                                            fontSize: 14,
+                                                            fontWeight: FontWeight.w500,
+                                                            fontStyle: FontStyle.normal,
+                                                            letterSpacing: -0.154,
+                                                          )
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                              Container(
+                                                margin: EdgeInsets.only(top: 10),
+                                                width: 144,
+                                                height: 35,
+                                                decoration: new BoxDecoration(
+                                                    color: _buttonNoColorN1a,
+                                                    borderRadius: BorderRadius.circular(6)
+                                                ),
+                                                child: FlatButton(
+                                                  onPressed: () {
+                                                    setState(() {
+                                                      _height = finalHeight;
+                                                      _question3 = 2;
+                                                      _buttonYesColorN1a = Color(0xffe8e8e8);
+                                                      _buttonYesTextN1a = Colors.black38;
+                                                      _buttonNoColorN1a = Color(0xff27b3ff);
+                                                      _buttonNoTextN1a = Colors.white;
+                                                    });
+                                                  },
+                                                  child: Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                    children: <Widget>[
+                                                      Text("Não",
+                                                          style: TextStyle(
+                                                            fontFamily: 'Montserrat',
+                                                            color: _buttonNoTextN1a,
+                                                            fontSize: 14,
+                                                            fontWeight: FontWeight.w500,
+                                                            fontStyle: FontStyle.normal,
+                                                            letterSpacing: -0.154,
+
+                                                          )
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                           Container(
                                             margin: EdgeInsets.only(top:10, left: 20, right: 20),
@@ -628,6 +1111,88 @@ class _AutoAvaliationPageState extends State<AutoAvaliationPage> {
                                                 )
                                             ),
                                           ),
+                                          Row(
+                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                            children: <Widget>[
+                                              AnimatedContainer(
+                                                duration: _durationButton,
+                                                margin: EdgeInsets.only(top: 10),
+                                                width: 144,
+                                                height: 35,
+                                                decoration: new BoxDecoration(
+                                                    color: _buttonYesColorN1a,
+                                                    borderRadius: BorderRadius.circular(6)
+                                                ),
+                                                child: FlatButton(
+                                                  onPressed: () {
+                                                    setState(() {
+                                                      _height = 225.00;
+                                                      _question3 = 1;
+                                                      _buttonYesColorN1a = Color(0xff27b3ff);
+                                                      _buttonYesTextN1a = Colors.white;
+                                                      _buttonNoColorN1a = Color(0xffe8e8e8);
+                                                      _buttonNoTextN1a = Colors.black38;
+                                                    });
+                                                  },
+                                                  child: Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                    children: <Widget>[
+                                                      Text("Sim",
+                                                          style: TextStyle(
+                                                            fontFamily: 'Montserrat',
+                                                            color: _buttonYesTextN1a,
+                                                            fontSize: 14,
+                                                            fontWeight: FontWeight.w500,
+                                                            fontStyle: FontStyle.normal,
+                                                            letterSpacing: -0.154,
+                                                          )
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                              Container(
+                                                margin: EdgeInsets.only(top: 10),
+                                                width: 144,
+                                                height: 35,
+                                                decoration: new BoxDecoration(
+                                                    color: _buttonNoColorN1a,
+                                                    borderRadius: BorderRadius.circular(6)
+                                                ),
+                                                child: FlatButton(
+                                                  onPressed: () {
+                                                    setState(() {
+                                                      _height = finalHeight;
+                                                      _question3 = 2;
+                                                      _buttonYesColorN1a = Color(0xffe8e8e8);
+                                                      _buttonYesTextN1a = Colors.black38;
+                                                      _buttonNoColorN1a = Color(0xff27b3ff);
+                                                      _buttonNoTextN1a = Colors.white;
+                                                    });
+                                                  },
+                                                  child: Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                    children: <Widget>[
+                                                      Text("Não",
+                                                          style: TextStyle(
+                                                            fontFamily: 'Montserrat',
+                                                            color: _buttonNoTextN1a,
+                                                            fontSize: 14,
+                                                            fontWeight: FontWeight.w500,
+                                                            fontStyle: FontStyle.normal,
+                                                            letterSpacing: -0.154,
+
+                                                          )
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
                                           Container(
                                             margin: EdgeInsets.only(top:10),
                                             child: Text("Notou ter batimento de asa do nariz?",
@@ -641,6 +1206,88 @@ class _AutoAvaliationPageState extends State<AutoAvaliationPage> {
 
                                                 )
                                             ),
+                                          ),
+                                          Row(
+                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                            children: <Widget>[
+                                              AnimatedContainer(
+                                                duration: _durationButton,
+                                                margin: EdgeInsets.only(top: 10),
+                                                width: 144,
+                                                height: 35,
+                                                decoration: new BoxDecoration(
+                                                    color: _buttonYesColorN1a,
+                                                    borderRadius: BorderRadius.circular(6)
+                                                ),
+                                                child: FlatButton(
+                                                  onPressed: () {
+                                                    setState(() {
+                                                      _height = 225.00;
+                                                      _question3 = 1;
+                                                      _buttonYesColorN1a = Color(0xff27b3ff);
+                                                      _buttonYesTextN1a = Colors.white;
+                                                      _buttonNoColorN1a = Color(0xffe8e8e8);
+                                                      _buttonNoTextN1a = Colors.black38;
+                                                    });
+                                                  },
+                                                  child: Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                    children: <Widget>[
+                                                      Text("Sim",
+                                                          style: TextStyle(
+                                                            fontFamily: 'Montserrat',
+                                                            color: _buttonYesTextN1a,
+                                                            fontSize: 14,
+                                                            fontWeight: FontWeight.w500,
+                                                            fontStyle: FontStyle.normal,
+                                                            letterSpacing: -0.154,
+                                                          )
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                              Container(
+                                                margin: EdgeInsets.only(top: 10),
+                                                width: 144,
+                                                height: 35,
+                                                decoration: new BoxDecoration(
+                                                    color: _buttonNoColorN1a,
+                                                    borderRadius: BorderRadius.circular(6)
+                                                ),
+                                                child: FlatButton(
+                                                  onPressed: () {
+                                                    setState(() {
+                                                      _height = finalHeight;
+                                                      _question3 = 2;
+                                                      _buttonYesColorN1a = Color(0xffe8e8e8);
+                                                      _buttonYesTextN1a = Colors.black38;
+                                                      _buttonNoColorN1a = Color(0xff27b3ff);
+                                                      _buttonNoTextN1a = Colors.white;
+                                                    });
+                                                  },
+                                                  child: Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                    children: <Widget>[
+                                                      Text("Não",
+                                                          style: TextStyle(
+                                                            fontFamily: 'Montserrat',
+                                                            color: _buttonNoTextN1a,
+                                                            fontSize: 14,
+                                                            fontWeight: FontWeight.w500,
+                                                            fontStyle: FontStyle.normal,
+                                                            letterSpacing: -0.154,
+
+                                                          )
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                           Container(
                                             margin: EdgeInsets.only(top:10, right: 20, left: 20),
@@ -671,7 +1318,89 @@ class _AutoAvaliationPageState extends State<AutoAvaliationPage> {
 
                                                 )
                                             ),
-                                          )
+                                          ),
+                                          Row(
+                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                            children: <Widget>[
+                                              AnimatedContainer(
+                                                duration: _durationButton,
+                                                margin: EdgeInsets.only(top: 10),
+                                                width: 144,
+                                                height: 35,
+                                                decoration: new BoxDecoration(
+                                                    color: _buttonYesColorN1a,
+                                                    borderRadius: BorderRadius.circular(6)
+                                                ),
+                                                child: FlatButton(
+                                                  onPressed: () {
+                                                    setState(() {
+                                                      _height = 225.00;
+                                                      _question3 = 1;
+                                                      _buttonYesColorN1a = Color(0xff27b3ff);
+                                                      _buttonYesTextN1a = Colors.white;
+                                                      _buttonNoColorN1a = Color(0xffe8e8e8);
+                                                      _buttonNoTextN1a = Colors.black38;
+                                                    });
+                                                  },
+                                                  child: Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                    children: <Widget>[
+                                                      Text("Sim",
+                                                          style: TextStyle(
+                                                            fontFamily: 'Montserrat',
+                                                            color: _buttonYesTextN1a,
+                                                            fontSize: 14,
+                                                            fontWeight: FontWeight.w500,
+                                                            fontStyle: FontStyle.normal,
+                                                            letterSpacing: -0.154,
+                                                          )
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                              Container(
+                                                margin: EdgeInsets.only(top: 10),
+                                                width: 144,
+                                                height: 35,
+                                                decoration: new BoxDecoration(
+                                                    color: _buttonNoColorN1a,
+                                                    borderRadius: BorderRadius.circular(6)
+                                                ),
+                                                child: FlatButton(
+                                                  onPressed: () {
+                                                    setState(() {
+                                                      _height = finalHeight;
+                                                      _question3 = 2;
+                                                      _buttonYesColorN1a = Color(0xffe8e8e8);
+                                                      _buttonYesTextN1a = Colors.black38;
+                                                      _buttonNoColorN1a = Color(0xff27b3ff);
+                                                      _buttonNoTextN1a = Colors.white;
+                                                    });
+                                                  },
+                                                  child: Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                    children: <Widget>[
+                                                      Text("Não",
+                                                          style: TextStyle(
+                                                            fontFamily: 'Montserrat',
+                                                            color: _buttonNoTextN1a,
+                                                            fontSize: 14,
+                                                            fontWeight: FontWeight.w500,
+                                                            fontStyle: FontStyle.normal,
+                                                            letterSpacing: -0.154,
+
+                                                          )
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
 
 
                                         ],
@@ -688,118 +1417,6 @@ class _AutoAvaliationPageState extends State<AutoAvaliationPage> {
                 ],
               ),
             ),
-    );
-  }
-}
-
-class YesNo extends StatefulWidget {
-  @override
-  _YesNoState createState() => _YesNoState();
-}
-
-class _YesNoState extends State<YesNo> {
-  Duration _durationButton = new Duration(milliseconds: 200);
-
-  var _buttonYesColor = Color(0xffe8e8e8);
-
-  var _buttonYesText = Colors.black38;
-
-  var _buttonNoColor = Color(0xffe8e8e8);
-
-  var _buttonNoText = Colors.black38;
-
-  var _question1 = 0;
-
-  @override
-  void dispose() {
-    // TODO: Quando der dispose mandar pro mobx o retorno
-    handleQuestions.setHeight(80.00);
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: <Widget>[
-        AnimatedContainer(
-          duration: _durationButton,
-          margin: EdgeInsets.only(top: 10),
-          width: 144,
-          height: 35,
-          decoration: new BoxDecoration(
-              color: _buttonYesColor,
-              borderRadius: BorderRadius.circular(6)
-          ),
-          child: FlatButton(
-            onPressed: () {
-              setState(() {
-                handleQuestions.setHeight(140.00);
-                _question1 = 1;
-                _buttonYesColor = Color(0xff27b3ff);
-                _buttonYesText = Colors.white;
-                _buttonNoColor = Color(0xffe8e8e8);
-                _buttonNoText = Colors.black38;
-              });
-            },
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text("Sim",
-                    style: TextStyle(
-                      fontFamily: 'Montserrat',
-                      color: _buttonYesText,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                      fontStyle: FontStyle.normal,
-                      letterSpacing: -0.154,
-
-                    )
-                ),
-              ],
-            ),
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.only(top: 10),
-          width: 144,
-          height: 35,
-          decoration: new BoxDecoration(
-              color: _buttonNoColor,
-              borderRadius: BorderRadius.circular(6)
-          ),
-          child: FlatButton(
-            onPressed: () {
-              setState(() {
-                _question1 = 2;
-                _buttonYesColor = Color(0xffe8e8e8);
-                _buttonYesText = Colors.black38;
-                _buttonNoColor = Color(0xff27b3ff);
-                _buttonNoText = Colors.white;
-              });
-            },
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text("Não",
-                    style: TextStyle(
-                      fontFamily: 'Montserrat',
-                      color: _buttonNoText,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                      fontStyle: FontStyle.normal,
-                      letterSpacing: -0.154,
-
-                    )
-                ),
-              ],
-            ),
-          ),
-        ),
-      ],
     );
   }
 }
