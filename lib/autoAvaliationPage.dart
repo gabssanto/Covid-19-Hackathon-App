@@ -131,6 +131,8 @@ class _AutoAvaliationPageState extends State<AutoAvaliationPage> {
 
   var _buttonNoTextQ11 = Colors.black38;
 
+  //SO A PARTIR DESSA MERDA QUE E IMPORATNTE, O RESTO E TUDO A MERDA DA LOGICA DESSA MERDA
+
   var _question1 = 0;
   var _question2 = 0;
   var _question3 = 0;
