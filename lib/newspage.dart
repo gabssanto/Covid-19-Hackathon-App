@@ -93,7 +93,7 @@ class NewsList extends StatelessWidget {
 
   _launchURL(url) async {
     if (await canLaunch(url)) {
-      await launch(url, forceSafariVC: true); //forceWebView
+      await launch(url, forceWebView: true); //forceWebView
     } else {
       throw 'Could not launch $url';
     }
@@ -113,11 +113,12 @@ class NewsList extends StatelessWidget {
                   child: ListTile(
                     isThreeLine: true,
                     onTap: () async {
-                      await _launchURL(news[index].url);
+                      await _launchURL(news[index].url ??
+                          'https://www.google.com/search?q=covid19&oq=covid19');
                     },
                     title: Container(
                       child: Text(
-                        news[index].title,
+                        news[index].title ?? 'sem título',
                         softWrap: true,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
@@ -132,7 +133,7 @@ class NewsList extends StatelessWidget {
                       children: [
                         Container(
                           child: Text(
-                            news[index].description,
+                            news[index].description ?? 'sem Descrição',
                             softWrap: true,
                             overflow: TextOverflow.ellipsis,
                             maxLines: 2,
@@ -157,7 +158,8 @@ class NewsList extends StatelessWidget {
                       decoration: BoxDecoration(
                         image: DecorationImage(
                             fit: BoxFit.cover,
-                            image: NetworkImage(news[index].urlToImage)),
+                            image: NetworkImage(news[index].urlToImage ??
+                                'https://bloximages.newyork1.vip.townnews.com/wfsb.com/content/tncms/assets/v3/editorial/7/e5/7e5f698a-63b6-11ea-8771-d3793e20699a/5e69139c582eb.image.jpg')),
                         borderRadius: BorderRadius.all(Radius.circular(8.0)),
                       ),
                     ),
