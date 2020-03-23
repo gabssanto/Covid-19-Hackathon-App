@@ -1,4 +1,5 @@
 import 'package:covid19/autoAvaliationPage.dart';
+import 'package:covid19/profilePage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -32,9 +33,31 @@ class HomePageAppBar extends StatelessWidget implements PreferredSizeWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Container(
-                  child: Icon(Icons.notifications, size: 60, color: Colors.white)//Color(0xff27b3ff),)
+                  child: ClipOval(
+                    child: Material(
+                      color: Colors.white,
+                      child: InkWell(
+                        splashColor: Color.fromRGBO(1, 1, 1, 0),
+                        child: Icon(Icons.notifications, size: 60, color: Colors.white),
+                      ),
+                    ),
+                  ),
                 ),
-                Icon(Icons.account_circle, size: 60, color: Color(0xff707070),)
+                Container(
+                  child: ClipOval(
+                    child: Material(
+                      color: Colors.white,
+                      child: InkWell(
+                        splashColor: Color.fromRGBO(1, 1, 1, 0),
+                        child: Icon(Icons.account_circle, size: 60, color: Colors.blue),
+                        onTap: () {
+                          Navigator.push(
+                          context, MaterialPageRoute(builder: (context) => ProfilePage()));
+                        },
+                      ),
+                    ),
+                  ),
+                )
               ],
             ),
           ),
