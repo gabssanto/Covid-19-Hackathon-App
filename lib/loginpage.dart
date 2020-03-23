@@ -1,3 +1,4 @@
+import 'package:covid19/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import './mobx/imports.dart';
@@ -19,8 +20,9 @@ void _validateInputs() {
 
 class Btn extends StatelessWidget {
   final String text;
+  final destPage;
 
-  Btn(this.text);
+  Btn(this.text, this.destPage);
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +51,7 @@ class Btn extends StatelessWidget {
 //                  _validateInputs
                       () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => SignupPage1()));
+                        MaterialPageRoute(builder: (context) => destPage));
                   },
                 ),
               ))
@@ -57,6 +59,10 @@ class Btn extends StatelessWidget {
       ),
     );
   }
+}
+
+class ConstantsLoginPage {
+  static final logo = 'assets/app_logo.png';
 }
 
 class LoginPage extends StatelessWidget {
@@ -67,17 +73,27 @@ class LoginPage extends StatelessWidget {
         resizeToAvoidBottomPadding: false,
         appBar: LoginAppBar(
           title: 'Login',
+          canGoBack: false,
         ),
         body: Form(
-          key: _formKey,
+            key: _formKey,
             autovalidate: _autoValidate,
             child: SingleChildScrollView(
                 reverse: true,
                 child: Column(children: <Widget>[
                   Container(
                     alignment: Alignment.topCenter,
-                    padding: EdgeInsets.only(top: 50),
-//                    child: CircleAvatar(radius: 100, backgroundColor: Color(0xff27b3ff) ,),
+                    height: MediaQuery.of(context).size.height / 3,
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(color: Colors.transparent),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: AssetImage(ConstantsLoginPage.logo),
+                        ),
+                      ),
+                    ),
                   ),
                   Container(
                       margin: EdgeInsets.only(top: 30),
@@ -88,11 +104,10 @@ class LoginPage extends StatelessWidget {
                         onSaved: (var value) {
                           cpf = value;
                         },
-                        validator: (cpf){
-                          Pattern pattern =
-                              r'(^(?:[0-9]{14}$)';
+                        validator: (cpf) {
+                          Pattern pattern = r'(^(?:[0-9]{14}$)';
                           RegExp regex = new RegExp(pattern);
-                          if(cpf.length == 0)
+                          if (cpf.length == 0)
                             return 'Digite o seu CPF';
                           else if ((!regex.hasMatch(cpf)) || cpf.length < 13)
                             return 'Digite um CPF válido';
@@ -126,7 +141,7 @@ class LoginPage extends StatelessWidget {
                         onSaved: (String value) {
                           password = value;
                         },
-                        validator: (password){
+                        validator: (password) {
                           Pattern pattern =
                               r'^(?=.*[0-9]+.*)(?=.*[a-zA-Z]+.*)[0-9a-zA-Z]{6,}$';
                           RegExp regex = new RegExp(pattern);
@@ -154,13 +169,11 @@ class LoginPage extends StatelessWidget {
                         ),
                       )),
                   Container(margin: EdgeInsets.only(top: 40)),
-                  Container(child: Btn("Entrar")),
+                  Container(child: Btn("Entrar", HomePage())),
+                  Container(child: Btn("Cadastrar-se", SignupPage1())),
                   Container(
                     alignment: Alignment.topCenter,
                     padding: EdgeInsets.only(top: 10),
-//                child: Image(
-//                  image: AssetImage(ConstantsLoginPage.logoName),
-//                ),
                   ),
                 ]))));
   }

@@ -10,6 +10,13 @@ import 'package:location/location.dart';
 
 import 'HelpPage.dart';
 
+class ConstantsHomePage {
+  static final String iconeDiagostico = 'assets/icones_home/diagnostico.png';
+  static final String iconeNoticias = 'assets/icones_home/noticias.png';
+  static final String iconeDicas = 'assets/icones_home/dicas.png';
+  static final String iconeAjuda = 'assets/icones_home/ajuda.png';
+}
+
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -122,25 +129,26 @@ class _HomePageState extends State<HomePage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Container(
-                              width: 66,
-                              height: 66,
-                              decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(50)),
+                            width: MediaQuery.of(context).size.width / 4,
+                            height: MediaQuery.of(context).size.height / 8,
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                fit: BoxFit.cover,
+                                image: AssetImage(
+                                    ConstantsHomePage.iconeDiagostico),
                               ),
-                              child: Icon(
-                                Icons.favorite,
-                                size: 60,
-                                color: Color(0xff27b3ff),
-                              )),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(35)),
+                            ),
+                          ),
                           Container(
                             margin: EdgeInsets.only(top: 10),
-                            child: Text("Diagnostico",
+                            child: Text("Diagnóstico",
                                 style: TextStyle(
                                   fontFamily: 'Montserrat',
                                   color: Color(0xff707070),
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w600,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
                                   fontStyle: FontStyle.normal,
                                   letterSpacing: -0.132,
                                 )),
@@ -167,25 +175,26 @@ class _HomePageState extends State<HomePage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Container(
-                                width: 66,
-                                height: 66,
-                                decoration: BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(50)),
+                              width: MediaQuery.of(context).size.width / 4,
+                              height: MediaQuery.of(context).size.height / 8,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  fit: BoxFit.cover,
+                                  image: AssetImage(
+                                      ConstantsHomePage.iconeNoticias),
                                 ),
-                                child: Icon(
-                                  Icons.note,
-                                  size: 60,
-                                  color: Color(0xff27b3ff),
-                                )),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(35)),
+                              ),
+                            ),
                             Container(
                               margin: EdgeInsets.only(top: 10),
                               child: Text("Notícias",
                                   style: TextStyle(
                                     fontFamily: 'Montserrat',
                                     color: Color(0xff707070),
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w600,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,
                                     fontStyle: FontStyle.normal,
                                     letterSpacing: -0.132,
                                   )),
@@ -218,25 +227,26 @@ class _HomePageState extends State<HomePage> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
                               Container(
-                                  width: 66,
-                                  height: 66,
-                                  decoration: BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(50)),
+                                width: MediaQuery.of(context).size.width / 4,
+                                height: MediaQuery.of(context).size.height / 8,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: AssetImage(
+                                        ConstantsHomePage.iconeDicas),
                                   ),
-                                  child: Icon(
-                                    Icons.lightbulb_outline,
-                                    size: 60,
-                                    color: Color(0xff27b3ff),
-                                  )),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(35)),
+                                ),
+                              ),
                               Container(
                                 margin: EdgeInsets.only(top: 10),
                                 child: Text("Dicas",
                                     style: TextStyle(
                                       fontFamily: 'Montserrat',
                                       color: Color(0xff707070),
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w600,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold,
                                       fontStyle: FontStyle.normal,
                                       letterSpacing: -0.132,
                                     )),
@@ -267,25 +277,28 @@ class _HomePageState extends State<HomePage> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
                                   Container(
-                                      width: 66,
-                                      height: 66,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(50)),
+                                    width:
+                                        MediaQuery.of(context).size.width / 4,
+                                    height:
+                                        MediaQuery.of(context).size.height / 8,
+                                    decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        fit: BoxFit.cover,
+                                        image: AssetImage(
+                                            ConstantsHomePage.iconeAjuda),
                                       ),
-                                      child: Icon(
-                                        Icons.help,
-                                        size: 60,
-                                        color: Color(0xff27b3ff),
-                                      )),
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(35)),
+                                    ),
+                                  ),
                                   Container(
                                     margin: EdgeInsets.only(top: 10),
                                     child: Text("Ajuda",
                                         style: TextStyle(
                                           fontFamily: 'Montserrat',
                                           color: Color(0xff707070),
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w600,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.bold,
                                           fontStyle: FontStyle.normal,
                                           letterSpacing: -0.132,
                                         )),

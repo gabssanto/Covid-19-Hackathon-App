@@ -17,7 +17,7 @@ class NewsPage extends StatelessWidget {
         appBar: BackAppBar(
           title: 'Notícias',
         ),
-        body: SafeArea(
+        body: Container(
           child: Column(children: <Widget>[
             Expanded(
                 flex: 1,
@@ -62,6 +62,7 @@ class News {
 // se adicionar esses argumentos ele misteriosamente nao funciona
   final String urlToImage;
   final String publishedAt;
+
 //  final String content;
 
   News({
@@ -89,6 +90,7 @@ class News {
 
 class NewsList extends StatelessWidget {
   final List<News> news;
+
   NewsList({Key key, this.news}) : super(key: key);
 
   _launchURL(url) async {
@@ -114,11 +116,11 @@ class NewsList extends StatelessWidget {
                     isThreeLine: true,
                     onTap: () async {
                       await _launchURL(news[index].url ??
-                          'https://www.google.com/search?q=covid19&oq=covid19');
+                          'https://trends.google.com.br/trends/trendingsearches/daily?geo=BR');
                     },
                     title: Container(
                       child: Text(
-                        news[index].title ?? 'sem título',
+                        news[index].title ?? 'Sem título',
                         softWrap: true,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
@@ -133,7 +135,7 @@ class NewsList extends StatelessWidget {
                       children: [
                         Container(
                           child: Text(
-                            news[index].description ?? 'sem Descrição',
+                            news[index].description ?? 'Sem descrição',
                             softWrap: true,
                             overflow: TextOverflow.ellipsis,
                             maxLines: 2,
@@ -159,7 +161,7 @@ class NewsList extends StatelessWidget {
                         image: DecorationImage(
                             fit: BoxFit.cover,
                             image: NetworkImage(news[index].urlToImage ??
-                                'https://bloximages.newyork1.vip.townnews.com/wfsb.com/content/tncms/assets/v3/editorial/7/e5/7e5f698a-63b6-11ea-8771-d3793e20699a/5e69139c582eb.image.jpg')),
+                                'http://www.miovitae.es/wp-content/uploads/2018/07/Noticias.png')),
                         borderRadius: BorderRadius.all(Radius.circular(8.0)),
                       ),
                     ),
