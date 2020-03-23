@@ -23,8 +23,6 @@ class TipsPage extends StatelessWidget {
                 builder: (context, snapshot) {
                   List<TipItem> tips = parseTip(snapshot.data.toString());
 
-                  if (snapshot.hasError) print(snapshot.error);
-
                   return tips.isNotEmpty
                       ? TipsList(tips: tips)
                       : Center(child: CircularProgressIndicator());
@@ -54,6 +52,8 @@ class TipsList extends StatelessWidget {
             child: TipItem(
           title: tips[index].title,
           description: tips[index].description,
+          image: tips[index].image,
+          url: tips[index].url,
         ));
       },
     );
@@ -71,14 +71,16 @@ class TipItem extends StatelessWidget {
   final String title;
   final String description;
   final String image;
+  final String url;
 
-  TipItem({this.title, this.description, this.image});
+  TipItem({this.title, this.description, this.image, this.url});
 
   factory TipItem.fromJson(Map<String, dynamic> json) {
     return TipItem(
-      title: json['title'],
-      description: json['description'],
-      image: json['image'],
+      title: json['title'] as String,
+      description: json['description'] as String,
+      image: json['image'] as String,
+      url: json['url'] as String,
     );
   }
 
@@ -102,9 +104,21 @@ class TipItem extends StatelessWidget {
                   color: Colors.transparent,
                 ),
                 child: LayoutBuilder(builder: (context, constraint) {
-                  return Icon(
-                    Icons.help,
-                    size: constraint.biggest.height,
+                  print(image);
+                  return Container(
+                    width: 60.0,
+                    height: 60.0,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: (() {
+                            return image == null
+                                ? AssetImage(image)
+                                : NetworkImage(
+                                    'https://bloximages.newyork1.vip.townnews.com/wfsb.com/content/tncms/assets/v3/editorial/7/e5/7e5f698a-63b6-11ea-8771-d3793e20699a/5e69139c582eb.image.jpg');
+                          })()),
+                      borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                    ),
                   );
                 }),
               )),
