@@ -89,13 +89,13 @@ class TipItem extends StatelessWidget {
     return Container(
       width: MediaQuery.of(context).size.width,
       margin: EdgeInsets.only(left: 5.0, right: 5.0),
-      height: 190,
+//      height: 8000,
       decoration: BoxDecoration(
           color: Colors.white, borderRadius: BorderRadius.circular(15)),
       child: Column(
         children: <Widget>[
           SizedBox(
-              height: 80.0,
+//              height: 10.0,
               width: MediaQuery.of(context).size.width / 3.7,
               child: Container(
                 transform: Matrix4.translationValues(0.0, 10.0, 0.0),
