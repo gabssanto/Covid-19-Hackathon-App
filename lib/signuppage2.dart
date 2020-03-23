@@ -67,6 +67,7 @@ class SignupPage2 extends StatelessWidget {
         resizeToAvoidBottomPadding: false,
         appBar: LoginAppBar(
           title: 'Cadastre-se',
+          canGoBack: true,
         ),
         body: Form(
           key: _formKey,

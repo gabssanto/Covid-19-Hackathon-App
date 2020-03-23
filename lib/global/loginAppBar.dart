@@ -5,19 +5,23 @@ class LoginAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget child;
   final Function onPressed;
   final Function onTitleTapped;
+  final bool canGoBack;
 
   @override
   final Size preferredSize;
+
   LoginAppBar(
       {@required this.title,
       @required this.child,
       @required this.onPressed,
-      this.onTitleTapped})
+      this.onTitleTapped,
+      @required this.canGoBack})
       : preferredSize = Size.fromHeight(150.0);
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: canGoBack ? 150 : 100,
       margin: EdgeInsets.only(top: 30),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -28,13 +32,20 @@ class LoginAppBar extends StatelessWidget implements PreferredSizeWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                IconButton(
-                    icon: Icon(Icons.arrow_back),
-                    iconSize: 30,
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    color: Color(0xff27b3ff)),
+                (() {
+                  if (canGoBack) {
+                    return IconButton(
+                        icon: Icon(Icons.arrow_back),
+                        iconSize: 30,
+                        onPressed: () {
+                          this.onPressed != null
+                              ? this.onPressed()
+                              : Navigator.pop(context);
+                        },
+                        color: Color(0xff27b3ff));
+                  }
+                  return Container(height: 0.0);
+                })(),
               ],
             ),
           ),
