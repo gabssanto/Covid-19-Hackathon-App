@@ -89,13 +89,13 @@ class TipItem extends StatelessWidget {
     return Container(
       width: MediaQuery.of(context).size.width,
       margin: EdgeInsets.only(left: 5.0, right: 5.0),
-      height: 190,
+//      height: 8000,
       decoration: BoxDecoration(
           color: Colors.white, borderRadius: BorderRadius.circular(15)),
       child: Column(
         children: <Widget>[
           SizedBox(
-              height: 80.0,
+//              height: 10.0,
               width: MediaQuery.of(context).size.width / 3.7,
               child: Container(
                 transform: Matrix4.translationValues(0.0, 10.0, 0.0),
@@ -104,7 +104,7 @@ class TipItem extends StatelessWidget {
                   color: Colors.transparent,
                 ),
                 child: LayoutBuilder(builder: (context, constraint) {
-                  print(image);
+//                  print(image);
                   return Container(
                     width: 60.0,
                     height: 60.0,
@@ -112,7 +112,7 @@ class TipItem extends StatelessWidget {
                       image: DecorationImage(
                           fit: BoxFit.cover,
                           image: (() {
-                            return image == null
+                            return image != null
                                 ? AssetImage(image)
                                 : NetworkImage(
                                     'https://bloximages.newyork1.vip.townnews.com/wfsb.com/content/tncms/assets/v3/editorial/7/e5/7e5f698a-63b6-11ea-8771-d3793e20699a/5e69139c582eb.image.jpg');

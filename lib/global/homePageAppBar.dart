@@ -1,4 +1,4 @@
-import 'package:covid19/autoAvaliationPage.dart';
+import 'package:covid19/autoAvaliationPage1.dart';
 import 'package:covid19/profilePage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -128,7 +128,7 @@ class HomePageAppBar extends StatelessWidget implements PreferredSizeWidget {
               child: FlatButton(
                 onPressed: () {
                   Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => AutoAvaliationPage()));
+                      context, MaterialPageRoute(builder: (context) => AutoAvaliationPage1()));
                 },
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
