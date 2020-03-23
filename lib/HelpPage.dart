@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:core';
 import 'dart:async';
+import 'package:covid19/global/backAppBar.dart';
 import 'package:covid19/global/generalAppBar.dart';
 import 'package:covid19/mobx/imports.dart';
 import 'package:csv/csv.dart';
@@ -24,7 +25,7 @@ class _HelpPageState extends State<HelpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: GeneralAppBar(title: 'Ajuda',),
+      appBar: BackAppBar(title: 'Ajuda',),
       body: MapSample(),
     );
   }
@@ -56,34 +57,11 @@ class MapSampleState extends State<MapSample> {
   void initState() {
     BitmapDescriptor.fromAssetImage(
         ImageConfiguration(devicePixelRatio: 2.5),
-        'assets/pin.png').then((onValue) {
+        'assets/marker.png').then((onValue) {
       pinLocationIcon = onValue;
     });
     super.initState();
   }
-
-/*
-  loadAsset() async {
-    final myData = await rootBundle.loadString("assets/dataframe.csv");
-    List<List<dynamic>> csvTable = CsvToListConverter().convert(myData);
-
-    data = csvTable;
-    print(data.map((e) {
-      return e;
-    }).toList()[1][1]);
-  }
-*/
-
-  Set<Marker> _createMarker() {
-    return <Marker>[
-      Marker(
-        markerId: MarkerId("marker_1"),
-        position: LatLng(handleLocations.latitude, handleLocations.longitude),
-        icon: pinLocationIcon,
-      ),
-    ].toSet();
-  }
-
 
   @override
   Widget build(BuildContext context) {
