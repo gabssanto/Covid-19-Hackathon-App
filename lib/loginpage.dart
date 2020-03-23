@@ -90,7 +90,7 @@ class LoginPage extends StatelessWidget {
                         },
                         validator: (cpf){
                           Pattern pattern =
-                              r'(^(?:[+0]9)?[0-9]{10,12}$)';
+                              r'(^(?:[0-9]{14}$)';
                           RegExp regex = new RegExp(pattern);
                           if(cpf.length == 0)
                             return 'Digite o seu CPF';
@@ -137,7 +137,7 @@ class LoginPage extends StatelessWidget {
                         },
                         decoration: InputDecoration(
                           labelText: 'Senha',
-//                          hintText: 'Digite sua senha',
+                          hintText: 'Digite sua senha',
                           focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                   color: Color(0xff27b3ff), width: 1.0),
