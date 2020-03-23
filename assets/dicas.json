@@ -1,0 +1,70 @@
+{
+  "dicas": [
+    {
+      "title": "Cuidado com as fake news!",
+      "description": "sempre fique atento à veracidade das informações antes de repassá-la aos amigos.",
+      "image": "",
+      "url": "https://www.bbc.com/portuguese/geral-51551090"
+    },
+    {
+      "title": "Lave bem as mãos!",
+      "description": "Mantenha a higiene das mãos. Lave sempre que possível com água e sabão ou use álcool gel 70%.",
+      "image": "",
+      "url": "https://www.bbc.com/portuguese/geral-51551090"
+    },
+    {
+      "title": "Não espirre ou tussa nas mãos!",
+      "description": "Se você não tem lenço descartável, a melhor forma de espirrar e tossir é na dobra do cotovelo.",
+      "image": "",
+      "url": "https://g1.globo.com/bemestar/coronavirus/videos-perguntas-e-respostas/noticia/2020/03/12/coronavirus-como-tossir-e-espirrar-da-forma-correta.ghtml"
+    },
+    {
+      "title": "Evite aglomerações!",
+      "description": "Neste momento, uma decisão importante é evitar locais como clubes, piscinas, praias, bares e casas noturnas.",
+      "image": "",
+      "url": ""
+    },
+    {
+      "title": "Se possível, fique em casa!",
+      "description": "Para áreas com transmissão local da doença, é recomendado evitar contato social.",
+      "image": "",
+      "url": ""
+    },
+    {
+      "title": "Não compartilhe objetos pessoais!",
+      "description": "",
+      "image": "",
+      "url": ""
+    },
+    {
+      "title": "O que é coronavírus?",
+      "description": "Coronavírus (CID10) é uma família de vírus que causam infecções respiratórias.",
+      "image": "",
+      "url": ""
+    },
+    {
+      "title": "Qual o período de incubação?",
+      "description": "Período de incubação é o tempo que leva para os primeiros sintomas aparecerem, variando entre 2 a 14 dias.",
+      "image": "",
+      "url": ""
+    },
+    {
+      "title": "O que é coronavírus?",
+      "description": "Coronavírus (CID10) é uma família de vírus que causam infecções respiratórias.",
+      "image": "",
+      "url": ""
+    },
+    {
+      "title": "O que é coronavírus?",
+      "description": "Coronavírus (CID10) é uma família de vírus que causam infecções respiratórias.",
+      "image": "",
+      "url": ""
+    },
+    {
+      "title": "Quando ir ao médico?",
+      "description": "Somente procure ajuda médica se houver agravamento dos sintomas.",
+      "image": "",
+      "url": ""
+    }
+  ]
+}
