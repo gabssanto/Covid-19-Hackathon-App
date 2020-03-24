@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:covid19/diagnosisPage.dart';
 import 'package:covid19/global/homePageAppBar.dart';
 import 'package:covid19/mobx/imports.dart';
 import 'package:covid19/newspage.dart';
@@ -124,36 +125,44 @@ class _HomePageState extends State<HomePage> {
                       decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(18)),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Container(
-                            width: MediaQuery.of(context).size.width / 4,
-                            height: MediaQuery.of(context).size.height / 8,
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                fit: BoxFit.cover,
-                                image: AssetImage(
-                                    ConstantsHomePage.iconeDiagostico),
+                      child: FlatButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => DiagnosisPage()));
+                        },
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Container(
+                              width: MediaQuery.of(context).size.width / 4,
+                              height: MediaQuery.of(context).size.height / 8,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  fit: BoxFit.cover,
+                                  image: AssetImage(
+                                      ConstantsHomePage.iconeDiagostico),
+                                ),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(35)),
                               ),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(35)),
                             ),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(top: 10),
-                            child: Text("Diagnóstico",
-                                style: TextStyle(
-                                  fontFamily: 'Montserrat',
-                                  color: Color(0xff707070),
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold,
-                                  fontStyle: FontStyle.normal,
-                                  letterSpacing: -0.132,
-                                )),
-                          )
-                        ],
+                            Container(
+                              margin: EdgeInsets.only(top: 10),
+                              child: Text("Diagnóstico",
+                                  style: TextStyle(
+                                    fontFamily: 'Montserrat',
+                                    color: Color(0xff707070),
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,
+                                    fontStyle: FontStyle.normal,
+                                    letterSpacing: -0.132,
+                                  )),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                     Container(

@@ -1,0 +1,24 @@
+{
+    "diagnosticos": [
+        {
+            "diagnosis": 0,
+            "diagnosis_date": "2020-03-23T23:09:37.120Z"
+        },
+        {
+            "diagnosis": 0,
+            "diagnosis_date": "2020-03-24T23:09:37.120Z"
+        },
+        {
+            "diagnosis": 0,
+            "diagnosis_date": "2020-03-26T23:09:37.120Z"
+        },
+        {
+            "diagnosis": 1,
+            "diagnosis_date": "2020-04-23T23:09:37.120Z"
+        },
+        {
+            "diagnosis": 2,
+            "diagnosis_date": "2020-05-23T23:09:37.120Z"
+        }
+    ]
+}
