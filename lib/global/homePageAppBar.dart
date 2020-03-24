@@ -1,5 +1,5 @@
-import 'package:covid19/autoAvaliationPage1.dart';
-import 'package:covid19/profilePage.dart';
+import 'package:covid19/pages/auto_avaliation/auto_avaliation_page.dart';
+import 'package:covid19/pages/profile/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 

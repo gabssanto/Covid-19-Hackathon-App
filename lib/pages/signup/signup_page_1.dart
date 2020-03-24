@@ -1,7 +1,5 @@
+import 'package:covid19/pages/signup/signup_page_2.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
-import './mobx/imports.dart';
-import 'signuppage3.dart';
 import 'package:covid19/global/loginAppBar.dart';
 
 final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -49,7 +47,7 @@ class Btn extends StatelessWidget {
 //                  _validateInputs
                       () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => SignupPage3()));
+                        MaterialPageRoute(builder: (context) => SignupPage2()));
                   },
                 ),
               ))
@@ -59,7 +57,7 @@ class Btn extends StatelessWidget {
   }
 }
 
-class SignupPage2 extends StatelessWidget {
+class SignupPage1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,7 +78,7 @@ class SignupPage2 extends StatelessWidget {
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text('Localização',
+                          Text('Informações Básicas',
                               style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
@@ -92,8 +90,8 @@ class SignupPage2 extends StatelessWidget {
                               child: TextFormField(
                                 keyboardType: TextInputType.text,
                                 decoration: new InputDecoration(
-                                  hintText: 'Digite seu cidade/municipio',
-                                  labelText: 'Cidade/Municipio',
+                                  hintText: 'Digite seu nome',
+                                  labelText: 'Nome',
                                   focusedBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
                                           color: Color(0xff27b3ff), width: 1.0),
@@ -105,19 +103,19 @@ class SignupPage2 extends StatelessWidget {
                                   prefixIcon: Padding(
                                     padding: EdgeInsets.only(top: 0),
                                     // add padding to adjust icon
-                                    child: Icon(Icons.location_city),
+                                    child: Icon(Icons.person),
                                   ),
                                 ),
                               )),
                           Container(
-                              margin: EdgeInsets.only(top: 15, bottom: 15),
+                              margin: EdgeInsets.only(top: 15),
                               width: MediaQuery.of(context).size.width / 1.2,
                               height: MediaQuery.of(context).size.height / 15,
                               child: TextFormField(
                                 keyboardType: TextInputType.text,
                                 decoration: new InputDecoration(
-                                  hintText: 'Digite seu bairro',
-                                  labelText: 'Bairro',
+                                  hintText: 'Digite seu sobrenome',
+                                  labelText: 'Sobrenome',
                                   focusedBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
                                           color: Color(0xff27b3ff), width: 1.0),
@@ -129,36 +127,7 @@ class SignupPage2 extends StatelessWidget {
                                   prefixIcon: Padding(
                                     padding: EdgeInsets.only(top: 0),
                                     // add padding to adjust icon
-                                    child: Icon(Icons.location_on),
-                                  ),
-                                ),
-                              )),
-                          Text('Segurança',
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                  color: Color(0xff27b3ff))),
-                          Container(
-                              margin: EdgeInsets.only(top: 15),
-                              width: MediaQuery.of(context).size.width / 1.2,
-                              height: MediaQuery.of(context).size.height / 15,
-                              child: TextFormField(
-                                obscureText: true,
-                                decoration: InputDecoration(
-                                  labelText: 'Senha',
-//                          hintText: 'Digite sua senha',
-                                  focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: Color(0xff27b3ff), width: 1.0),
-                                      borderRadius: BorderRadius.circular(12)),
-                                  enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: Colors.grey, width: 1.0),
-                                      borderRadius: BorderRadius.circular(12)),
-                                  prefixIcon: Padding(
-                                    padding: EdgeInsets.only(top: 0),
-                                    // add padding to adjust icon
-                                    child: Icon(Icons.lock),
+                                    child: Icon(Icons.person),
                                   ),
                                 ),
                               )),
@@ -167,10 +136,10 @@ class SignupPage2 extends StatelessWidget {
                               width: MediaQuery.of(context).size.width / 1.2,
                               height: MediaQuery.of(context).size.height / 15,
                               child: TextFormField(
-                                obscureText: true,
-                                decoration: InputDecoration(
-                                  labelText: 'Confirme a senha',
-//                          hintText: 'Confirme a senha',
+                                keyboardType: TextInputType.number,
+                                decoration: new InputDecoration(
+                                  hintText: 'Digite seu CPF',
+                                  labelText: 'CPF',
                                   focusedBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
                                           color: Color(0xff27b3ff), width: 1.0),
@@ -182,8 +151,70 @@ class SignupPage2 extends StatelessWidget {
                                   prefixIcon: Padding(
                                     padding: EdgeInsets.only(top: 0),
                                     // add padding to adjust icon
-                                    child: Icon(Icons.lock),
+                                    child: Icon(Icons.person),
                                   ),
+                                ),
+                              )),
+                          Container(
+                              margin: EdgeInsets.only(top: 15),
+                              width: MediaQuery.of(context).size.width / 1.2,
+                              height: MediaQuery.of(context).size.height / 15,
+                              child: TextFormField(
+                                keyboardType: TextInputType.number,
+                                decoration: new InputDecoration(
+                                  hintText: 'Digite seu telefone',
+                                  labelText: 'Telefone',
+                                  focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Color(0xff27b3ff), width: 1.0),
+                                      borderRadius: BorderRadius.circular(12)),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Colors.grey, width: 1.0),
+                                      borderRadius: BorderRadius.circular(12)),
+                                  prefixIcon: Padding(
+                                    padding: EdgeInsets.only(top: 0),
+                                    // add padding to adjust icon
+                                    child: Icon(Icons.phone),
+                                  ),
+                                ),
+                              )),
+                          Container(
+                              margin: EdgeInsets.only(top: 15),
+                              width: MediaQuery.of(context).size.width / 1.2,
+                              height: MediaQuery.of(context).size.height / 15,
+                              child: TextFormField(
+                                keyboardType: TextInputType.number,
+                                decoration: new InputDecoration(
+                                  hintText: 'Digite sua idade',
+                                  labelText: 'Idade',
+                                  focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Color(0xff27b3ff), width: 1.0),
+                                      borderRadius: BorderRadius.circular(12)),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Colors.grey, width: 1.0),
+                                      borderRadius: BorderRadius.circular(12)),
+                                ),
+                              )),
+                          Container(
+                              margin: EdgeInsets.only(top: 15),
+                              width: MediaQuery.of(context).size.width / 1.2,
+                              height: MediaQuery.of(context).size.height / 15,
+                              child: TextFormField(
+                                keyboardType: TextInputType.number,
+                                decoration: new InputDecoration(
+                                  hintText: 'Digite seu gênero',
+                                  labelText: 'Gênero',
+                                  focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Color(0xff27b3ff), width: 1.0),
+                                      borderRadius: BorderRadius.circular(12)),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Colors.grey, width: 1.0),
+                                      borderRadius: BorderRadius.circular(12)),
                                 ),
                               )),
                           Container(margin: EdgeInsets.only(top: 40)),
@@ -191,9 +222,6 @@ class SignupPage2 extends StatelessWidget {
                           Container(
                             alignment: Alignment.topCenter,
                             padding: EdgeInsets.only(top: 10),
-//                child: Image(
-//                  image: AssetImage(ConstantsLoginPage.logoName),
-//                ),
                           ),
                         ])))));
   }

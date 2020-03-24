@@ -1,65 +1,21 @@
-import 'package:covid19/homepage.dart';
+import 'package:covid19/pages/home/home_page.dart';
+import 'package:covid19/pages/signup/signup_page_1.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
-import './mobx/imports.dart';
-import 'signuppage1.dart';
 import 'package:covid19/global/loginAppBar.dart';
+import 'package:covid19/pages/login/widgets/button.dart';
 
 final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 bool _autoValidate = false;
 var cpf;
 String password;
 
-void _validateInputs() {
-  final form = _formKey.currentState;
-  if (form.validate()) {
-    // Text forms was validated.
-    form.save();
-  }
-}
-
-class Btn extends StatelessWidget {
-  final String text;
-  final destPage;
-
-  Btn(this.text, this.destPage);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(
-          top: 20, bottom: MediaQuery.of(context).viewInsets.bottom),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          SizedBox(
-              width: MediaQuery.of(context).size.width / 1.2,
-              height: MediaQuery.of(context).size.height / 15,
-              child: Container(
-                child: FlatButton(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(12.0),
-                  ),
-                  color: Color(0xff27b3ff),
-                  child: Text(text,
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white)),
-                  onPressed:
-//                  _validateInputs
-                      () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => destPage));
-                  },
-                ),
-              ))
-        ],
-      ),
-    );
-  }
-}
+// void _validateInputs() {
+//   final form = _formKey.currentState;
+//   if (form.validate()) {
+//     // Text forms was validated.
+//     form.save();
+//   }
+// }
 
 class ConstantsLoginPage {
   static final logo = 'assets/app_logo.png';
@@ -169,8 +125,8 @@ class LoginPage extends StatelessWidget {
                         ),
                       )),
                   Container(margin: EdgeInsets.only(top: 40)),
-                  Container(child: Btn("Entrar", HomePage())),
-                  Container(child: Btn("Cadastrar-se", SignupPage1())),
+                  Container(child: BtnItem("Entrar", HomePage())),
+                  Container(child: BtnItem("Cadastrar-se", SignupPage1())),
                   Container(
                     alignment: Alignment.topCenter,
                     padding: EdgeInsets.only(top: 10),

@@ -1,5 +1,4 @@
 import 'package:covid19/global/backAppBar.dart';
-import 'package:covid19/global/generalAppBar.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatefulWidget {

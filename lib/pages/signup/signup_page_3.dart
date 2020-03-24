@@ -1,7 +1,5 @@
+import 'package:covid19/pages/home/home_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
-import './mobx/imports.dart';
-import 'homepage.dart';
 import 'package:covid19/global/loginAppBar.dart';
 
 final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -113,9 +111,6 @@ class SignupPage3 extends StatelessWidget {
                           Container(
                             alignment: Alignment.topCenter,
                             padding: EdgeInsets.only(top: 10),
-//                child: Image(
-//                  image: AssetImage(ConstantsLoginPage.logoName),
-//                ),
                           ),
                         ])))));
   }

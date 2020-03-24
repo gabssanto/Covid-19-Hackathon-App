@@ -1,0 +1,175 @@
+{
+    "autoValidated": false,
+    "fields": [
+        {
+            "key": "question",
+            "type": "RadioButton",
+            "label": "Você já teve diagnóstico de coronavírus?",
+            "value": 3,
+            "items": [
+                {
+                    "label": "Sim",
+                    "value": 1
+                },
+                {
+                    "label": "Não",
+                    "value": 2
+                }
+            ]
+        },
+        {
+            "key": "question",
+            "type": "Input",
+            "label": "Quando foi diagnosticado?",
+            "value": "",
+            "required": true
+        },
+        {
+            "key": "question",
+            "type": "RadioButton",
+            "label": "Você é um caso suspeito de coronavírus?",
+            "value": 3,
+            "items": [
+                {
+                    "label": "Sim",
+                    "value": 1
+                },
+                {
+                    "label": "Não",
+                    "value": 2
+                }
+            ]
+        },
+        {
+            "key": "question",
+            "type": "RadioButton",
+            "label": "Está em isolamento residencial ou internamento?",
+            "value": 3,
+            "items": [
+                {
+                    "label": "Sim",
+                    "value": 1
+                },
+                {
+                    "label": "Não",
+                    "value": 2
+                }
+            ]
+        },
+        {
+            "key": "question",
+            "type": "Input",
+            "label": "Quando começou a sentir os sintomas?",
+            "value": "",
+            "required": true
+        },
+        {
+            "key": "check",
+            "type": "Checkbox",
+            "label": "Quais são os seus sintomas?",
+            "value": 2,
+            "items": [
+                {
+                    "label": "Febre",
+                    "value": false
+                },
+                {
+                    "label": "Tosse",
+                    "value": false
+                },
+                {
+                    "label": "Escarro",
+                    "value": false
+                },
+                {
+                    "label": "Congestão Nasal",
+                    "value": false
+                },
+                {
+                    "label": "Corrimento Nasal",
+                    "value": false
+                }
+            ]
+        },
+        {
+            "key": "question",
+            "type": "RadioButton",
+            "label": "Apresenta dificuldade para respirar?",
+            "value": 3,
+            "items": [
+                {
+                    "label": "Sim",
+                    "value": 1
+                },
+                {
+                    "label": "Não",
+                    "value": 2
+                }
+            ]
+        },
+        {
+            "key": "question",
+            "type": "RadioButton",
+            "label": "Os olhos estão vermelhos e/ou com secreção?",
+            "value": 3,
+            "items": [
+                {
+                    "label": "Sim",
+                    "value": 1
+                },
+                {
+                    "label": "Não",
+                    "value": 2
+                }
+            ]
+        },
+        {
+            "key": "question",
+            "type": "RadioButton",
+            "label": "Tem dificuldade para engolir os alimentos?",
+            "value": 3,
+            "items": [
+                {
+                    "label": "Sim",
+                    "value": 1
+                },
+                {
+                    "label": "Não",
+                    "value": 2
+                }
+            ]
+        },
+        {
+            "key": "question",
+            "type": "RadioButton",
+            "label": "Tem observado se a ponta de seus dedos dos pés ou das mãos estão ficando descorados ou azulados?",
+            "value": 3,
+            "items": [
+                {
+                    "label": "Sim",
+                    "value": 1
+                },
+                {
+                    "label": "Não",
+                    "value": 2
+                }
+            ]
+        },
+        {
+            "key": "question",
+            "type": "RadioButton",
+            "label": "Notou ter batimento de asa do nariz?",
+            "value": 3,
+            "items": [
+                {
+                    "label": "Sim",
+                    "value": 1
+                },
+                {
+                    "label": "Não",
+                    "value": 2
+                }
+            ]
+        }
+    ]
+}
