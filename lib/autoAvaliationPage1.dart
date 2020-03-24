@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:covid19/global/generalAppBar.dart';
+import 'package:covid19/homepage.dart';
 import 'package:covid19/mobx/imports.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -13,7 +14,7 @@ class AutoAvaliationPage1 extends StatefulWidget {
   _AutoAvaliationPage1State createState() => _AutoAvaliationPage1State();
 }
 
-class  _AutoAvaliationPage1State extends State<AutoAvaliationPage1> {
+class _AutoAvaliationPage1State extends State<AutoAvaliationPage1> {
   String form = json.encode({
     'autoValidated': false,
     'fields': [
@@ -37,7 +38,7 @@ class  _AutoAvaliationPage1State extends State<AutoAvaliationPage1> {
         'key': 'question',
         'type': 'Input',
         'label': 'Quando foi diagnosticado?',
-        'value':'',
+        'value': '',
         'required': true
       },
       {
@@ -76,7 +77,7 @@ class  _AutoAvaliationPage1State extends State<AutoAvaliationPage1> {
         'key': 'question',
         'type': 'Input',
         'label': 'Quando começou a sentir os sintomas?',
-        'value':'',
+        'value': '',
         'required': true
       },
       {
@@ -158,7 +159,8 @@ class  _AutoAvaliationPage1State extends State<AutoAvaliationPage1> {
       {
         'key': 'question',
         'type': 'RadioButton',
-        'label': 'Tem observado se a ponta de seus dedos dos pés ou das mãos estão ficando descorados ou azulados?',
+        'label':
+            'Tem observado se a ponta de seus dedos dos pés ou das mãos estão ficando descorados ou azulados?',
         'value': 3,
         'items': [
           {
@@ -191,8 +193,7 @@ class  _AutoAvaliationPage1State extends State<AutoAvaliationPage1> {
   });
   dynamic response;
 
-  Map decorations = {
-  };
+  Map decorations = {};
 
   @override
   Widget build(BuildContext context) {
@@ -216,10 +217,15 @@ class  _AutoAvaliationPage1State extends State<AutoAvaliationPage1> {
                 height: 40.0,
                 color: Color(0xff27b3ff),
                 child: Center(
+                    child: FlatButton(
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => HomePage()));
+                  },
                   child: Text("Confirmar",
                       style: TextStyle(
                           color: Colors.white, fontWeight: FontWeight.bold)),
-                ),
+                )),
               ),
             ),
           ]),

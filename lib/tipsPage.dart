@@ -21,9 +21,11 @@ class TipsPage extends StatelessWidget {
                 future: DefaultAssetBundle.of(context)
                     .loadString(ConstantsTipsPage.jsonPath),
                 builder: (context, snapshot) {
+                  if (snapshot.hasError) print(snapshot.error);
+
                   List<TipItem> tips = parseTip(snapshot.data.toString());
-                  // só pra nao ser tao estatico
                   tips.shuffle();
+
                   return tips.isNotEmpty
                       ? TipsList(tips: tips)
                       : Center(child: CircularProgressIndicator());

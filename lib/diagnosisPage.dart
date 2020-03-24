@@ -32,10 +32,13 @@ class DiagnosisPage extends StatelessWidget {
             // http
             // fetchDiagnosis(http.Client()),
             builder: (context, snapshot) {
+              if (snapshot.hasError) print(snapshot.error);
+
               List<DiagnosisItem> diags =
                   parseDiagnosis(snapshot.data.toString());
               diags.sort((a, b) =>
                   DateTime.parse(a.date).compareTo(DateTime.parse(b.date)));
+
               return diags.isNotEmpty
                   ? CarouselSlider(
                       height: MediaQuery.of(context).size.height / 1.3,
