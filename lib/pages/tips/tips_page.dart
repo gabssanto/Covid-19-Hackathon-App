@@ -2,6 +2,7 @@ import 'package:covid19/global/backAppBar.dart';
 import 'package:covid19/pages/tips/constants.dart';
 import 'package:covid19/pages/tips/widgets/item.dart';
 import 'package:covid19/pages/tips/widgets/list.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 
@@ -15,17 +16,16 @@ class TipsPage extends StatelessWidget {
         body: Container(
             padding: EdgeInsets.only(top: 10),
             child: GestureDetector(
-              child: FutureBuilder(
-                future: DefaultAssetBundle.of(context)
-                    .loadString(ConstantsTipsPage.jsonPath),
+              child: FutureBuilder<List<TipItem>>(
+                future: fetchTips(context: context),
                 builder: (context, snapshot) {
                   if (snapshot.hasError) print(snapshot.error);
 
-                  List<TipItem> tips = parseTip(snapshot.data.toString());
-                  tips.shuffle();
-
-                  return tips.isNotEmpty
-                      ? TipsList(tips: tips)
+                  return snapshot.hasData
+                      ? TipsList(tips: (() {
+                          snapshot.data.shuffle();
+                          return snapshot.data;
+                        })())
                       : Center(child: CircularProgressIndicator());
                 },
               ),
@@ -33,8 +33,14 @@ class TipsPage extends StatelessWidget {
   }
 }
 
+Future<List<TipItem>> fetchTips({BuildContext context}) async {
+  String jsonString = await DefaultAssetBundle.of(context)
+      .loadString(ConstantsTipsPage.jsonPath);
+  return compute(parseTip, jsonString);
+}
+
 List<TipItem> parseTip(String responseBody) {
-  final parsed = json.decode(responseBody.toString()).cast<String, dynamic>();
+  final parsed = json.decode(responseBody);
   return (parsed["dicas"] as List)
       .map<TipItem>((json) => TipItem.fromJson(json))
       .toList();
