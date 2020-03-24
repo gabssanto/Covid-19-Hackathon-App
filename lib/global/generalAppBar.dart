@@ -10,9 +10,9 @@ class GeneralAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Size preferredSize;
   GeneralAppBar(
       {@required this.title,
-        @required this.child,
-        @required this.onPressed,
-        this.onTitleTapped})
+      @required this.child,
+      @required this.onPressed,
+      this.onTitleTapped})
       : preferredSize = Size.fromHeight(85.0);
 
   @override
@@ -38,7 +38,7 @@ class GeneralAppBar extends StatelessWidget implements PreferredSizeWidget {
                     color: Color(0xff27b3ff)),
                 Container(
                   margin: EdgeInsets.only(left: 10),
-                  child:  Text('$title',
+                  child: Text('$title',
                       style: TextStyle(
                           fontSize: 30,
                           fontWeight: FontWeight.bold,

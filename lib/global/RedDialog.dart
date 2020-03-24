@@ -4,9 +4,7 @@ class RedDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(21)
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(21)),
       child: Container(
         width: MediaQuery.of(context).size.width - 80,
         height: 300,
@@ -21,9 +19,7 @@ class RedDialog extends StatelessWidget {
                   fontWeight: FontWeight.w700,
                   fontStyle: FontStyle.normal,
                   letterSpacing: -0.176,
-
-                )
-            ),
+                )),
             Text("Você é um caso confirmado",
                 style: TextStyle(
                   fontFamily: 'Montserrat',
@@ -32,12 +28,11 @@ class RedDialog extends StatelessWidget {
                   fontWeight: FontWeight.w700,
                   fontStyle: FontStyle.normal,
                   letterSpacing: -0.176,
-
-                )
-            ),
+                )),
             Container(
                 margin: EdgeInsets.only(left: 20, right: 20),
-                child: Text("Se seus sintomas são leves é orientado que permaneça em isolamento residencial e somente procure ajuda médica se houver agravamento dos sintomas. Em caso de dúvidas, ligue para o Dique Saúde 136 do Ministério da Saúde.",
+                child: Text(
+                    "Se seus sintomas são leves é orientado que permaneça em isolamento residencial e somente procure ajuda médica se houver agravamento dos sintomas. Em caso de dúvidas, ligue para o Dique Saúde 136 do Ministério da Saúde.",
                     style: TextStyle(
                       fontFamily: 'Montserrat',
                       color: Colors.black54,
@@ -45,18 +40,13 @@ class RedDialog extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                       fontStyle: FontStyle.normal,
                       letterSpacing: -0.154,
-
-                    )
-                )
-
-            ),
+                    ))),
             Container(
               width: 285,
               height: 49,
               decoration: new BoxDecoration(
                   color: Color(0xfff65f68),
-                  borderRadius: BorderRadius.circular(14)
-              ),
+                  borderRadius: BorderRadius.circular(14)),
               child: FlatButton(
                 onPressed: () {
                   Navigator.pop(context);
@@ -73,17 +63,11 @@ class RedDialog extends StatelessWidget {
                           fontWeight: FontWeight.w600,
                           fontStyle: FontStyle.normal,
                           letterSpacing: -0.165,
-
-                        )
-                    ),
+                        )),
                   ],
                 ),
               ),
             )
-
-
-
-
           ],
         ),
       ),

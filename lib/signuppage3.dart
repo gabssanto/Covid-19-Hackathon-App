@@ -47,7 +47,7 @@ class Btn extends StatelessWidget {
                           color: Colors.white)),
                   onPressed:
 //                  _validateInputs
-    () {
+                      () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => HomePage()));
                   },
@@ -70,56 +70,53 @@ class SignupPage3 extends StatelessWidget {
           canGoBack: true,
         ),
         body: Form(
-          key: _formKey,
+            key: _formKey,
             autovalidate: _autoValidate,
             child: SingleChildScrollView(
                 reverse: true,
                 child: Container(
-                alignment: Alignment.center,
+                    alignment: Alignment.center,
                     margin: EdgeInsets.only(left: 30, right: 30),
-                    child:Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-
-
-                  Text('Quantas pessoas residem com você na sua casa?',
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xff6f6f6f))),
-                  Container(
-                      margin: EdgeInsets.only(top: 15),
-                      width: MediaQuery.of(context).size.width / 1.2,
-                      height: MediaQuery.of(context).size.height / 15,
-                      child: TextFormField(
-                        keyboardType: TextInputType.number,
-                        decoration: new InputDecoration(
-                          labelText: 'Número de Pessoas',
-                          focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Color(0xff27b3ff), width: 1.0),
-                              borderRadius: BorderRadius.circular(12)),
-                          enabledBorder: OutlineInputBorder(
-                              borderSide:
-                              BorderSide(color: Colors.grey, width: 1.0),
-                              borderRadius: BorderRadius.circular(12)),
-                          prefixIcon: Padding(
-                            padding: EdgeInsets.only(top: 0),
-                            // add padding to adjust icon
-                            child: Icon(Icons.people),
-                          ),
-                        ),
-                      )),
-
-                  Container(margin: EdgeInsets.only(top: 40)),
-                  Container(child: Btn("Finalizar Cadastro")),
-                  Container(
-                    alignment: Alignment.topCenter,
-                    padding: EdgeInsets.only(top: 10),
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text('Quantas pessoas residem com você na sua casa?',
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xff6f6f6f))),
+                          Container(
+                              margin: EdgeInsets.only(top: 15),
+                              width: MediaQuery.of(context).size.width / 1.2,
+                              height: MediaQuery.of(context).size.height / 15,
+                              child: TextFormField(
+                                keyboardType: TextInputType.number,
+                                decoration: new InputDecoration(
+                                  labelText: 'Número de Pessoas',
+                                  focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Color(0xff27b3ff), width: 1.0),
+                                      borderRadius: BorderRadius.circular(12)),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Colors.grey, width: 1.0),
+                                      borderRadius: BorderRadius.circular(12)),
+                                  prefixIcon: Padding(
+                                    padding: EdgeInsets.only(top: 0),
+                                    // add padding to adjust icon
+                                    child: Icon(Icons.people),
+                                  ),
+                                ),
+                              )),
+                          Container(margin: EdgeInsets.only(top: 40)),
+                          Container(child: Btn("Finalizar Cadastro")),
+                          Container(
+                            alignment: Alignment.topCenter,
+                            padding: EdgeInsets.only(top: 10),
 //                child: Image(
 //                  image: AssetImage(ConstantsLoginPage.logoName),
 //                ),
-                  ),
-                ])))));
+                          ),
+                        ])))));
   }
 }

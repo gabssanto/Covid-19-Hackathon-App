@@ -21,11 +21,13 @@ class _HelpPageState extends State<HelpPage> {
     super.initState();
   }
   //https://i3geo.saude.gov.br/i3geo/ogc.php?service=WFS&version=1.0.0&request=GetFeature&typeName=ubs_funcionamento&outputFormat=JSON
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: BackAppBar(title: 'Ajuda',),
+      appBar: BackAppBar(
+        title: 'Ajuda',
+      ),
       body: MapSample(),
     );
   }
@@ -56,8 +58,8 @@ class MapSampleState extends State<MapSample> {
   @override
   void initState() {
     BitmapDescriptor.fromAssetImage(
-        ImageConfiguration(devicePixelRatio: 2.5),
-        'assets/marker.png').then((onValue) {
+            ImageConfiguration(devicePixelRatio: 2.5), 'assets/marker.png')
+        .then((onValue) {
       pinLocationIcon = onValue;
     });
     super.initState();
@@ -77,27 +79,37 @@ class MapSampleState extends State<MapSample> {
         onMapCreated: (GoogleMapController controller) {
           _controller.complete(controller);
           setState(() {
-            for(int i = 0; i < handleLocations.ubsNames.length-1; i++) {
-              double minusLat = handleLocations.latitude - double.parse(handleLocations.ubsLatitudes[i]);
-              double minusLong = handleLocations.longitude - double.parse(handleLocations.ubsLongitudes[i]);
-              if(minusLat.abs() <= 0.1 && minusLong.abs() <= 0.1) {
-                _markers.add(
-                    Marker(
-                      infoWindow: InfoWindow(title: handleLocations.ubsNames[i].replaceAll("'", ''), snippet: 'Clique aqui para navegar ate o local!', onTap:  () => MapsLauncher.launchCoordinates(double.parse(handleLocations.ubsLatitudes[i]), double.parse(handleLocations.ubsLongitudes[i]))),
-                      markerId: MarkerId(handleLocations.ubsNames[i]),
-                      position: LatLng(double.parse(handleLocations.ubsLatitudes[i]), double.parse(handleLocations.ubsLongitudes[i])),
-                      icon: pinLocationIcon,
-                    )
-                );
+            for (int i = 0; i < handleLocations.ubsNames.length - 1; i++) {
+              double minusLat = handleLocations.latitude -
+                  double.parse(handleLocations.ubsLatitudes[i]);
+              double minusLong = handleLocations.longitude -
+                  double.parse(handleLocations.ubsLongitudes[i]);
+              if (minusLat.abs() <= 0.1 && minusLong.abs() <= 0.1) {
+                _markers.add(Marker(
+                  infoWindow: InfoWindow(
+                      title: handleLocations.ubsNames[i].replaceAll("'", ''),
+                      snippet: 'Clique aqui para navegar ate o local!',
+                      onTap: () => MapsLauncher.launchCoordinates(
+                          double.parse(handleLocations.ubsLatitudes[i]),
+                          double.parse(handleLocations.ubsLongitudes[i]))),
+                  markerId: MarkerId(handleLocations.ubsNames[i]),
+                  position: LatLng(
+                      double.parse(handleLocations.ubsLatitudes[i]),
+                      double.parse(handleLocations.ubsLongitudes[i])),
+                  icon: pinLocationIcon,
+                ));
               }
             }
           });
-          },
+        },
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.white,
         onPressed: _goToCurrentPosition,
-        child: Icon(Icons.my_location, color: Color(0xff27b3ff),),
+        child: Icon(
+          Icons.my_location,
+          color: Color(0xff27b3ff),
+        ),
       ),
     );
   }

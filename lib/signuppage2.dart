@@ -47,7 +47,7 @@ class Btn extends StatelessWidget {
                           color: Colors.white)),
                   onPressed:
 //                  _validateInputs
-    () {
+                      () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => SignupPage3()));
                   },
@@ -70,133 +70,131 @@ class SignupPage2 extends StatelessWidget {
           canGoBack: true,
         ),
         body: Form(
-          key: _formKey,
+            key: _formKey,
             autovalidate: _autoValidate,
             child: SingleChildScrollView(
                 reverse: true,
                 child: Container(
-                alignment: Alignment.center,
+                    alignment: Alignment.center,
                     margin: EdgeInsets.only(left: 30),
-                    child:Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-
-
-                  Text('Localização',
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xff27b3ff))),
-                  Container(
-                      margin: EdgeInsets.only(top: 15),
-                      width: MediaQuery.of(context).size.width / 1.2,
-                      height: MediaQuery.of(context).size.height / 15,
-                      child: TextFormField(
-                        keyboardType: TextInputType.text,
-                        decoration: new InputDecoration(
-                          hintText: 'Digite seu cidade/municipio',
-                          labelText: 'Cidade/Municipio',
-                          focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Color(0xff27b3ff), width: 1.0),
-                              borderRadius: BorderRadius.circular(12)),
-                          enabledBorder: OutlineInputBorder(
-                              borderSide:
-                              BorderSide(color: Colors.grey, width: 1.0),
-                              borderRadius: BorderRadius.circular(12)),
-                          prefixIcon: Padding(
-                            padding: EdgeInsets.only(top: 0),
-                            // add padding to adjust icon
-                            child: Icon(Icons.location_city),
-                          ),
-                        ),
-                      )),
-                      Container(
-                          margin: EdgeInsets.only(top: 15, bottom: 15),
-                          width: MediaQuery.of(context).size.width / 1.2,
-                          height: MediaQuery.of(context).size.height / 15,
-                          child: TextFormField(
-                            keyboardType: TextInputType.text,
-                            decoration: new InputDecoration(
-                              hintText: 'Digite seu bairro',
-                              labelText: 'Bairro',
-                              focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: Color(0xff27b3ff), width: 1.0),
-                                  borderRadius: BorderRadius.circular(12)),
-                              enabledBorder: OutlineInputBorder(
-                                  borderSide:
-                                  BorderSide(color: Colors.grey, width: 1.0),
-                                  borderRadius: BorderRadius.circular(12)),
-                              prefixIcon: Padding(
-                                padding: EdgeInsets.only(top: 0),
-                                // add padding to adjust icon
-                                child: Icon(Icons.location_on),
-                              ),
-                            ),
-                          )),
-                      Text('Segurança',
-                          style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xff27b3ff))),
-                      Container(
-                          margin: EdgeInsets.only(top: 15),
-                          width: MediaQuery.of(context).size.width / 1.2,
-                          height: MediaQuery.of(context).size.height / 15,
-                          child: TextFormField(
-                            obscureText: true,
-                            decoration: InputDecoration(
-                              labelText: 'Senha',
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text('Localização',
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xff27b3ff))),
+                          Container(
+                              margin: EdgeInsets.only(top: 15),
+                              width: MediaQuery.of(context).size.width / 1.2,
+                              height: MediaQuery.of(context).size.height / 15,
+                              child: TextFormField(
+                                keyboardType: TextInputType.text,
+                                decoration: new InputDecoration(
+                                  hintText: 'Digite seu cidade/municipio',
+                                  labelText: 'Cidade/Municipio',
+                                  focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Color(0xff27b3ff), width: 1.0),
+                                      borderRadius: BorderRadius.circular(12)),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Colors.grey, width: 1.0),
+                                      borderRadius: BorderRadius.circular(12)),
+                                  prefixIcon: Padding(
+                                    padding: EdgeInsets.only(top: 0),
+                                    // add padding to adjust icon
+                                    child: Icon(Icons.location_city),
+                                  ),
+                                ),
+                              )),
+                          Container(
+                              margin: EdgeInsets.only(top: 15, bottom: 15),
+                              width: MediaQuery.of(context).size.width / 1.2,
+                              height: MediaQuery.of(context).size.height / 15,
+                              child: TextFormField(
+                                keyboardType: TextInputType.text,
+                                decoration: new InputDecoration(
+                                  hintText: 'Digite seu bairro',
+                                  labelText: 'Bairro',
+                                  focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Color(0xff27b3ff), width: 1.0),
+                                      borderRadius: BorderRadius.circular(12)),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Colors.grey, width: 1.0),
+                                      borderRadius: BorderRadius.circular(12)),
+                                  prefixIcon: Padding(
+                                    padding: EdgeInsets.only(top: 0),
+                                    // add padding to adjust icon
+                                    child: Icon(Icons.location_on),
+                                  ),
+                                ),
+                              )),
+                          Text('Segurança',
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xff27b3ff))),
+                          Container(
+                              margin: EdgeInsets.only(top: 15),
+                              width: MediaQuery.of(context).size.width / 1.2,
+                              height: MediaQuery.of(context).size.height / 15,
+                              child: TextFormField(
+                                obscureText: true,
+                                decoration: InputDecoration(
+                                  labelText: 'Senha',
 //                          hintText: 'Digite sua senha',
-                              focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: Color(0xff27b3ff), width: 1.0),
-                                  borderRadius: BorderRadius.circular(12)),
-                              enabledBorder: OutlineInputBorder(
-                                  borderSide:
-                                  BorderSide(color: Colors.grey, width: 1.0),
-                                  borderRadius: BorderRadius.circular(12)),
-                              prefixIcon: Padding(
-                                padding: EdgeInsets.only(top: 0),
-                                // add padding to adjust icon
-                                child: Icon(Icons.lock),
-                              ),
-                            ),
-                          )),
-                      Container(
-                          margin: EdgeInsets.only(top: 15),
-                          width: MediaQuery.of(context).size.width / 1.2,
-                          height: MediaQuery.of(context).size.height / 15,
-                          child: TextFormField(
-                            obscureText: true,
-                            decoration: InputDecoration(
-                              labelText: 'Confirme a senha',
+                                  focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Color(0xff27b3ff), width: 1.0),
+                                      borderRadius: BorderRadius.circular(12)),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Colors.grey, width: 1.0),
+                                      borderRadius: BorderRadius.circular(12)),
+                                  prefixIcon: Padding(
+                                    padding: EdgeInsets.only(top: 0),
+                                    // add padding to adjust icon
+                                    child: Icon(Icons.lock),
+                                  ),
+                                ),
+                              )),
+                          Container(
+                              margin: EdgeInsets.only(top: 15),
+                              width: MediaQuery.of(context).size.width / 1.2,
+                              height: MediaQuery.of(context).size.height / 15,
+                              child: TextFormField(
+                                obscureText: true,
+                                decoration: InputDecoration(
+                                  labelText: 'Confirme a senha',
 //                          hintText: 'Confirme a senha',
-                              focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: Color(0xff27b3ff), width: 1.0),
-                                  borderRadius: BorderRadius.circular(12)),
-                              enabledBorder: OutlineInputBorder(
-                                  borderSide:
-                                  BorderSide(color: Colors.grey, width: 1.0),
-                                  borderRadius: BorderRadius.circular(12)),
-                              prefixIcon: Padding(
-                                padding: EdgeInsets.only(top: 0),
-                                // add padding to adjust icon
-                                child: Icon(Icons.lock),
-                              ),
-                            ),
-                          )),
-                  Container(margin: EdgeInsets.only(top: 40)),
-                  Container(child: Btn("Próximo")),
-                  Container(
-                    alignment: Alignment.topCenter,
-                    padding: EdgeInsets.only(top: 10),
+                                  focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Color(0xff27b3ff), width: 1.0),
+                                      borderRadius: BorderRadius.circular(12)),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Colors.grey, width: 1.0),
+                                      borderRadius: BorderRadius.circular(12)),
+                                  prefixIcon: Padding(
+                                    padding: EdgeInsets.only(top: 0),
+                                    // add padding to adjust icon
+                                    child: Icon(Icons.lock),
+                                  ),
+                                ),
+                              )),
+                          Container(margin: EdgeInsets.only(top: 40)),
+                          Container(child: Btn("Próximo")),
+                          Container(
+                            alignment: Alignment.topCenter,
+                            padding: EdgeInsets.only(top: 10),
 //                child: Image(
 //                  image: AssetImage(ConstantsLoginPage.logoName),
 //                ),
-                  ),
-                ])))));
+                          ),
+                        ])))));
   }
 }
