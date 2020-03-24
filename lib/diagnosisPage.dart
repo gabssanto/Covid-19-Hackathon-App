@@ -9,9 +9,11 @@ import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
 class ConstantsDiagnosisPage {
-  static final iconeEmojiSaudavel = "assets/diagnostico/.png";
-  static final iconeEmojiSuspeito = "assets/diagnostico/.png";
-  static final iconeEmojiConfirmado = "assets/diagnostico/.png";
+  static final icones = [
+    "assets/icones_diagnostico/saudavel.png",
+    "assets/icones_diagnostico/suspeito.png",
+    "assets/icones_diagnostico/contaminado.png"
+  ];
   static final jsonPath = 'assets/diags.json';
 }
 
@@ -32,6 +34,8 @@ class DiagnosisPage extends StatelessWidget {
             builder: (context, snapshot) {
               List<DiagnosisItem> diags =
                   parseDiagnosis(snapshot.data.toString());
+              diags.sort((a, b) =>
+                  DateTime.parse(a.date).compareTo(DateTime.parse(b.date)));
               return diags.isNotEmpty
                   ? CarouselSlider(
                       height: MediaQuery.of(context).size.height / 1.3,
@@ -123,13 +127,16 @@ class DiagnosisItem extends StatelessWidget {
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
-                    color: Colors.cyan,
+                    image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: AssetImage(
+                            ConstantsDiagnosisPage.icones[diagnostico])),
                     borderRadius: BorderRadius.all(Radius.circular(25.0)),
                   ),
                 ),
               )),
           Container(
-            margin: EdgeInsets.only(top: 100, left: 20, right: 20),
+            margin: EdgeInsets.only(top: 70, left: 20, right: 20),
             child: Column(
               children: <Widget>[
                 (() {
