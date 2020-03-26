@@ -1,63 +1,19 @@
 import 'package:covid19/pages/home/home_page.dart';
+import 'package:covid19/pages/signup/widgets/BtnSignup.dart';
 import 'package:flutter/material.dart';
 import 'package:covid19/global/loginAppBar.dart';
 
-final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-bool _autoValidate = false;
-var cpf;
-String password;
-
-void _validateInputs() {
-  final form = _formKey.currentState;
-  if (form.validate()) {
-    // Text forms was validated.
-    form.save();
-  }
-}
-
-class Btn extends StatelessWidget {
-  final String text;
-
-  Btn(this.text);
+class SignUpPage3 extends StatefulWidget {
+  SignUpPage3({Key key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(
-          top: 20, bottom: MediaQuery.of(context).viewInsets.bottom),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          SizedBox(
-              width: MediaQuery.of(context).size.width / 1.2,
-              height: MediaQuery.of(context).size.height / 15,
-              child: Container(
-                child: FlatButton(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(12.0),
-                  ),
-                  color: Color(0xff27b3ff),
-                  child: Text(text,
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white)),
-                  onPressed:
-//                  _validateInputs
-                      () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => HomePage()));
-                  },
-                ),
-              ))
-        ],
-      ),
-    );
-  }
+  _SignupPage3 createState() => _SignupPage3();
 }
 
-class SignupPage3 extends StatelessWidget {
+class _SignupPage3 extends State<SignUpPage3> {
+  final GlobalKey<FormState> _signupForm3 = GlobalKey<FormState>();
+  bool _autoValidate = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,7 +24,7 @@ class SignupPage3 extends StatelessWidget {
           canGoBack: true,
         ),
         body: Form(
-            key: _formKey,
+            key: _signupForm3,
             autovalidate: _autoValidate,
             child: SingleChildScrollView(
                 reverse: true,
@@ -105,13 +61,37 @@ class SignupPage3 extends StatelessWidget {
                                     child: Icon(Icons.people),
                                   ),
                                 ),
+                                validator: (String qtdPessoas) {
+                                  RegExp pattern = new RegExp(r'\d{1,2}');
+                                  return pattern.hasMatch(qtdPessoas.trim())
+                                      ? (() => int.parse(qtdPessoas.trim()) > 50
+                                          ? 'Entre com uma quantidade válida'
+                                          : null)()
+                                      : 'Entre com uma quantidade válida';
+                                },
                               )),
                           Container(margin: EdgeInsets.only(top: 40)),
-                          Container(child: Btn("Finalizar Cadastro")),
+                          Container(
+                              child: BtnSignup(
+                            text: "Finalizar Cadastro",
+                            onPressed: this._validateInputs,
+                          )),
                           Container(
                             alignment: Alignment.topCenter,
                             padding: EdgeInsets.only(top: 10),
                           ),
                         ])))));
+  }
+
+  void _validateInputs() {
+    if (_signupForm3.currentState.validate()) {
+      _signupForm3.currentState.save();
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => HomePage()));
+    } else {
+      setState(() {
+        _autoValidate = true;
+      });
+    }
   }
 }

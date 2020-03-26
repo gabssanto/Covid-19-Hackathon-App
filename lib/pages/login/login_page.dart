@@ -126,7 +126,7 @@ class LoginPage extends StatelessWidget {
                       )),
                   Container(margin: EdgeInsets.only(top: 40)),
                   Container(child: BtnItem("Entrar", HomePage())),
-                  Container(child: BtnItem("Cadastrar-se", SignupPage1())),
+                  Container(child: BtnItem("Cadastrar-se", SignUpPage1())),
                   Container(
                     alignment: Alignment.topCenter,
                     padding: EdgeInsets.only(top: 10),

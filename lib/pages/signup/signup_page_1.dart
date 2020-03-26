@@ -1,63 +1,23 @@
 import 'package:covid19/pages/signup/signup_page_2.dart';
+import 'package:covid19/pages/signup/widgets/BtnSignup.dart';
 import 'package:flutter/material.dart';
 import 'package:covid19/global/loginAppBar.dart';
 
-final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-bool _autoValidate = false;
-var cpf;
-String password;
-
-void _validateInputs() {
-  final form = _formKey.currentState;
-  if (form.validate()) {
-    // Text forms was validated.
-    form.save();
-  }
-}
-
-class Btn extends StatelessWidget {
-  final String text;
-
-  Btn(this.text);
+class SignUpPage1 extends StatefulWidget {
+  SignUpPage1({Key key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(
-          top: 20, bottom: MediaQuery.of(context).viewInsets.bottom),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          SizedBox(
-              width: MediaQuery.of(context).size.width / 1.2,
-              height: MediaQuery.of(context).size.height / 15,
-              child: Container(
-                child: FlatButton(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(12.0),
-                  ),
-                  color: Color(0xff27b3ff),
-                  child: Text(text,
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white)),
-                  onPressed:
-//                  _validateInputs
-                      () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => SignupPage2()));
-                  },
-                ),
-              ))
-        ],
-      ),
-    );
-  }
+  _SignupPage1 createState() => _SignupPage1();
 }
 
-class SignupPage1 extends StatelessWidget {
+class _SignupPage1 extends State<SignUpPage1> {
+  final GlobalKey<FormState> _signupForm1 = GlobalKey<FormState>();
+  bool _autoValidate = false;
+  String _name;
+  String _cpf;
+  String _phone;
+  String _age;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,7 +28,7 @@ class SignupPage1 extends StatelessWidget {
           canGoBack: true,
         ),
         body: Form(
-            key: _formKey,
+            key: _signupForm1,
             autovalidate: _autoValidate,
             child: SingleChildScrollView(
                 reverse: true,
@@ -88,10 +48,11 @@ class SignupPage1 extends StatelessWidget {
                               width: MediaQuery.of(context).size.width / 1.2,
                               height: MediaQuery.of(context).size.height / 15,
                               child: TextFormField(
+                                obscureText: false,
                                 keyboardType: TextInputType.text,
                                 decoration: new InputDecoration(
-                                  hintText: 'Digite seu nome',
-                                  labelText: 'Nome',
+                                  hintText: "Digite seu nome",
+                                  labelText: "Nome",
                                   focusedBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
                                           color: Color(0xff27b3ff), width: 1.0),
@@ -106,6 +67,16 @@ class SignupPage1 extends StatelessWidget {
                                     child: Icon(Icons.person),
                                   ),
                                 ),
+                                validator: (String nome) {
+                                  RegExp pattern = new RegExp(
+                                      r"^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$");
+                                  return pattern.hasMatch(nome.trim())
+                                      ? null
+                                      : 'Nome inválido';
+                                },
+                                onSaved: (String val) {
+                                  _name = val;
+                                },
                               )),
                           Container(
                               margin: EdgeInsets.only(top: 15),
@@ -114,8 +85,8 @@ class SignupPage1 extends StatelessWidget {
                               child: TextFormField(
                                 keyboardType: TextInputType.text,
                                 decoration: new InputDecoration(
-                                  hintText: 'Digite seu sobrenome',
-                                  labelText: 'Sobrenome',
+                                  hintText: "Digite seu CPF",
+                                  labelText: "CPF",
                                   focusedBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
                                           color: Color(0xff27b3ff), width: 1.0),
@@ -130,40 +101,57 @@ class SignupPage1 extends StatelessWidget {
                                     child: Icon(Icons.person),
                                   ),
                                 ),
+                                validator: (String cpf) {
+                                  RegExp pattern = new RegExp(
+                                      r'^\d{3}\.?\d{3}\.?\d{3}\-?\d{2}$');
+                                  return pattern.hasMatch(cpf.trim())
+                                      ? (() {
+                                          cpf = cpf.trim().replaceAll(
+                                              new RegExp(r'[\.-]'), '');
+                                          int soma = 0;
+                                          var digito1;
+                                          var digito2;
+                                          var j = 10;
+                                          for (int i = 0; i < 9; i++) {
+                                            soma += int.parse(cpf[i]) * j;
+                                            j--;
+                                          }
+                                          soma %= 11;
+                                          soma < 2
+                                              ? digito1 = 0
+                                              : digito1 = 11 - soma;
+                                          if (digito1 == int.parse(cpf[9])) {
+                                            soma = 0;
+                                            j = 11;
+                                            for (int i = 0; i < 10; i++) {
+                                              soma += int.parse(cpf[i]) * j;
+                                              j--;
+                                            }
+                                            soma %= 11;
+                                            soma < 2
+                                                ? digito2 = 0
+                                                : digito2 = 11 - soma;
+                                          }
+                                          return digito1 == int.parse(cpf[9]) &&
+                                                  digito2 == int.parse(cpf[10])
+                                              ? null
+                                              : 'CPF inválido';
+                                        })()
+                                      : 'CPF inválido';
+                                },
+                                onSaved: (String val) {
+                                  _cpf = val;
+                                },
                               )),
                           Container(
                               margin: EdgeInsets.only(top: 15),
                               width: MediaQuery.of(context).size.width / 1.2,
                               height: MediaQuery.of(context).size.height / 15,
                               child: TextFormField(
-                                keyboardType: TextInputType.number,
+                                keyboardType: TextInputType.phone,
                                 decoration: new InputDecoration(
-                                  hintText: 'Digite seu CPF',
-                                  labelText: 'CPF',
-                                  focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: Color(0xff27b3ff), width: 1.0),
-                                      borderRadius: BorderRadius.circular(12)),
-                                  enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: Colors.grey, width: 1.0),
-                                      borderRadius: BorderRadius.circular(12)),
-                                  prefixIcon: Padding(
-                                    padding: EdgeInsets.only(top: 0),
-                                    // add padding to adjust icon
-                                    child: Icon(Icons.person),
-                                  ),
-                                ),
-                              )),
-                          Container(
-                              margin: EdgeInsets.only(top: 15),
-                              width: MediaQuery.of(context).size.width / 1.2,
-                              height: MediaQuery.of(context).size.height / 15,
-                              child: TextFormField(
-                                keyboardType: TextInputType.number,
-                                decoration: new InputDecoration(
-                                  hintText: 'Digite seu telefone',
-                                  labelText: 'Telefone',
+                                  hintText: "Digite seu telefone",
+                                  labelText: "Telefone",
                                   focusedBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
                                           color: Color(0xff27b3ff), width: 1.0),
@@ -178,6 +166,16 @@ class SignupPage1 extends StatelessWidget {
                                     child: Icon(Icons.phone),
                                   ),
                                 ),
+                                validator: (String telefone) {
+                                  RegExp pattern = new RegExp(
+                                      r'\(?\d{2,}\)?\s?\d{4,}\-?\d{4}');
+                                  return pattern.hasMatch(telefone.trim())
+                                      ? null
+                                      : 'Número de telefone inválido';
+                                },
+                                onSaved: (String val) {
+                                  _phone = val;
+                                },
                               )),
                           Container(
                               margin: EdgeInsets.only(top: 15),
@@ -186,8 +184,8 @@ class SignupPage1 extends StatelessWidget {
                               child: TextFormField(
                                 keyboardType: TextInputType.number,
                                 decoration: new InputDecoration(
-                                  hintText: 'Digite sua idade',
-                                  labelText: 'Idade',
+                                  hintText: "Digite sua idade",
+                                  labelText: "Idade",
                                   focusedBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
                                           color: Color(0xff27b3ff), width: 1.0),
@@ -196,33 +194,45 @@ class SignupPage1 extends StatelessWidget {
                                       borderSide: BorderSide(
                                           color: Colors.grey, width: 1.0),
                                       borderRadius: BorderRadius.circular(12)),
+                                  prefixIcon: Padding(
+                                    padding: EdgeInsets.only(top: 0),
+                                    // add padding to adjust icon
+                                    child: Icon(Icons.cake),
+                                  ),
                                 ),
-                              )),
-                          Container(
-                              margin: EdgeInsets.only(top: 15),
-                              width: MediaQuery.of(context).size.width / 1.2,
-                              height: MediaQuery.of(context).size.height / 15,
-                              child: TextFormField(
-                                keyboardType: TextInputType.number,
-                                decoration: new InputDecoration(
-                                  hintText: 'Digite seu gênero',
-                                  labelText: 'Gênero',
-                                  focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: Color(0xff27b3ff), width: 1.0),
-                                      borderRadius: BorderRadius.circular(12)),
-                                  enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: Colors.grey, width: 1.0),
-                                      borderRadius: BorderRadius.circular(12)),
-                                ),
+                                validator: (String idade) {
+                                  RegExp pattern = new RegExp(r'\d{1,3}');
+                                  return pattern.hasMatch(idade.trim())
+                                      ? (() => int.parse(idade.trim()) > 130
+                                          ? 'Idade inválida'
+                                          : null)()
+                                      : 'Idade inválida';
+                                },
+                                onSaved: (String val) {
+                                  _age = val;
+                                },
                               )),
                           Container(margin: EdgeInsets.only(top: 40)),
-                          Container(child: Btn("Próximo")),
+                          BtnSignup(
+                            text: "Próximo",
+                            onPressed: this._validateInputs,
+                          ),
                           Container(
                             alignment: Alignment.topCenter,
                             padding: EdgeInsets.only(top: 10),
                           ),
                         ])))));
+  }
+
+  void _validateInputs() {
+    if (_signupForm1.currentState.validate()) {
+      _signupForm1.currentState.save();
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => SignUpPage2()));
+    } else {
+      setState(() {
+        _autoValidate = true;
+      });
+    }
   }
 }
