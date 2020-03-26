@@ -188,6 +188,16 @@ mixin _$HandleUser on _HandleUserBase, Store {
   }
 
   @override
+  void login(dynamic email, dynamic password) {
+    final _$actionInfo = _$_HandleUserBaseActionController.startAction();
+    try {
+      return super.login(email, password);
+    } finally {
+      _$_HandleUserBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     final string =
         'name: ${name.toString()},email: ${email.toString()},cpf: ${cpf.toString()},phone: ${phone.toString()},age: ${age.toString()},city: ${city.toString()},street: ${street.toString()},numberOfPeople: ${numberOfPeople.toString()},password: ${password.toString()}';

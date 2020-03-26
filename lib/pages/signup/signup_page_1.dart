@@ -264,6 +264,8 @@ class _SignupPage1 extends State<SignUpPage1> {
   void _validateInputs() {
     if (_signupForm1.currentState.validate()) {
       _signupForm1.currentState.save();
+
+      print(_email);
       handleUser.setForm1(_name, _email, _cpf, _phone, _age);
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => SignUpPage2()));

@@ -1,4 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'dart:async';
+
 import 'package:mobx/mobx.dart';
 part 'handleUser.g.dart';
 
@@ -47,7 +49,12 @@ abstract class _HandleUserBase with Store {
     this.street = street;
     this.numberOfPeople = numberOfPeople;
     this.password = password;
-    signUp(this.email, this.password);
+    signUp();
+  }
+
+  @action
+  void login(email, password) {
+    signIn(email, password);
   }
 
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
@@ -59,9 +66,9 @@ abstract class _HandleUserBase with Store {
     return user.uid;
   }
 
-  Future<String> signUp(String email, String password) async {
+  Future<String> signUp() async {
     AuthResult result = await _firebaseAuth.createUserWithEmailAndPassword(
-        email: email, password: password);
+        email: this.email, password: this.password);
     FirebaseUser user = result.user;
     return user.uid;
   }
