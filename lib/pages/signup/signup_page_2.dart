@@ -1,4 +1,4 @@
-import 'package:covid19/pages/signup/signup_page_3.dart';
+import 'package:covid19/pages/home/home_page.dart';
 import 'package:covid19/pages/signup/widgets/BtnSignup.dart';
 import 'package:flutter/material.dart';
 import 'package:covid19/global/loginAppBar.dart';
@@ -14,7 +14,10 @@ class _SignupPage2 extends State<SignUpPage2> {
   final GlobalKey<FormState> _signupForm2 = GlobalKey<FormState>();
   bool _autoValidate = false;
   final passKey = GlobalKey<FormFieldState>();
-  String _senha1;
+  String _city;
+  String _street;
+  String _numberOfPeople;
+  String _senha;
 
   @override
   Widget build(BuildContext context) {
@@ -69,6 +72,9 @@ class _SignupPage2 extends State<SignUpPage2> {
                                       ? null
                                       : 'Digite o nome de sua Cidade';
                                 },
+                                onSaved: (String val) {
+                                  _city = val;
+                                },
                               )),
                           Container(
                               margin: EdgeInsets.only(top: 15, bottom: 15),
@@ -97,6 +103,51 @@ class _SignupPage2 extends State<SignUpPage2> {
                                   return bairro.length > 0
                                       ? null
                                       : 'Digite o nome de seu bairro';
+                                },
+                                onSaved: (String val) {
+                                  _street = val;
+                                },
+                              )),
+                          Container(
+                            margin: EdgeInsets.only(right: 15),
+                            child: Text('Quantas pessoas residem com você na sua casa?',
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    color: Color(0xff27b3ff))),
+                          ),
+                          Container(
+                              margin: EdgeInsets.only(top: 15, bottom: 15),
+                              width: MediaQuery.of(context).size.width / 1.2,
+                              height: MediaQuery.of(context).size.height / 15,
+                              child: TextFormField(
+                                keyboardType: TextInputType.number,
+                                decoration: new InputDecoration(
+                                  labelText: 'Número de Pessoas',
+                                  focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Color(0xff27b3ff), width: 1.0),
+                                      borderRadius: BorderRadius.circular(12)),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Colors.grey, width: 1.0),
+                                      borderRadius: BorderRadius.circular(12)),
+                                  prefixIcon: Padding(
+                                    padding: EdgeInsets.only(top: 0),
+                                    // add padding to adjust icon
+                                    child: Icon(Icons.people),
+                                  ),
+                                ),
+                                validator: (String qtdPessoas) {
+                                  RegExp pattern = new RegExp(r'\d{1,2}');
+                                  return pattern.hasMatch(qtdPessoas.trim())
+                                      ? (() => int.parse(qtdPessoas.trim()) > 50
+                                      ? 'Entre com uma quantidade válida'
+                                      : null)()
+                                      : 'Entre com uma quantidade válida';
+                                },
+                                onSaved: (String val) {
+                                  _numberOfPeople = val;
                                 },
                               )),
                           Text('Segurança',
@@ -134,7 +185,7 @@ class _SignupPage2 extends State<SignUpPage2> {
                                       : 'senha deve ter mais de 6 digítos';
                                 },
                                 onSaved: (String val) {
-                                  _senha1 = val;
+                                  _senha = val;
                                 },
                               )),
                           Container(
@@ -167,10 +218,11 @@ class _SignupPage2 extends State<SignUpPage2> {
                                 },
                               )),
                           Container(margin: EdgeInsets.only(top: 40)),
-                          BtnSignup(
-                            text: "Próximo",
-                            onPressed: this._validateInputs,
-                          ),
+                          Container(
+                              child: BtnSignup(
+                                text: "Finalizar Cadastro",
+                                onPressed: this._validateInputs,
+                              )),
                           Container(
                             alignment: Alignment.topCenter,
                             padding: EdgeInsets.only(top: 10),
@@ -182,7 +234,7 @@ class _SignupPage2 extends State<SignUpPage2> {
     if (_signupForm2.currentState.validate()) {
       _signupForm2.currentState.save();
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => SignUpPage3()));
+          context, MaterialPageRoute(builder: (context) => HomePage()));
     } else {
       setState(() {
         _autoValidate = true;

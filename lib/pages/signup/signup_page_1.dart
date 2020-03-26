@@ -14,6 +14,7 @@ class _SignupPage1 extends State<SignUpPage1> {
   final GlobalKey<FormState> _signupForm1 = GlobalKey<FormState>();
   bool _autoValidate = false;
   String _name;
+  String _email;
   String _cpf;
   String _phone;
   String _age;
@@ -110,7 +111,7 @@ class _SignupPage1 extends State<SignUpPage1> {
                                       : 'Email inválido';
                                 },
                                 onSaved: (String val) {
-                                  _name = val;
+                                  _email = val;
                                 },
                               )),
                           Container(
