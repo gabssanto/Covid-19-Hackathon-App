@@ -9,7 +9,6 @@ import 'package:covid19/pages/home/widgets/item.dart';
 import 'package:covid19/pages/news/news_page.dart';
 import 'package:covid19/pages/tips/tips_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:location/location.dart';
 
 class HomePage extends StatefulWidget {
@@ -39,11 +38,15 @@ class _HomePageState extends State<HomePage> {
                       HomePageItem(
                         destPage: DiagnosisPage(),
                         name: "Diagnóstico",
+                        description:
+                            "Visualize os diagnósticos da sua auto avaliação",
                         icon: ConstantsHomePage.iconeDiagostico,
                       ),
                       HomePageItem(
                         destPage: NewsPage(),
                         name: "Notícias",
+                        description:
+                            "Leia as principais notícias de saúde que estão circulando no Brasil",
                         icon: ConstantsHomePage.iconeNoticias,
                       ),
                     ]),
@@ -53,15 +56,20 @@ class _HomePageState extends State<HomePage> {
                     HomePageItem(
                       destPage: TipsPage(),
                       name: "Dicas",
+                      description:
+                          "Leia dicas de saúde para ajudar na prevenção do Coronavirus",
                       icon: ConstantsHomePage.iconeDicas,
                     ),
                     HomePageItem(
                       destPage: HelpPage(),
-                      name: "Ajuda",
+                      name: "Unidades Básicas de Saúde",
+                      description:
+                          "Encontre as unidade Básicas de saúde mais próximas de você",
                       icon: ConstantsHomePage.iconeAjuda,
                     ),
                   ],
-                )
+                ),
+                Container(padding: EdgeInsets.only(top: 20.0),)
               ],
             ),
           ],

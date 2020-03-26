@@ -1,17 +1,8 @@
 import 'package:covid19/pages/home/home_page.dart';
-import 'package:covid19/pages/login/widgets/BtnLogin.dart';
 import 'package:covid19/pages/signup/signup_page_1.dart';
 import 'package:flutter/material.dart';
 import 'package:covid19/global/loginAppBar.dart';
 import 'package:covid19/pages/login/widgets/button.dart';
-
-// void _validateInputs() {
-//   final form = _formKey.currentState;
-//   if (form.validate()) {
-//     // Text forms was validated.
-//     form.save();
-//   }
-// }
 
 class ConstantsLoginPage {
   static final logo = 'assets/app_logo.png';
