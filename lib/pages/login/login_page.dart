@@ -1,13 +1,9 @@
 import 'package:covid19/pages/home/home_page.dart';
+import 'package:covid19/pages/login/widgets/BtnLogin.dart';
 import 'package:covid19/pages/signup/signup_page_1.dart';
 import 'package:flutter/material.dart';
 import 'package:covid19/global/loginAppBar.dart';
 import 'package:covid19/pages/login/widgets/button.dart';
-
-final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-bool _autoValidate = false;
-var cpf;
-String password;
 
 // void _validateInputs() {
 //   final form = _formKey.currentState;
@@ -21,7 +17,26 @@ class ConstantsLoginPage {
   static final logo = 'assets/app_logo.png';
 }
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final GlobalKey<FormState> _loginForm = GlobalKey<FormState>();
+
+  bool _autoValidate = false;
+
+  String cpf = '';
+  String senha = '';
+  int soma = 0;
+
+  String password;
+
+  bool _isValidated = false;
+
+  TextEditingController _cpfInput = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,7 +47,7 @@ class LoginPage extends StatelessWidget {
           canGoBack: false,
         ),
         body: Form(
-            key: _formKey,
+            key: _loginForm,
             autovalidate: _autoValidate,
             child: SingleChildScrollView(
                 reverse: true,
@@ -57,18 +72,47 @@ class LoginPage extends StatelessWidget {
                       height: MediaQuery.of(context).size.height / 15,
                       child: TextFormField(
                         keyboardType: TextInputType.number,
-                        onSaved: (var value) {
-                          cpf = value;
+                        //controller: _cpfInput,
+                        validator: (String cpf) {
+                          RegExp pattern = new RegExp(
+                              r'^\d{3}\.?\d{3}\.?\d{3}\-?\d{2}$');
+                          return pattern.hasMatch(cpf)
+                              ? (() {
+                            cpf = cpf.replaceAll(
+                                new RegExp(r'[\.-]'), '');
+                            int soma = 0;
+                            var digito1;
+                            var digito2;
+                            var j = 10;
+                            for (int i = 0; i < 9; i++) {
+                              soma += int.parse(cpf[i]) * j;
+                              j--;
+                            }
+                            soma %= 11;
+                            soma < 2
+                                ? digito1 = 0
+                                : digito1 = 11 - soma;
+                            if (digito1 == int.parse(cpf[9])) {
+                              soma = 0;
+                              j = 11;
+                              for (int i = 0; i < 10; i++) {
+                                soma += int.parse(cpf[i]) * j;
+                                j--;
+                              }
+                              soma %= 11;
+                              soma < 2
+                                  ? digito2 = 0
+                                  : digito2 = 11 - soma;
+                            }
+                            return digito1 == int.parse(cpf[9]) &&
+                                digito2 == int.parse(cpf[10])
+                                ? null
+                                : 'CPF inválido';
+                          })()
+                              : 'CPF inválido';
                         },
-                        validator: (cpf) {
-                          Pattern pattern = r'(^(?:[0-9]{14}$)';
-                          RegExp regex = new RegExp(pattern);
-                          if (cpf.length == 0)
-                            return 'Digite o seu CPF';
-                          else if ((!regex.hasMatch(cpf)) || cpf.length < 13)
-                            return 'Digite um CPF válido';
-                          else
-                            return null;
+                        onSaved: (String string) {
+                          cpf = string;
                         },
                         decoration: new InputDecoration(
                           hintText: 'Digite seu CPF',
@@ -94,17 +138,19 @@ class LoginPage extends StatelessWidget {
                       height: MediaQuery.of(context).size.height / 15,
                       child: TextFormField(
                         obscureText: true,
-                        onSaved: (String value) {
-                          password = value;
-                        },
-                        validator: (password) {
-                          Pattern pattern =
-                              r'^(?=.*[0-9]+.*)(?=.*[a-zA-Z]+.*)[0-9a-zA-Z]{6,}$';
-                          RegExp regex = new RegExp(pattern);
-                          if (!regex.hasMatch(password))
-                            return 'A senha deve ter entre 4 e 60 caracteres.';
-                          else
+                        validator: (String string) {
+                          if(string.length == 0) {
+                            return 'Campo de senha nao pode estar vazio';
+                          }
+                          else if (string.length <= 6) {
+                            return 'Senha deve ter mais de 6 digitos';
+                          }
+                          else {
                             return null;
+                          }
+                        },
+                        onSaved: (String string) {
+                          senha = string;
                         },
                         decoration: InputDecoration(
                           labelText: 'Senha',
@@ -125,7 +171,46 @@ class LoginPage extends StatelessWidget {
                         ),
                       )),
                   Container(margin: EdgeInsets.only(top: 40)),
-                  Container(child: BtnItem("Entrar", HomePage())),
+                  Container(child: Padding(
+                    padding: EdgeInsets.only(
+                        top: 20, bottom: MediaQuery.of(context).viewInsets.bottom),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        SizedBox(
+                            width: MediaQuery.of(context).size.width / 1.2,
+                            height: MediaQuery.of(context).size.height / 15,
+                            child: Container(
+                              child: FlatButton(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: new BorderRadius.circular(12.0),
+                                ),
+                                color: Color(0xff27b3ff),
+                                child: Text('Entrar',
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white)),
+                                onPressed: () {
+                                  if(_loginForm.currentState.validate()) {
+                                    _loginForm.currentState.save();
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => HomePage())
+                                    );
+                                  }
+                                  else {
+                                    setState(() {
+                                      _autoValidate = true;
+                                    });
+                                  }
+                                }
+                              ),
+                            ))
+                      ],
+                    ),
+                  )),
                   Container(child: BtnItem("Cadastrar-se", SignupPage1())),
                   Container(
                     alignment: Alignment.topCenter,
