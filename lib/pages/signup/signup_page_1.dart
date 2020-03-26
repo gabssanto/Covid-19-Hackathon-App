@@ -83,6 +83,41 @@ class _SignupPage1 extends State<SignUpPage1> {
                               width: MediaQuery.of(context).size.width / 1.2,
                               height: MediaQuery.of(context).size.height / 15,
                               child: TextFormField(
+                                obscureText: false,
+                                keyboardType: TextInputType.text,
+                                decoration: new InputDecoration(
+                                  hintText: "Digite seu e-mail",
+                                  labelText: "Email",
+                                  focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Color(0xff27b3ff), width: 1.0),
+                                      borderRadius: BorderRadius.circular(12)),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Colors.grey, width: 1.0),
+                                      borderRadius: BorderRadius.circular(12)),
+                                  prefixIcon: Padding(
+                                    padding: EdgeInsets.only(top: 0),
+                                    // add padding to adjust icon
+                                    child: Icon(Icons.email),
+                                  ),
+                                ),
+                                validator: (String email) {
+                                  RegExp pattern = new RegExp(
+                                      r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?");
+                                  return pattern.hasMatch(email.trim())
+                                      ? null
+                                      : 'Email inválido';
+                                },
+                                onSaved: (String val) {
+                                  _name = val;
+                                },
+                              )),
+                          Container(
+                              margin: EdgeInsets.only(top: 15),
+                              width: MediaQuery.of(context).size.width / 1.2,
+                              height: MediaQuery.of(context).size.height / 15,
+                              child: TextFormField(
                                 keyboardType: TextInputType.text,
                                 decoration: new InputDecoration(
                                   hintText: "Digite seu CPF",
