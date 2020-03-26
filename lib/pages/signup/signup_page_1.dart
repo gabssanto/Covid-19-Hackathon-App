@@ -1,3 +1,4 @@
+import 'package:covid19/mobx/imports.dart';
 import 'package:covid19/pages/signup/signup_page_2.dart';
 import 'package:covid19/pages/signup/widgets/BtnSignup.dart';
 import 'package:flutter/material.dart';
@@ -263,6 +264,7 @@ class _SignupPage1 extends State<SignUpPage1> {
   void _validateInputs() {
     if (_signupForm1.currentState.validate()) {
       _signupForm1.currentState.save();
+      handleUser.setForm1(_name, _email, _cpf, _phone, _age);
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => SignUpPage2()));
     } else {
