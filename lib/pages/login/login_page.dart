@@ -24,18 +24,9 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final GlobalKey<FormState> _loginForm = GlobalKey<FormState>();
-
   bool _autoValidate = false;
-
-  String cpf = '';
-  String senha = '';
-  int soma = 0;
-
-  String password;
-
-  bool _isValidated = false;
-
-  TextEditingController _cpfInput = TextEditingController();
+  String _cpf;
+  String _senha;
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +63,6 @@ class _LoginPageState extends State<LoginPage> {
                       height: MediaQuery.of(context).size.height / 15,
                       child: TextFormField(
                         keyboardType: TextInputType.number,
-                        //controller: _cpfInput,
                         validator: (String cpf) {
                           RegExp pattern =
                               new RegExp(r'^\d{3}\.?\d{3}\.?\d{3}\-?\d{2}$');
@@ -110,7 +100,7 @@ class _LoginPageState extends State<LoginPage> {
                               : 'CPF inválido';
                         },
                         onSaved: (String string) {
-                          cpf = string;
+                          _cpf = string;
                         },
                         decoration: new InputDecoration(
                           hintText: 'Digite seu CPF',
@@ -137,16 +127,10 @@ class _LoginPageState extends State<LoginPage> {
                       child: TextFormField(
                         obscureText: true,
                         validator: (String string) {
-                          if (string.length == 0) {
-                            return 'Campo de senha nao pode estar vazio';
-                          } else if (string.length <= 6) {
-                            return 'Senha deve ter mais de 6 digitos';
-                          } else {
-                            return null;
-                          }
+                          return string.length > 6 ? null : 'Senha inválida';
                         },
                         onSaved: (String string) {
-                          senha = string;
+                          _senha = string;
                         },
                         decoration: InputDecoration(
                           labelText: 'Senha',
