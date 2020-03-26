@@ -34,6 +34,8 @@ dependencies:
   json_to_form: "^0.0.1"
   carousel_slider: "^1.4.1"
   intl: "^0.16.1"
+  firebase_auth:
+  firebase_database:
 
 dev_dependencies:
   flutter_test:
