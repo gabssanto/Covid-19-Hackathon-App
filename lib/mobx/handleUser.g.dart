@@ -9,6 +9,23 @@ part of 'handleUser.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$HandleUser on _HandleUserBase, Store {
+  final _$userIDAtom = Atom(name: '_HandleUserBase.userID');
+
+  @override
+  String get userID {
+    _$userIDAtom.context.enforceReadPolicy(_$userIDAtom);
+    _$userIDAtom.reportObserved();
+    return super.userID;
+  }
+
+  @override
+  set userID(String value) {
+    _$userIDAtom.context.conditionallyRunInAction(() {
+      super.userID = value;
+      _$userIDAtom.reportChanged();
+    }, _$userIDAtom, name: '${_$userIDAtom.name}_set');
+  }
+
   final _$nameAtom = Atom(name: '_HandleUserBase.name');
 
   @override
@@ -162,6 +179,13 @@ mixin _$HandleUser on _HandleUserBase, Store {
     }, _$passwordAtom, name: '${_$passwordAtom.name}_set');
   }
 
+  final _$loginAsyncAction = AsyncAction('login');
+
+  @override
+  Future login(dynamic email, dynamic password) {
+    return _$loginAsyncAction.run(() => super.login(email, password));
+  }
+
   final _$_HandleUserBaseActionController =
       ActionController(name: '_HandleUserBase');
 
@@ -188,19 +212,9 @@ mixin _$HandleUser on _HandleUserBase, Store {
   }
 
   @override
-  void login(dynamic email, dynamic password) {
-    final _$actionInfo = _$_HandleUserBaseActionController.startAction();
-    try {
-      return super.login(email, password);
-    } finally {
-      _$_HandleUserBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   String toString() {
     final string =
-        'name: ${name.toString()},email: ${email.toString()},cpf: ${cpf.toString()},phone: ${phone.toString()},age: ${age.toString()},city: ${city.toString()},street: ${street.toString()},numberOfPeople: ${numberOfPeople.toString()},password: ${password.toString()}';
+        'userID: ${userID.toString()},name: ${name.toString()},email: ${email.toString()},cpf: ${cpf.toString()},phone: ${phone.toString()},age: ${age.toString()},city: ${city.toString()},street: ${street.toString()},numberOfPeople: ${numberOfPeople.toString()},password: ${password.toString()}';
     return '{$string}';
   }
 }

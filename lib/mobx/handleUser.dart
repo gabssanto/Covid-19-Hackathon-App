@@ -8,6 +8,9 @@ class HandleUser = _HandleUserBase with _$HandleUser;
 
 abstract class _HandleUserBase with Store {
   @observable
+  String userID;
+
+  @observable
   String name;
 
   @observable
@@ -53,8 +56,9 @@ abstract class _HandleUserBase with Store {
   }
 
   @action
-  void login(email, password) {
-    signIn(email, password);
+  login(email, password) async {
+    String res = await signIn(email, password);
+    this.userID = res;
   }
 
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;

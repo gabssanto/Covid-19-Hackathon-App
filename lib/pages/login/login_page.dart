@@ -1,3 +1,4 @@
+import 'package:covid19/mobx/imports.dart';
 import 'package:covid19/pages/home/home_page.dart';
 import 'package:covid19/pages/signup/signup_page_1.dart';
 import 'package:flutter/material.dart';
@@ -48,69 +49,41 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                   ),
-                  Container(
-                      margin: EdgeInsets.only(top: 30),
-                      width: MediaQuery.of(context).size.width / 1.2,
-                      height: MediaQuery.of(context).size.height / 15,
-                      child: TextFormField(
-                        keyboardType: TextInputType.number,
-                        validator: (String cpf) {
-                          RegExp pattern =
-                              new RegExp(r'^\d{3}\.?\d{3}\.?\d{3}\-?\d{2}$');
-                          return pattern.hasMatch(cpf)
-                              ? (() {
-                                  cpf =
-                                      cpf.replaceAll(new RegExp(r'[\.-]'), '');
-                                  int soma = 0;
-                                  var digito1;
-                                  var digito2;
-                                  var j = 10;
-                                  for (int i = 0; i < 9; i++) {
-                                    soma += int.parse(cpf[i]) * j;
-                                    j--;
-                                  }
-                                  soma %= 11;
-                                  soma < 2 ? digito1 = 0 : digito1 = 11 - soma;
-                                  if (digito1 == int.parse(cpf[9])) {
-                                    soma = 0;
-                                    j = 11;
-                                    for (int i = 0; i < 10; i++) {
-                                      soma += int.parse(cpf[i]) * j;
-                                      j--;
-                                    }
-                                    soma %= 11;
-                                    soma < 2
-                                        ? digito2 = 0
-                                        : digito2 = 11 - soma;
-                                  }
-                                  return digito1 == int.parse(cpf[9]) &&
-                                          digito2 == int.parse(cpf[10])
-                                      ? null
-                                      : 'CPF inválido';
-                                })()
-                              : 'CPF inválido';
-                        },
-                        onSaved: (String string) {
-                          _cpf = string;
-                        },
-                        decoration: new InputDecoration(
-                          hintText: 'Digite seu CPF',
-                          labelText: 'CPF',
-                          focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Color(0xff27b3ff), width: 1.0),
-                              borderRadius: BorderRadius.circular(12)),
-                          enabledBorder: OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: Colors.grey, width: 1.0),
-                              borderRadius: BorderRadius.circular(12)),
-                          prefixIcon: Padding(
-                            padding: EdgeInsets.only(top: 0),
-                            // add padding to adjust icon
-                            child: Icon(Icons.person),
-                          ),
+                Container(
+                    margin: EdgeInsets.only(top: 15),
+                    width: MediaQuery.of(context).size.width / 1.2,
+                    height: MediaQuery.of(context).size.height / 15,
+                    child: TextFormField(
+                      obscureText: false,
+                      keyboardType: TextInputType.text,
+                      decoration: new InputDecoration(
+                        hintText: "Digite seu e-mail",
+                        labelText: "Email",
+                        focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Color(0xff27b3ff), width: 1.0),
+                            borderRadius: BorderRadius.circular(12)),
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Colors.grey, width: 1.0),
+                            borderRadius: BorderRadius.circular(12)),
+                        prefixIcon: Padding(
+                          padding: EdgeInsets.only(top: 0),
+                          // add padding to adjust icon
+                          child: Icon(Icons.email),
                         ),
-                      )),
+                      ),
+                      validator: (String email) {
+                        RegExp pattern = new RegExp(
+                            r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?");
+                        return pattern.hasMatch(email.trim())
+                            ? null
+                            : 'Email inválido';
+                      },
+                      onSaved: (String val) {
+                        _cpf = val;
+                      },
+                    )),
                   Container(
                       margin: EdgeInsets.only(top: 15),
                       width: MediaQuery.of(context).size.width / 1.2,
@@ -169,11 +142,14 @@ class _LoginPageState extends State<LoginPage> {
                                   onPressed: () {
                                     if (_loginForm.currentState.validate()) {
                                       _loginForm.currentState.save();
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  HomePage()));
+                                      var a = handleUser.login(_cpf, _senha);
+                                      if(a != null) {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    HomePage()));
+                                      }
                                     } else {
                                       setState(() {
                                         _autoValidate = true;
