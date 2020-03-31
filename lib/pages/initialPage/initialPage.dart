@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:covid19/pages/login/login_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class InitialPage extends StatelessWidget {
   @override
@@ -9,19 +10,12 @@ class InitialPage extends StatelessWidget {
       body: Column(
         children: <Widget>[
           Padding(
-            padding: const EdgeInsets.only(top: 80, bottom: 30),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'Covid-19',
-                  style: TextStyle(
-                      fontSize: 55,
-                      color: Colors.lightBlue,
-                      fontWeight: FontWeight.w400),
-                ),
-              ],
+            padding: const EdgeInsets.only(top: 80, bottom: 40),
+            child: SvgPicture.asset(
+              'assets/logo-horizontal.svg',
+              height: 67.5,
+              width: 67.5,
+              color: Color(0xff27b3ff),
             ),
           ),
           CarouselSlider(
