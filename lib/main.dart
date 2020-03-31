@@ -13,7 +13,7 @@ class App extends StatelessWidget {
     ]);
 
     return MaterialApp(
-      title: 'Observatório COVID-19 - Monitorando Juntos',
+      title: 'Rastreando Covid-19',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
