@@ -19,6 +19,8 @@ class _SignupPage1 extends State<SignUpPage1> {
   String _cpf;
   String _phone;
   String _age;
+  String _city;
+  String _street;
 
   @override
   Widget build(BuildContext context) {

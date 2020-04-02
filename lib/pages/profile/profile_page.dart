@@ -7,6 +7,17 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  final GlobalKey<FormState> _profileForm = GlobalKey<FormState>();
+  bool _autoValidate = false;
+  final passKey = GlobalKey<FormFieldState>();
+  String _senha;
+  String _numberOfPeople;
+  String _name;
+  String _email;
+  String _cpf;
+  String _phone;
+  String _age;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,288 +27,458 @@ class _ProfilePageState extends State<ProfilePage> {
       body: Container(
           height: double.infinity,
           color: Color(0xffefefef),
-          child: ListView(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Container(
-                    margin: EdgeInsets.only(top: 10, bottom: 10),
-                    width: MediaQuery.of(context).size.width - 50,
-                    height: MediaQuery.of(context).size.height - 120,
-                    decoration: new BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(12)),
-                    child: Column(
-                      children: <Widget>[
-                        Container(
-                          margin: EdgeInsets.only(top: 5, bottom: 5),
-                          child: Icon(
-                            Icons.account_circle,
-                            size: 80,
-                            color: Colors.black54,
-                          ),
-                        ),
-                        Text("Gabriel Alves",
-                            style: TextStyle(
-                              fontFamily: 'Montserrat',
-                              color: Color(0xff27b3ff),
-                              fontSize: 21,
-                              fontWeight: FontWeight.w700,
-                              fontStyle: FontStyle.normal,
-                              letterSpacing: -0.231,
-                            )),
-                        Text("Supeito de Covid-19",
-                            style: TextStyle(
-                              fontFamily: 'Montserrat',
-                              color: Color(0xffffb027),
-                              fontSize: 15,
-                              fontWeight: FontWeight.w600,
-                              fontStyle: FontStyle.normal,
-                              letterSpacing: -0.165,
-                            )),
-                        Container(
-                            margin:
-                                EdgeInsets.only(top: 15, left: 20, right: 20),
-                            width: MediaQuery.of(context).size.width,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.start,
+              Container(
+                margin: EdgeInsets.only(top: 10, bottom: 10),
+                width: MediaQuery.of(context).size.width - 50,
+                height: MediaQuery.of(context).size.height - 350 ,
+                decoration: new BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(12)),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                        margin:
+                            EdgeInsets.only(top: 0, left: 20, right: 20),
+                        width: MediaQuery.of(context).size.width,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
-                                Text("Informações Básicas",
-                                    textAlign: TextAlign.start,
-                                    style: TextStyle(
-                                      fontFamily: 'Montserrat',
-                                      color: Color(0xff27b3ff),
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w600,
-                                      fontStyle: FontStyle.normal,
-                                      letterSpacing: -0.165,
-                                    )),
                                 Container(
-                                    margin: EdgeInsets.only(top: 5),
-                                    width: MediaQuery.of(context).size.width,
-                                    height:
-                                        MediaQuery.of(context).size.height / 20,
-                                    child: TextFormField(
-                                      keyboardType: TextInputType.number,
-                                      decoration: new InputDecoration(
-                                        labelText: 'Nome',
-                                        focusedBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                                color: Color(0xff27b3ff),
-                                                width: 1.0),
-                                            borderRadius:
-                                                BorderRadius.circular(12)),
-                                        enabledBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                                color: Colors.grey, width: 1.0),
-                                            borderRadius:
-                                                BorderRadius.circular(12)),
-                                        prefixIcon: Padding(
-                                          padding: EdgeInsets.only(top: 0),
-                                          // add padding to adjust icon
-                                          child: Icon(Icons.account_box),
-                                        ),
-                                      ),
-                                    )),
-                                Container(
-                                    margin: EdgeInsets.only(top: 15),
-                                    width: MediaQuery.of(context).size.width,
-                                    height:
-                                        MediaQuery.of(context).size.height / 20,
-                                    child: TextFormField(
-                                      keyboardType: TextInputType.number,
-                                      decoration: new InputDecoration(
-                                        labelText: 'Sobrenome',
-                                        focusedBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                                color: Color(0xff27b3ff),
-                                                width: 1.0),
-                                            borderRadius:
-                                                BorderRadius.circular(12)),
-                                        enabledBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                                color: Colors.grey, width: 1.0),
-                                            borderRadius:
-                                                BorderRadius.circular(12)),
-                                        prefixIcon: Padding(
-                                          padding: EdgeInsets.only(top: 0),
-                                          // add padding to adjust icon
-                                          child: Icon(Icons.account_box),
-                                        ),
-                                      ),
-                                    )),
-                                Container(
-                                    margin: EdgeInsets.only(top: 15),
-                                    width: MediaQuery.of(context).size.width,
-                                    height:
-                                        MediaQuery.of(context).size.height / 20,
-                                    child: TextFormField(
-                                      keyboardType: TextInputType.number,
-                                      decoration: new InputDecoration(
-                                        labelText: 'Idade',
-                                        focusedBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                                color: Color(0xff27b3ff),
-                                                width: 1.0),
-                                            borderRadius:
-                                                BorderRadius.circular(12)),
-                                        enabledBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                                color: Colors.grey, width: 1.0),
-                                            borderRadius:
-                                                BorderRadius.circular(12)),
-                                        prefixIcon: Padding(
-                                          padding: EdgeInsets.only(top: 0),
-                                          // add padding to adjust icon
-                                          child: Icon(Icons.cake),
-                                        ),
-                                      ),
-                                    )),
-                                Divider(),
-                                Container(
-                                  width: MediaQuery.of(context).size.width,
-                                  margin: EdgeInsets.only(top: 0, bottom: 0),
-                                  decoration: BoxDecoration(),
-                                  child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: <Widget>[
-                                      Container(
-                                        child: Text("Localização",
-                                            style: TextStyle(
-                                              fontFamily: 'Montserrat',
-                                              color: Color(0xff27b3ff),
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.w600,
-                                              fontStyle: FontStyle.normal,
-                                              letterSpacing: -0.165,
-                                            )),
-                                      ),
-                                      Icon(
-                                        Icons.keyboard_arrow_right,
-                                        color: Color(0xff27b3ff),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Divider(),
-                                Container(
-                                  child: Text("Segurança",
+                                  margin: EdgeInsets.only(top: 5),
+                                  child: Text("Supeito de Covid-19",
                                       style: TextStyle(
                                         fontFamily: 'Montserrat',
-                                        color: Color(0xff27b3ff),
-                                        fontSize: 15,
+                                        color: Color(0xffffb027),
+                                        fontSize: 28,
                                         fontWeight: FontWeight.w600,
                                         fontStyle: FontStyle.normal,
                                         letterSpacing: -0.165,
                                       )),
                                 ),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
                                 Container(
-                                    margin: EdgeInsets.only(top: 15),
-                                    width: MediaQuery.of(context).size.width,
-                                    height:
-                                        MediaQuery.of(context).size.height / 20,
-                                    child: TextFormField(
-                                      keyboardType: TextInputType.number,
-                                      decoration: new InputDecoration(
-                                        labelText: 'Senha',
-                                        focusedBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                                color: Color(0xff27b3ff),
-                                                width: 1.0),
-                                            borderRadius:
-                                                BorderRadius.circular(12)),
-                                        enabledBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                                color: Colors.grey, width: 1.0),
-                                            borderRadius:
-                                                BorderRadius.circular(12)),
-                                        prefixIcon: Padding(
-                                          padding: EdgeInsets.only(top: 0),
-                                          // add padding to adjust icon
-                                          child: Icon(Icons.lock),
-                                        ),
-                                      ),
-                                    )),
-                                Container(
-                                  margin: EdgeInsets.only(top: 5, bottom: 15),
-                                  child: Text("Digite aqui para mudar a senha",
+                                  margin: EdgeInsets.only(top: 10),
+                                  child: Text("Nome:",
                                       style: TextStyle(
                                         fontFamily: 'Montserrat',
-                                        color: Colors.black38,
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w600,
+                                        color: Colors.black54,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
                                         fontStyle: FontStyle.normal,
-                                        letterSpacing: -0.132,
+                                        letterSpacing: -0.231,
                                       )),
                                 ),
                                 Container(
-                                  margin: EdgeInsets.only(bottom: 10),
-                                  width: MediaQuery.of(context).size.width,
-                                  height:
-                                      MediaQuery.of(context).size.height / 18,
-                                  decoration: new BoxDecoration(
-                                      color: Color(0xff27b3ff),
-                                      border:
-                                          Border.all(color: Color(0xff27b3ff)),
-                                      borderRadius: BorderRadius.circular(13)),
-                                  child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: <Widget>[
-                                      Text("Salvar",
-                                          style: TextStyle(
-                                            fontFamily: 'Montserrat',
-                                            color: Colors.white,
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w600,
-                                            fontStyle: FontStyle.normal,
-                                            letterSpacing: -0.176,
-                                          )),
-                                    ],
-                                  ),
-                                ),
-                                Container(
-                                  width: MediaQuery.of(context).size.width,
-                                  height:
-                                      MediaQuery.of(context).size.height / 18,
-                                  decoration: new BoxDecoration(
-                                      color: Colors.white,
-                                      border:
-                                          Border.all(color: Color(0xff27b3ff)),
-                                      borderRadius: BorderRadius.circular(13)),
-                                  child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: <Widget>[
-                                      Text("Sair da conta",
-                                          style: TextStyle(
-                                            fontFamily: 'Montserrat',
-                                            color: Color(0xff27b3ff),
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w600,
-                                            fontStyle: FontStyle.normal,
-                                            letterSpacing: -0.176,
-                                          )),
-                                    ],
-                                  ),
+                                  margin: EdgeInsets.only(top: 10, left: 10),
+                                  child: Text("Gabriel Espirito Santo",
+                                      style: TextStyle(
+                                        fontFamily: 'Montserrat',
+                                        color: Colors.black54,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w600,
+                                        fontStyle: FontStyle.normal,
+                                        letterSpacing: -0.231,
+                                      )),
                                 )
                               ],
-                            ))
-                      ],
-                    ),
-                  ),
-                ],
+                            ),
+                            Row(
+                              children: <Widget>[
+                                Container(
+                                  margin: EdgeInsets.only(top: 10),
+                                  child: Text("CPF:",
+                                      style: TextStyle(
+                                        fontFamily: 'Montserrat',
+                                        color: Colors.black54,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                        fontStyle: FontStyle.normal,
+                                        letterSpacing: -0.231,
+                                      )),
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(top: 10, left: 10),
+                                  child: Text("067624631-18",
+                                      style: TextStyle(
+                                        fontFamily: 'Montserrat',
+                                        color: Colors.black54,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w600,
+                                        fontStyle: FontStyle.normal,
+                                        letterSpacing: -0.231,
+                                      )),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: <Widget>[
+                                Container(
+                                  margin: EdgeInsets.only(top: 10),
+                                  child: Text("Telefone:",
+                                      style: TextStyle(
+                                        fontFamily: 'Montserrat',
+                                        color: Colors.black54,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                        fontStyle: FontStyle.normal,
+                                        letterSpacing: -0.231,
+                                      )),
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(top: 10, left: 10),
+                                  child: Text("91234-5678",
+                                      style: TextStyle(
+                                        fontFamily: 'Montserrat',
+                                        color: Colors.black54,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w600,
+                                        fontStyle: FontStyle.normal,
+                                        letterSpacing: -0.231,
+                                      )),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: <Widget>[
+                                Container(
+                                  margin: EdgeInsets.only(top: 10),
+                                  child: Text("Idade:",
+                                      style: TextStyle(
+                                        fontFamily: 'Montserrat',
+                                        color: Colors.black54,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                        fontStyle: FontStyle.normal,
+                                        letterSpacing: -0.231,
+                                      )),
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(top: 10, left: 10),
+                                  child: Text("20",
+                                      style: TextStyle(
+                                        fontFamily: 'Montserrat',
+                                        color: Colors.black54,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w600,
+                                        fontStyle: FontStyle.normal,
+                                        letterSpacing: -0.231,
+                                      )),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: <Widget>[
+                                Container(
+                                  margin: EdgeInsets.only(top: 10),
+                                  child: Text("Gênero:",
+                                      style: TextStyle(
+                                        fontFamily: 'Montserrat',
+                                        color: Colors.black54,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                        fontStyle: FontStyle.normal,
+                                        letterSpacing: -0.231,
+                                      )),
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(top: 10, left: 10),
+                                  child: Text("Masculino",
+                                      style: TextStyle(
+                                        fontFamily: 'Montserrat',
+                                        color: Colors.black54,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w600,
+                                        fontStyle: FontStyle.normal,
+                                        letterSpacing: -0.231,
+                                      )),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: <Widget>[
+                                Container(
+                                  margin: EdgeInsets.only(top: 10),
+                                  child: Text("X pessoas moram comigo",
+                                      style: TextStyle(
+                                        fontFamily: 'Montserrat',
+                                        color: Colors.black54,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                        fontStyle: FontStyle.normal,
+                                        letterSpacing: -0.231,
+                                      )),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: <Widget>[
+                                Container(
+                                  margin: EdgeInsets.only(top: 10),
+                                  child: Text("CEP:",
+                                      style: TextStyle(
+                                        fontFamily: 'Montserrat',
+                                        color: Colors.black54,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                        fontStyle: FontStyle.normal,
+                                        letterSpacing: -0.231,
+                                      )),
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(top: 10, left: 10),
+                                  child: Text("12345-678",
+                                      style: TextStyle(
+                                        fontFamily: 'Montserrat',
+                                        color: Colors.black54,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w600,
+                                        fontStyle: FontStyle.normal,
+                                        letterSpacing: -0.231,
+                                      )),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: <Widget>[
+                                Container(
+                                  margin: EdgeInsets.only(top: 10),
+                                  child: Text("Bairro:",
+                                      style: TextStyle(
+                                        fontFamily: 'Montserrat',
+                                        color: Colors.black54,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                        fontStyle: FontStyle.normal,
+                                        letterSpacing: -0.231,
+                                      )),
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(top: 10, left: 10),
+                                  child: Text("Rua do Juca",
+                                      style: TextStyle(
+                                        fontFamily: 'Montserrat',
+                                        color: Colors.black54,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w600,
+                                        fontStyle: FontStyle.normal,
+                                        letterSpacing: -0.231,
+                                      )),
+                                ),
+                              ],
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(top:15, bottom: 10),
+                              width: MediaQuery.of(context).size.width,
+                              height:
+                              MediaQuery.of(context).size.height / 18,
+                              decoration: new BoxDecoration(
+                                  color: Color(0xff27b3ff),
+                                  border:
+                                  Border.all(color: Color(0xff27b3ff)),
+                                  borderRadius: BorderRadius.circular(13)),
+                              child: FlatButton(
+                                onPressed: () {
+
+                                },
+                                child: Row(
+                                  crossAxisAlignment:
+                                  CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    Text("Editar Perfil",
+                                        style: TextStyle(
+                                          fontFamily: 'Montserrat',
+                                          color: Colors.white,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600,
+                                          fontStyle: FontStyle.normal,
+                                          letterSpacing: -0.176,
+                                        )),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Container(
+                              width: MediaQuery.of(context).size.width,
+                              height:
+                                  MediaQuery.of(context).size.height / 18,
+                              decoration: new BoxDecoration(
+                                  color: Colors.white,
+                                  border:
+                                      Border.all(color: Color(0xff27b3ff)),
+                                  borderRadius: BorderRadius.circular(13)),
+                              child: Row(
+                                crossAxisAlignment:
+                                    CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Text("Sair da conta",
+                                      style: TextStyle(
+                                        fontFamily: 'Montserrat',
+                                        color: Color(0xff27b3ff),
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                        fontStyle: FontStyle.normal,
+                                        letterSpacing: -0.176,
+                                      )),
+                                ],
+                              ),
+                            )
+                          ],
+                        ))
+                  ],
+                ),
               ),
             ],
           )),
     );
   }
+  void _validateInputs() {
+
+  }
 }
+
+/*
+Container(
+                                    child: Text("Segurança",
+                                        style: TextStyle(
+                                          fontFamily: 'Montserrat',
+                                          color: Color(0xff27b3ff),
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w600,
+                                          fontStyle: FontStyle.normal,
+                                          letterSpacing: -0.165,
+                                        )),
+                                  ),
+                                  Container(
+                                      margin: EdgeInsets.only(top: 15),
+                                      width: MediaQuery.of(context).size.width / 1.2,
+                                      height: MediaQuery.of(context).size.height / 15,
+                                      child: TextFormField(
+                                        key: passKey,
+                                        obscureText: true,
+                                        decoration: InputDecoration(
+                                          labelText: 'Senha',
+                                          hintText: 'Digite sua senha',
+                                          focusedBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                  color: Color(0xff27b3ff), width: 1.0),
+                                              borderRadius: BorderRadius.circular(12)),
+                                          enabledBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                  color: Colors.grey, width: 1.0),
+                                              borderRadius: BorderRadius.circular(12)),
+                                          prefixIcon: Padding(
+                                            padding: EdgeInsets.only(top: 0),
+                                            // add padding to adjust icon
+                                            child: Icon(Icons.lock),
+                                          ),
+                                        ),
+                                        validator: (String password) {
+                                          return password.length > 6
+                                              ? null
+                                              : 'senha deve ter mais de 6 digítos';
+                                        },
+                                        onSaved: (String val) {
+                                          _senha = val;
+                                        },
+                                      )),
+                                  Container(
+                                      margin: EdgeInsets.only(top: 15),
+                                      width: MediaQuery.of(context).size.width / 1.2,
+                                      height: MediaQuery.of(context).size.height / 15,
+                                      child: TextFormField(
+                                        obscureText: true,
+                                        decoration: InputDecoration(
+                                          labelText: 'Confirme a senha',
+                                          hintText: 'Confirme a senha',
+                                          focusedBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                  color: Color(0xff27b3ff), width: 1.0),
+                                              borderRadius: BorderRadius.circular(12)),
+                                          enabledBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                  color: Colors.grey, width: 1.0),
+                                              borderRadius: BorderRadius.circular(12)),
+                                          prefixIcon: Padding(
+                                            padding: EdgeInsets.only(top: 0),
+                                            // add padding to adjust icon
+                                            child: Icon(Icons.lock),
+                                          ),
+                                        ),
+                                        validator: (String password) {
+                                          return passKey.currentState.value == password
+                                              ? null
+                                              : 'As senhas devem ser iguais';
+                                        },
+                                      )),
+                                  Container(margin: EdgeInsets.only(top: 40)),
+
+                                  Container(
+                                    margin: EdgeInsets.only(top: 5, bottom: 15),
+                                    child: Text("Digite aqui para mudar a senha",
+                                        style: TextStyle(
+                                          fontFamily: 'Montserrat',
+                                          color: Colors.black38,
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w600,
+                                          fontStyle: FontStyle.normal,
+                                          letterSpacing: -0.132,
+                                        )),
+                                  ),
+                                  Container(
+                                    margin: EdgeInsets.only(bottom: 10),
+                                    width: MediaQuery.of(context).size.width,
+                                    height:
+                                        MediaQuery.of(context).size.height / 18,
+                                    decoration: new BoxDecoration(
+                                        color: Color(0xff27b3ff),
+                                        border:
+                                            Border.all(color: Color(0xff27b3ff)),
+                                        borderRadius: BorderRadius.circular(13)),
+                                    child: FlatButton(
+                                      onPressed: () {
+                                        if (_profileForm.currentState.validate()) {
+                                          _profileForm.currentState.save();
+                                          //Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+                                        } else {
+                                          setState(() {
+                                            _autoValidate = true;
+                                          });
+                                        }
+                                      },
+                                      child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: <Widget>[
+                                          Text("Salvar",
+                                              style: TextStyle(
+                                                fontFamily: 'Montserrat',
+                                                color: Colors.white,
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w600,
+                                                fontStyle: FontStyle.normal,
+                                                letterSpacing: -0.176,
+                                              )),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+ */
