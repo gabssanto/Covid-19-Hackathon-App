@@ -8,6 +8,9 @@ abstract class _HandleQuestionsBase with Store {
   double height = 80.00;
 
   @observable
+  var opacity;
+
+  @observable
   List yesNo = new List();
 
   @observable
@@ -21,11 +24,11 @@ abstract class _HandleQuestionsBase with Store {
 
   @action
   void setLastQuestion(index, value, limit) {
-    if(questions.length > limit) {
-      for(int i = index+1; i < questions.length; i++) {
-        questions.removeAt(i);
-      }
-    }
+    //if(questions.length > limit) {
+    //  for(int i = index+1; i < questions.length; i++) {
+    //    questions.removeAt(i);
+    //  }
+    //}
     this.questions[index] = value;
     //this.questions.add(question);
   }

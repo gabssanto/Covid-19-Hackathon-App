@@ -26,6 +26,23 @@ mixin _$HandleQuestions on _HandleQuestionsBase, Store {
     }, _$heightAtom, name: '${_$heightAtom.name}_set');
   }
 
+  final _$opacityAtom = Atom(name: '_HandleQuestionsBase.opacity');
+
+  @override
+  dynamic get opacity {
+    _$opacityAtom.context.enforceReadPolicy(_$opacityAtom);
+    _$opacityAtom.reportObserved();
+    return super.opacity;
+  }
+
+  @override
+  set opacity(dynamic value) {
+    _$opacityAtom.context.conditionallyRunInAction(() {
+      super.opacity = value;
+      _$opacityAtom.reportChanged();
+    }, _$opacityAtom, name: '${_$opacityAtom.name}_set');
+  }
+
   final _$yesNoAtom = Atom(name: '_HandleQuestionsBase.yesNo');
 
   @override
@@ -96,7 +113,7 @@ mixin _$HandleQuestions on _HandleQuestionsBase, Store {
   @override
   String toString() {
     final string =
-        'height: ${height.toString()},yesNo: ${yesNo.toString()},questions: ${questions.toString()}';
+        'height: ${height.toString()},opacity: ${opacity.toString()},yesNo: ${yesNo.toString()},questions: ${questions.toString()}';
     return '{$string}';
   }
 }

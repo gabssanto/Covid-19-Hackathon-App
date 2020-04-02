@@ -22,7 +22,7 @@ class _YesNoLastQuestion extends State<YesNoLastQuestion> {
 
   @override
   void initState() {
-    handleQuestions.questions.add(0);
+    //handleQuestions.questions.add(0);
     super.initState();
   }
 
@@ -66,7 +66,6 @@ class _YesNoLastQuestion extends State<YesNoLastQuestion> {
 
                           });
                           handleQuestions.setLastQuestion(widget.index, yesNo, widget.index);
-                          print(handleQuestions.questions);
                         },
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -101,8 +100,10 @@ class _YesNoLastQuestion extends State<YesNoLastQuestion> {
                             yesNo = 2;
                           });
                           handleQuestions.setLastQuestion(widget.index, yesNo, widget.index);
-
-                          print(handleQuestions.questions);
+                          if(
+                          handleQuestions.questions[0] == 1 && handleQuestions.questions[1] != 0 && handleQuestions.questions[2] != 0) {
+                            handleQuestions.opacity = 1.0;
+                          }
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,

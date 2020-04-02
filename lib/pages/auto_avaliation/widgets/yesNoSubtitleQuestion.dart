@@ -23,7 +23,7 @@ class _YesNoSubtitleQuestion extends State<YesNoSubtitleQuestion> {
 
   @override
   void initState() {
-    handleQuestions.questions.add(0);
+    //handleQuestions.questions.add(0);
     super.initState();
   }
 
@@ -86,9 +86,6 @@ class _YesNoSubtitleQuestion extends State<YesNoSubtitleQuestion> {
                           });
                           handleQuestions.setLastQuestion(widget.index, yesNo, widget.index);
 
-
-                          print(handleQuestions.questions);
-
                         },
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -123,7 +120,6 @@ class _YesNoSubtitleQuestion extends State<YesNoSubtitleQuestion> {
                             yesNo = 2;
                           });
                           handleQuestions.setLastQuestion(widget.index, yesNo, widget.index);
-                          print(handleQuestions.questions);
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,

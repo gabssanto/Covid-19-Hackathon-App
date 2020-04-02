@@ -22,13 +22,13 @@ class _YesNoQuestion extends State<YesNoQuestion> {
 
   @override
   void initState() {
-    handleQuestions.questions.add(0);
+    //handleQuestions.questions.add(0);
     super.initState();
   }
 
   @override
   void dispose() {
-    handleQuestions.questions.removeLast();
+    //handleQuestions.questions.removeLast();
     super.dispose();
   }
 
@@ -72,9 +72,7 @@ class _YesNoQuestion extends State<YesNoQuestion> {
 
                           });
                           handleQuestions.setQuestions(widget.index, yesNo);
-                          print('Posicao: ${this.widget.index}');
-                          print(handleQuestions.questions[this.widget.index]);
-                        },
+                          },
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -108,9 +106,6 @@ class _YesNoQuestion extends State<YesNoQuestion> {
                             yesNo = 2;
                           });
                           handleQuestions.setQuestions(widget.index, yesNo);
-                          print('Posicao: ${this.widget.index}');
-
-                          print(handleQuestions.questions[this.widget.index]);
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
