@@ -62,10 +62,13 @@ class UBSMapState extends State<UBSMap> {
                                 showDialog(
                                     context: context,
                                     builder: (BuildContext context) {
-                                      return MapDialog();
+                                      return MapDialog(title: handleLocations.ubsNames[i].replaceAll("'", ''),
+                                          description: handleLocations.ubsPlaces[i].replaceAll("'", ''),
+                                          latitude: double.parse(handleLocations.ubsLatitudes[i]),
+                                          longitude: double.parse(handleLocations.ubsLongitudes[i]),
+                                      );
                                     });
                               },
-
                               markerId: MarkerId(handleLocations.ubsNames[i]),
                               position: LatLng(
                                   double.parse(handleLocations.ubsLatitudes[i]),
@@ -142,88 +145,78 @@ class UBSMapState extends State<UBSMap> {
 }
 
 class MapDialog extends StatelessWidget {
+  final title;
+  final latitude;
+  final longitude;
+  final description;
+
+  MapDialog({this.title, this.latitude, this.longitude, this.description});
   @override
   Widget build(BuildContext context) {
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(21)),
       child: Container(
-        width: MediaQuery.of(context).size.width - 80,
-        height: MediaQuery.of(context).size.height - 120,
+        padding: EdgeInsets.only(left: 20, right: 20),
+        height: 250,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Container(
-              margin: EdgeInsets.only(top: 15, bottom: 15),
-              child: Icon(
-                Icons.sentiment_very_satisfied,
-                size: 60,
-                color: Color(0xFF64f460),
-              ),
-            ),
-            Container(
-              child: Text("Obrigado pela informação \n",
+              child: Text(title == null ? 'Erro' : title,
                   style: TextStyle(
                     fontFamily: 'Montserrat',
                     color: Colors.black54,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w700,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
                     fontStyle: FontStyle.normal,
-                    letterSpacing: -0.176,
-                  )),
+                    letterSpacing: -0.154,
+                  )
+              ),
             ),
             Container(
-              margin: EdgeInsets.only(left: 15, right: 15),
-              child: RichText(
-                  text: new TextSpan(children: [
-                    new TextSpan(
-                        text:
-                        "-Mantenha a higiene das mãos. Lave sempre que possível com água e sabão ou use álcool gel 70%.\n\n-Higiene respiratória é fundamental. Ao espirrar e tossir use um lenço descartável e jogue fora imediatamente. Se você não tem lenço descartável, a melhor forma de é espirrar e tossir na dobra do cotovelo.\n\n",
-                        style: TextStyle(
-                          fontFamily: 'Montserrat',
-                          color: Colors.black54,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                          fontStyle: FontStyle.normal,
-                          letterSpacing: -0.154,
-                        )),
-                    new TextSpan(
-                        text: "NUNCA ESPIRRE OU TUSSA NAS MÃOS",
-                        style: TextStyle(
-                          fontFamily: 'Montserrat',
-                          color: Color(0xff292727),
-                          fontSize: 14,
-                          fontWeight: FontWeight.w700,
-                          fontStyle: FontStyle.normal,
-                          letterSpacing: -0.154,
-                        )),
-                    new TextSpan(
-                        text: ".\n\n",
-                        style: TextStyle(
-                          fontFamily: 'Montserrat',
-                          color: Color(0xff292727),
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                          fontStyle: FontStyle.normal,
-                          letterSpacing: -0.154,
-                        )),
-                    new TextSpan(
-                        text:
-                        "-Evite aglomerações.\n\n-Se possível, fique em casa.\n\n-Não compartilhe objetos pessoais\n\n-Somente procure ajuda médica se houver agravamento dos sintomas.\n\n-Em caso de dúvidas, ligue para o Dique Saúde 136 do Ministério da Saúde.",
-                        style: TextStyle(
-                          fontFamily: 'Montserrat',
-                          color: Colors.black54,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                          fontStyle: FontStyle.normal,
-                          letterSpacing: -0.154,
-                        )),
-                  ])),
+              child: Text(description == null ? 'Erro' : description,
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
+                    color: Colors.black54,
+                    fontSize: 14,
+                    fontWeight: FontWeight.normal,
+                    fontStyle: FontStyle.normal,
+                    letterSpacing: -0.154,
+                  )
+              ),
             ),
             Container(
                 width: 285,
                 height: 49,
                 decoration: new BoxDecoration(
-                    color: Color(0xFF64f460),
+                    color: Color(0xff27b3ff),
+                    borderRadius: BorderRadius.circular(14)),
+                child: FlatButton(
+                  onPressed: () {
+                    MapsLauncher.launchCoordinates(latitude, longitude);
+                        },
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Text("Navegar para o local",
+                          style: TextStyle(
+                            fontFamily: 'Montserrat',
+                            color: Colors.white,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
+                            fontStyle: FontStyle.normal,
+                            letterSpacing: -0.165,
+                          )),
+                    ],
+                  ),
+                )),
+            Container(
+                width: 285,
+                height: 49,
+                decoration: new BoxDecoration(
+                    color: Color(0xFFf65f68),
                     borderRadius: BorderRadius.circular(14)),
                 child: FlatButton(
                   onPressed: () {
@@ -233,7 +226,7 @@ class MapDialog extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      Text("Fechar",
+                      Text("Voltar",
                           style: TextStyle(
                             fontFamily: 'Montserrat',
                             color: Colors.white,
@@ -245,6 +238,7 @@ class MapDialog extends StatelessWidget {
                     ],
                   ),
                 ))
+
           ],
         ),
       ),
