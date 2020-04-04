@@ -142,14 +142,12 @@ class _LoginPageState extends State<LoginPage> {
                                   onPressed: () {
                                     if (_loginForm.currentState.validate()) {
                                       _loginForm.currentState.save();
-                                      var a = handleUser.login(_cpf, _senha);
-                                      if(a != null) {
                                         Navigator.push(
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
                                                     HomePage()));
-                                      }
+
                                     } else {
                                       setState(() {
                                         _autoValidate = true;
