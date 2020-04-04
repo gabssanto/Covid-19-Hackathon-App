@@ -27,7 +27,7 @@ class _LoginPageState extends State<LoginPage> {
         resizeToAvoidBottomPadding: false,
         appBar: LoginAppBar(
           title: 'Login',
-          canGoBack: false,
+          canGoBack: true,
         ),
         body: Form(
             key: _loginForm,

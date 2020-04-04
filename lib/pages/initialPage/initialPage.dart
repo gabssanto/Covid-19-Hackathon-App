@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:covid19/pages/login/login_page.dart';
+import 'package:covid19/pages/signup/widgets/signup_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -19,7 +20,7 @@ class InitialPage extends StatelessWidget {
             ),
           ),
           CarouselSlider(
-            height: 400.0,
+            height: MediaQuery.of(context).size.height / 2.1,
             items: [1, 2, 3].map((i) {
               return Builder(
                 builder: (BuildContext context) {
@@ -86,7 +87,16 @@ class InitialPage extends StatelessWidget {
                     color: Color(0xff27b3ff),
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (BuildContext context) {
+                        return SignUpPage();
+                      },
+                    ),
+                  );
+                },
               ),
             ),
           )
