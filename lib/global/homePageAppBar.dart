@@ -16,7 +16,7 @@ class HomePageAppBar extends StatelessWidget implements PreferredSizeWidget {
       @required this.child,
       @required this.onPressed,
       this.onTitleTapped})
-      : preferredSize = Size.fromHeight(293.0);
+      : preferredSize = Size.fromHeight(300.0);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class HomePageAppBar extends StatelessWidget implements PreferredSizeWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Container(
-            padding: EdgeInsets.only(top: 20, left: 20, right: 20),
+            padding: EdgeInsets.only(top: 30, left: 20, right: 20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
