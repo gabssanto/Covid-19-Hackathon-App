@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:covid19/global/homePageAppBar.dart';
 import 'package:covid19/mobx/imports.dart';
 import 'package:covid19/pages/help/constants.dart';
@@ -238,7 +237,6 @@ class MapDialog extends StatelessWidget {
                     ],
                   ),
                 ))
-
           ],
         ),
       ),

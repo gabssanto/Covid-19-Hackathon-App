@@ -87,11 +87,11 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    _funct();
-    timer = Timer.periodic(Duration(seconds: 15), (Timer t) => _funct());
+    _getLocation();
+    timer = Timer.periodic(Duration(seconds: 300), (Timer t) => _getLocation());
   }
 
-  _funct() async {
+  _getLocation() async {
     Location location = Location();
 
     bool _serviceEnabled;
