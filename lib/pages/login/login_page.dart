@@ -1,5 +1,6 @@
 import 'package:covid19/global/appSnackBar.dart';
 import 'package:covid19/global/loginAppBar.dart';
+import 'package:covid19/global/userInfo.dart';
 import 'package:covid19/mobx/handleHttpConnections.dart';
 import 'package:covid19/pages/home/home_page.dart';
 import 'package:flutter/material.dart';
@@ -159,6 +160,7 @@ class _LoginPageState extends State<LoginPage> {
                                       _cpf,
                                       _password,
                                     );
+//                                    performUserSignUp(globalUser, 2.0, 3.0, 3);
                                     Scaffold.of(context).hideCurrentSnackBar();
                                     if (loginSucceeded) {
                                       Navigator.push(
