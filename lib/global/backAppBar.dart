@@ -20,7 +20,8 @@ class BackAppBar extends StatelessWidget implements PreferredSizeWidget {
     return SafeArea(
       child: Container(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Padding(
               padding: EdgeInsets.only(left: 10),
