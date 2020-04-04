@@ -148,7 +148,6 @@ class _LoginPageState extends State<LoginPage> {
                                 onPressed: () async {
                                   if (_loginForm.currentState.validate()) {
                                     _loginForm.currentState.save();
-                                    print(_loginForm);
                                     FocusScope.of(context).unfocus();
                                     Scaffold.of(context).showSnackBar(
                                       appSnackBar(
@@ -160,7 +159,6 @@ class _LoginPageState extends State<LoginPage> {
                                       _cpf,
                                       _password,
                                     );
-//                                    performUserSignUp(globalUser, 2.0, 3.0, 3);
                                     Scaffold.of(context).hideCurrentSnackBar();
                                     if (loginSucceeded) {
                                       Navigator.push(

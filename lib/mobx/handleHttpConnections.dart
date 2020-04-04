@@ -11,7 +11,6 @@ Future<bool> performUserLogin(String cpf, String password) async {
     var response = await Dio().get(_url + _endPoint);
     var data = response.data;
     globalUser.fromJson(data);
-    print(globalUser);
     return (response.statusCode == 200);
   } catch (e) {
     print(e);
@@ -24,20 +23,13 @@ Future<bool> performUserSignUp(
   var body = user.toMap(latitude, longitude, precision);
   var _endPoint = '/api/users/';
   try {
-    print(jsonEncode(body));
     var dio = new Dio();
     dio.options.headers['Content-Type'] = 'application/x-www-form-urlencoded';
     var response = await dio.post(
       _url + _endPoint,
-      data: jsonEncode(body) ,
-      options: Options(
-        validateStatus: (status) {
-          return status < 500;
-        },
-      ),
+      data: body,
+      options: Options(),
     );
-    var data = response.data;
-    print(data);
     return (response.statusCode == 201);
   } catch (e) {
     print(e);

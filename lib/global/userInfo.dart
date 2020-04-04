@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class UserInfo {
   String name,
       email,
@@ -6,8 +8,8 @@ class UserInfo {
       age,
       city,
       neighborhood,
-      password,
-      answers;
+      password;
+  List<dynamic> answers;
   int residents;
 
   fromJson(dynamic response) {
@@ -20,7 +22,7 @@ class UserInfo {
     this.city = data['cidade_municipio'].toString();
     this.neighborhood = data['bairro'].toString();
     this.password = data['senha'].toString();
-    this.answers = data['respostas'].toString();
+    this.answers = jsonDecode(data['respostas'].toString());
     this.residents = int.parse(data['residentes'].toString());
   }
 
@@ -41,8 +43,8 @@ class UserInfo {
       'bairro': this.neighborhood,
       'residentes': this.residents,
       'senha': this.password,
-      'respostas': this.answers,
-      'local': location
+      'respostas': this.answers.join(','),
+      'local': jsonEncode(location)
     };
 
     return result;
