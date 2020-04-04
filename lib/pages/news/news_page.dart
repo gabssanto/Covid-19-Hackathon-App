@@ -25,7 +25,7 @@ List<NewsItem> parseNews(String responseBody) {
 class NewsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.grey,
+        backgroundColor: Colors.white,
         appBar: BackAppBar(
           title: 'Notícias',
         ),
