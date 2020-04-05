@@ -16,7 +16,7 @@ class HomePageAppBar extends StatelessWidget implements PreferredSizeWidget {
       @required this.child,
       @required this.onPressed,
       this.onTitleTapped})
-      : preferredSize = Size.fromHeight(323.0);
+      : preferredSize = Size.fromHeight(300.0);
 
   @override
   Widget build(BuildContext context) {
@@ -50,8 +50,8 @@ class HomePageAppBar extends StatelessWidget implements PreferredSizeWidget {
                       color: Colors.white,
                       child: InkWell(
                         splashColor: Color.fromRGBO(1, 1, 1, 0),
-                        child: Icon(Icons.account_circle,
-                            size: 60, color: Colors.blue),
+                        child: Icon(Icons.settings,
+                            size: 40, color: Colors.blue),
                         onTap: () {
                           Navigator.push(
                               context,
@@ -71,7 +71,7 @@ class HomePageAppBar extends StatelessWidget implements PreferredSizeWidget {
             children: <Widget>[
               Container(
                 padding:
-                    EdgeInsets.only(top: 20, left: 0, right: 40, bottom: 10),
+                    EdgeInsets.only(top: 10, left: 0, right: 40, bottom: 10),
                 child: Text("Olá Gabriel,\nComo está se sentindo hoje?",
                     style: TextStyle(
                       fontFamily: 'Montserrat',

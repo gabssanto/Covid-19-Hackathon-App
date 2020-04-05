@@ -33,12 +33,10 @@ dependencies:
   google_maps_flutter: ^0.5.25
   csv: ^4.0.3
   maps_launcher: ^1.2.0
+  dio: ^3.0.9
   json_to_form: "^0.0.1"
   carousel_slider: "^1.4.1"
-  intl: "^0.16.0"
-  firebase_core:
-  firebase_auth:
-  firebase_database:
+  intl: "^0.16.1"
 
 dev_dependencies:
   flutter_test:

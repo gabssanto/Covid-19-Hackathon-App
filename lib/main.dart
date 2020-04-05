@@ -1,3 +1,4 @@
+import 'package:covid19/pages/initialPage/initialPage.dart';
 import 'package:covid19/pages/login/login_page.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +26,7 @@ class App extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: LoginPage(),
+      home: InitialPage(),
     );
   }
 }

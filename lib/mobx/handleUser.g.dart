@@ -179,13 +179,6 @@ mixin _$HandleUser on _HandleUserBase, Store {
     }, _$passwordAtom, name: '${_$passwordAtom.name}_set');
   }
 
-  final _$loginAsyncAction = AsyncAction('login');
-
-  @override
-  Future login(dynamic email, dynamic password) {
-    return _$loginAsyncAction.run(() => super.login(email, password));
-  }
-
   final _$_HandleUserBaseActionController =
       ActionController(name: '_HandleUserBase');
 

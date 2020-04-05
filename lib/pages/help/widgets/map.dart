@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'package:covid19/global/homePageAppBar.dart';
 import 'package:covid19/mobx/imports.dart';
 import 'package:covid19/pages/help/constants.dart';
 import 'package:flutter/material.dart';
@@ -57,16 +57,17 @@ class UBSMapState extends State<UBSMap> {
                               double.parse(handleLocations.ubsLongitudes[i]);
                           if (minusLat.abs() <= 0.1 && minusLong.abs() <= 0.1) {
                             _markers.add(Marker(
-                              infoWindow: InfoWindow(
-                                  title: handleLocations.ubsNames[i]
-                                      .replaceAll("'", ''),
-                                  snippet:
-                                      'Clique aqui para navegar ate o local!',
-                                  onTap: () => MapsLauncher.launchCoordinates(
-                                      double.parse(
-                                          handleLocations.ubsLatitudes[i]),
-                                      double.parse(
-                                          handleLocations.ubsLongitudes[i]))),
+                              onTap: () {
+                                showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return MapDialog(title: handleLocations.ubsNames[i].replaceAll("'", ''),
+                                          description: handleLocations.ubsPlaces[i].replaceAll("'", ''),
+                                          latitude: double.parse(handleLocations.ubsLatitudes[i]),
+                                          longitude: double.parse(handleLocations.ubsLongitudes[i]),
+                                      );
+                                    });
+                              },
                               markerId: MarkerId(handleLocations.ubsNames[i]),
                               position: LatLng(
                                   double.parse(handleLocations.ubsLatitudes[i]),
@@ -139,5 +140,106 @@ class UBSMapState extends State<UBSMap> {
   Future<void> _goToCurrentPosition() async {
     final GoogleMapController controller = await _controller.future;
     controller.animateCamera(CameraUpdate.newCameraPosition(_currentPosition));
+  }
+}
+
+class MapDialog extends StatelessWidget {
+  final title;
+  final latitude;
+  final longitude;
+  final description;
+
+  MapDialog({this.title, this.latitude, this.longitude, this.description});
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(21)),
+      child: Container(
+        padding: EdgeInsets.only(left: 20, right: 20),
+        height: 250,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Container(
+              child: Text(title == null ? 'Erro' : title,
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
+                    color: Colors.black54,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    fontStyle: FontStyle.normal,
+                    letterSpacing: -0.154,
+                  )
+              ),
+            ),
+            Container(
+              child: Text(description == null ? 'Erro' : description,
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
+                    color: Colors.black54,
+                    fontSize: 14,
+                    fontWeight: FontWeight.normal,
+                    fontStyle: FontStyle.normal,
+                    letterSpacing: -0.154,
+                  )
+              ),
+            ),
+            Container(
+                width: 285,
+                height: 49,
+                decoration: new BoxDecoration(
+                    color: Color(0xff27b3ff),
+                    borderRadius: BorderRadius.circular(14)),
+                child: FlatButton(
+                  onPressed: () {
+                    MapsLauncher.launchCoordinates(latitude, longitude);
+                        },
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Text("Navegar para o local",
+                          style: TextStyle(
+                            fontFamily: 'Montserrat',
+                            color: Colors.white,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
+                            fontStyle: FontStyle.normal,
+                            letterSpacing: -0.165,
+                          )),
+                    ],
+                  ),
+                )),
+            Container(
+                width: 285,
+                height: 49,
+                decoration: new BoxDecoration(
+                    color: Color(0xFFf65f68),
+                    borderRadius: BorderRadius.circular(14)),
+                child: FlatButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Text("Voltar",
+                          style: TextStyle(
+                            fontFamily: 'Montserrat',
+                            color: Colors.white,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
+                            fontStyle: FontStyle.normal,
+                            letterSpacing: -0.165,
+                          )),
+                    ],
+                  ),
+                ))
+          ],
+        ),
+      ),
+    );
   }
 }
