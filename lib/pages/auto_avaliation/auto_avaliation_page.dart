@@ -1,3 +1,4 @@
+import 'package:covid19/global/backAppBar.dart';
 import 'package:covid19/global/generalAppBar.dart';
 import 'package:covid19/mobx/imports.dart';
 import 'package:covid19/pages/auto_avaliation/widgets/symptomsQuestion.dart';
@@ -69,13 +70,12 @@ class _AutoAvaliationPage1State extends State<AutoAvaliationPage1> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: GeneralAppBar(
+      appBar: BackAppBar(
         title: 'Autoavaliação',
       ),
       body: Stack(
         children: <Widget>[
           Container(
-            color: Colors.white,
             child: ListView(
               children: <Widget>[
                 Container(
