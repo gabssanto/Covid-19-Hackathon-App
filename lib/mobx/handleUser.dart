@@ -51,6 +51,7 @@ abstract class _HandleUserBase with Store {
     this.phone = phone;
     this.age = age;
     this.cep = cep;
+    this.gender = gender;
     this.numberOfPeople = numberOfPeople;
     this.chronicDisease = chronicDisease;
     this.password = password;

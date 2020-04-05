@@ -226,13 +226,13 @@ mixin _$HandleUser on _HandleUserBase, Store {
       dynamic gender,
       dynamic cep,
       dynamic password,
-      dynamic numberOfpeople,
+      dynamic numberOfPeople,
       dynamic chronicDisease,
       dynamic termsChecked) {
     final _$actionInfo = _$_HandleUserBaseActionController.startAction();
     try {
       return super.setForm(name, email, cpf, phone, age, gender, cep, password,
-          numberOfpeople, chronicDisease, termsChecked);
+          numberOfPeople, chronicDisease, termsChecked);
     } finally {
       _$_HandleUserBaseActionController.endAction(_$actionInfo);
     }

@@ -16,6 +16,7 @@ class _SignupPage extends State<SignUpPage> {
   final GlobalKey<FormState> _signupForm = GlobalKey<FormState>();
   final passKey = GlobalKey<FormFieldState>();
   bool _autoValidate = false;
+  bool _obscureText = true;
   String _name;
   String _email;
   String _cpf;
@@ -72,7 +73,6 @@ class _SignupPage extends State<SignUpPage> {
                                     borderRadius: BorderRadius.circular(12)),
                                 prefixIcon: Padding(
                                   padding: EdgeInsets.only(top: 0),
-                                  // add padding to adjust icon
                                   child: Icon(Icons.person),
                                 ),
                               ),
@@ -107,7 +107,6 @@ class _SignupPage extends State<SignUpPage> {
                                     borderRadius: BorderRadius.circular(12)),
                                 prefixIcon: Padding(
                                   padding: EdgeInsets.only(top: 0),
-                                  // add padding to adjust icon
                                   child: Icon(Icons.email),
                                 ),
                               ),
@@ -141,7 +140,6 @@ class _SignupPage extends State<SignUpPage> {
                                     borderRadius: BorderRadius.circular(12)),
                                 prefixIcon: Padding(
                                   padding: EdgeInsets.only(top: 0),
-                                  // add padding to adjust icon
                                   child: Icon(Icons.person),
                                 ),
                               ),
@@ -206,7 +204,6 @@ class _SignupPage extends State<SignUpPage> {
                                     borderRadius: BorderRadius.circular(12)),
                                 prefixIcon: Padding(
                                   padding: EdgeInsets.only(top: 0),
-                                  // add padding to adjust icon
                                   child: Icon(Icons.phone),
                                 ),
                               ),
@@ -240,7 +237,6 @@ class _SignupPage extends State<SignUpPage> {
                                     borderRadius: BorderRadius.circular(12)),
                                 prefixIcon: Padding(
                                   padding: EdgeInsets.only(top: 0),
-                                  // add padding to adjust icon
                                   child: Icon(Icons.cake),
                                 ),
                               ),
@@ -261,8 +257,11 @@ class _SignupPage extends State<SignUpPage> {
                           width: MediaQuery.of(context).size.width / 1.2,
                           height: MediaQuery.of(context).size.height / 15,
                           child: DropdownButtonFormField(
+                            isExpanded: true,
+                            isDense: true,
                             value: _gender,
                             decoration: new InputDecoration(
+                              contentPadding: EdgeInsets.only(right: 10.0),
                               hintText: "Selecionar gênero",
                               labelText: "Gênero",
                               focusedBorder: OutlineInputBorder(
@@ -275,8 +274,7 @@ class _SignupPage extends State<SignUpPage> {
                                   borderRadius: BorderRadius.circular(12)),
                               prefixIcon: Padding(
                                 padding: EdgeInsets.only(top: 0),
-                                // add padding to adjust icon
-                                child: Icon(Icons.person),
+                                child: Icon(Icons.wc),
                               ),
                             ),
                             items: ['Masculino', 'Feminino', 'Outro']
@@ -285,10 +283,21 @@ class _SignupPage extends State<SignUpPage> {
                                       value: gender,
                                     ))
                                 .toList(),
+                            onSaved: (gender) {
+                              setState(() {
+                                _gender = gender;
+                              });
+                            },
                             onChanged: (gender) {
                               setState(() {
                                 _gender = gender;
                               });
+                            },
+                            iconEnabledColor: Colors.blueAccent,
+                            validator: (value) {
+                              return value == null
+                                  ? 'Escolha seu gênero'
+                                  : null;
                             },
                           ),
                         ),
@@ -319,7 +328,6 @@ class _SignupPage extends State<SignUpPage> {
                                     borderRadius: BorderRadius.circular(12)),
                                 prefixIcon: Padding(
                                   padding: EdgeInsets.only(top: 0),
-                                  // add padding to adjust icon
                                   child: Icon(Icons.location_city),
                                 ),
                               ),
@@ -347,10 +355,22 @@ class _SignupPage extends State<SignUpPage> {
                             height: MediaQuery.of(context).size.height / 15,
                             child: TextFormField(
                               key: passKey,
-                              obscureText: true,
+                              obscureText: _obscureText,
                               decoration: InputDecoration(
                                 labelText: 'Senha',
                                 hintText: 'Digite sua senha',
+                                suffixIcon: IconButton(
+                                  icon: Icon(
+                                    _obscureText
+                                        ? Icons.visibility
+                                        : Icons.visibility_off,
+                                  ),
+                                  onPressed: () {
+                                    setState(() {
+                                      _obscureText = !_obscureText;
+                                    });
+                                  },
+                                ),
                                 focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                         color: Color(0xff27b3ff), width: 1.0),
@@ -361,7 +381,6 @@ class _SignupPage extends State<SignUpPage> {
                                     borderRadius: BorderRadius.circular(12)),
                                 prefixIcon: Padding(
                                   padding: EdgeInsets.only(top: 0),
-                                  // add padding to adjust icon
                                   child: Icon(Icons.lock),
                                 ),
                               ),
@@ -393,7 +412,6 @@ class _SignupPage extends State<SignUpPage> {
                                     borderRadius: BorderRadius.circular(12)),
                                 prefixIcon: Padding(
                                   padding: EdgeInsets.only(top: 0),
-                                  // add padding to adjust icon
                                   child: Icon(Icons.lock),
                                 ),
                               ),
@@ -436,8 +454,7 @@ class _SignupPage extends State<SignUpPage> {
                                     borderRadius: BorderRadius.circular(12)),
                                 prefixIcon: Padding(
                                   padding: EdgeInsets.only(top: 0),
-                                  // add padding to adjust icon
-                                  child: Icon(Icons.person),
+                                  child: Icon(Icons.people),
                                 ),
                               ),
                               validator: (String quantidade) {
@@ -563,7 +580,10 @@ class _SignupPage extends State<SignUpPage> {
                         Container(margin: EdgeInsets.only(top: 30)),
                         BtnSignup(
                           text: "Próximo",
-                          onPressed: this._validateInputs,
+                          onPressed: () {
+                            FocusScope.of(context).unfocus();
+                            this._validateInputs();
+                          },
                         ),
                         Container(
                           alignment: Alignment.topCenter,
