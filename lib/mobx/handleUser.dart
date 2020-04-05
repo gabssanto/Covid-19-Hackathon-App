@@ -22,7 +22,7 @@ abstract class _HandleUserBase with Store {
   String phone;
 
   @observable
-  String age;
+  int age;
 
   @observable
   String gender;
@@ -31,20 +31,20 @@ abstract class _HandleUserBase with Store {
   String cep;
 
   @observable
-  String numberOfPeople;
-
-  @observable
-  String chronicDisease;
-
-  @observable
   String password;
+
+  @observable
+  int numberOfPeople;
+
+  @observable
+  bool chronicDisease;
 
   @observable
   bool termsChecked;
 
   @action
-  void setForm(name, email, cpf, phone, age, gender, cep, numberOfpeople,
-      chronicDisease, password, termsChecked) {
+  void setForm(name, email, cpf, phone, age, gender, cep, password,
+      numberOfpeople, chronicDisease, termsChecked) {
     this.name = name;
     this.email = email;
     this.cpf = cpf;

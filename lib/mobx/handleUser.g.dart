@@ -97,14 +97,14 @@ mixin _$HandleUser on _HandleUserBase, Store {
   final _$ageAtom = Atom(name: '_HandleUserBase.age');
 
   @override
-  String get age {
+  int get age {
     _$ageAtom.context.enforceReadPolicy(_$ageAtom);
     _$ageAtom.reportObserved();
     return super.age;
   }
 
   @override
-  set age(String value) {
+  set age(int value) {
     _$ageAtom.context.conditionallyRunInAction(() {
       super.age = value;
       _$ageAtom.reportChanged();
@@ -145,40 +145,6 @@ mixin _$HandleUser on _HandleUserBase, Store {
     }, _$cepAtom, name: '${_$cepAtom.name}_set');
   }
 
-  final _$numberOfPeopleAtom = Atom(name: '_HandleUserBase.numberOfPeople');
-
-  @override
-  String get numberOfPeople {
-    _$numberOfPeopleAtom.context.enforceReadPolicy(_$numberOfPeopleAtom);
-    _$numberOfPeopleAtom.reportObserved();
-    return super.numberOfPeople;
-  }
-
-  @override
-  set numberOfPeople(String value) {
-    _$numberOfPeopleAtom.context.conditionallyRunInAction(() {
-      super.numberOfPeople = value;
-      _$numberOfPeopleAtom.reportChanged();
-    }, _$numberOfPeopleAtom, name: '${_$numberOfPeopleAtom.name}_set');
-  }
-
-  final _$chronicDiseaseAtom = Atom(name: '_HandleUserBase.chronicDisease');
-
-  @override
-  String get chronicDisease {
-    _$chronicDiseaseAtom.context.enforceReadPolicy(_$chronicDiseaseAtom);
-    _$chronicDiseaseAtom.reportObserved();
-    return super.chronicDisease;
-  }
-
-  @override
-  set chronicDisease(String value) {
-    _$chronicDiseaseAtom.context.conditionallyRunInAction(() {
-      super.chronicDisease = value;
-      _$chronicDiseaseAtom.reportChanged();
-    }, _$chronicDiseaseAtom, name: '${_$chronicDiseaseAtom.name}_set');
-  }
-
   final _$passwordAtom = Atom(name: '_HandleUserBase.password');
 
   @override
@@ -194,6 +160,40 @@ mixin _$HandleUser on _HandleUserBase, Store {
       super.password = value;
       _$passwordAtom.reportChanged();
     }, _$passwordAtom, name: '${_$passwordAtom.name}_set');
+  }
+
+  final _$numberOfPeopleAtom = Atom(name: '_HandleUserBase.numberOfPeople');
+
+  @override
+  int get numberOfPeople {
+    _$numberOfPeopleAtom.context.enforceReadPolicy(_$numberOfPeopleAtom);
+    _$numberOfPeopleAtom.reportObserved();
+    return super.numberOfPeople;
+  }
+
+  @override
+  set numberOfPeople(int value) {
+    _$numberOfPeopleAtom.context.conditionallyRunInAction(() {
+      super.numberOfPeople = value;
+      _$numberOfPeopleAtom.reportChanged();
+    }, _$numberOfPeopleAtom, name: '${_$numberOfPeopleAtom.name}_set');
+  }
+
+  final _$chronicDiseaseAtom = Atom(name: '_HandleUserBase.chronicDisease');
+
+  @override
+  bool get chronicDisease {
+    _$chronicDiseaseAtom.context.enforceReadPolicy(_$chronicDiseaseAtom);
+    _$chronicDiseaseAtom.reportObserved();
+    return super.chronicDisease;
+  }
+
+  @override
+  set chronicDisease(bool value) {
+    _$chronicDiseaseAtom.context.conditionallyRunInAction(() {
+      super.chronicDisease = value;
+      _$chronicDiseaseAtom.reportChanged();
+    }, _$chronicDiseaseAtom, name: '${_$chronicDiseaseAtom.name}_set');
   }
 
   final _$termsCheckedAtom = Atom(name: '_HandleUserBase.termsChecked');
@@ -225,14 +225,14 @@ mixin _$HandleUser on _HandleUserBase, Store {
       dynamic age,
       dynamic gender,
       dynamic cep,
+      dynamic password,
       dynamic numberOfpeople,
       dynamic chronicDisease,
-      dynamic password,
       dynamic termsChecked) {
     final _$actionInfo = _$_HandleUserBaseActionController.startAction();
     try {
-      return super.setForm(name, email, cpf, phone, age, gender, cep,
-          numberOfpeople, chronicDisease, password, termsChecked);
+      return super.setForm(name, email, cpf, phone, age, gender, cep, password,
+          numberOfpeople, chronicDisease, termsChecked);
     } finally {
       _$_HandleUserBaseActionController.endAction(_$actionInfo);
     }
@@ -241,7 +241,7 @@ mixin _$HandleUser on _HandleUserBase, Store {
   @override
   String toString() {
     final string =
-        'userID: ${userID.toString()},name: ${name.toString()},email: ${email.toString()},cpf: ${cpf.toString()},phone: ${phone.toString()},age: ${age.toString()},gender: ${gender.toString()},cep: ${cep.toString()},numberOfPeople: ${numberOfPeople.toString()},chronicDisease: ${chronicDisease.toString()},password: ${password.toString()},termsChecked: ${termsChecked.toString()}';
+        'userID: ${userID.toString()},name: ${name.toString()},email: ${email.toString()},cpf: ${cpf.toString()},phone: ${phone.toString()},age: ${age.toString()},gender: ${gender.toString()},cep: ${cep.toString()},password: ${password.toString()},numberOfPeople: ${numberOfPeople.toString()},chronicDisease: ${chronicDisease.toString()},termsChecked: ${termsChecked.toString()}';
     return '{$string}';
   }
 }
