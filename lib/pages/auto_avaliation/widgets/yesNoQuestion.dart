@@ -14,11 +14,14 @@ class YesNoQuestion extends StatefulWidget {
 }
 
 class _YesNoQuestion extends State<YesNoQuestion> {
+//  final Function(int) answer;
   int yesNo = 0;
 
   final active = Color(0xff27b3ff);
 
   final inactive = Color(0xffe8e8e8);
+
+//  _YesNoQuestion(this.answer);
 
   @override
   void initState() {
@@ -39,40 +42,43 @@ class _YesNoQuestion extends State<YesNoQuestion> {
         return Column(
           children: <Widget>[
             Container(
-              margin: EdgeInsets.only(top: 15, left: 25, right: 25),
+              margin: EdgeInsets.only(top: 15),
+              width: MediaQuery.of(context).size.width / 1.15,
               child: Text(this.widget.title,
                   style: TextStyle(
                     fontFamily: 'Montserrat',
                     color: Colors.black54,
-                    fontSize: 14,
+                    fontSize: 16,
                     fontWeight: FontWeight.w600,
                     fontStyle: FontStyle.normal,
                     letterSpacing: -0.154,
-
-                  )
-              ),
+                  )),
             ),
             Container(
               margin: EdgeInsets.only(top: 15),
+              width: MediaQuery.of(context).size.width / 1.15,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   AnimatedContainer(
                       duration: Duration(milliseconds: 200),
-                      width: 145,
-                      height: 40,
+                      width: MediaQuery.of(context).size.width / 2.5,
+                      height: MediaQuery.of(context).size.height / 17,
                       decoration: new BoxDecoration(
-                          color: handleQuestions.questions[this.widget.index] == 1 ? active : inactive,
-                          borderRadius: BorderRadius.circular(6)
-                      ),
+                          color:
+                              handleQuestions.questions[this.widget.index] == 1
+                                  ? active
+                                  : inactive,
+                          borderRadius: BorderRadius.circular(6)),
                       child: FlatButton(
                         onPressed: () {
                           setState(() {
-                            yesNo = 1;
-
+                            handleQuestions.questions[this.widget.index] == 1 ? yesNo = 0 : yesNo = 1;
                           });
+//                          answer(yesNo);
                           handleQuestions.setQuestions(widget.index, yesNo);
-                          },
+                          print(handleQuestions.questions);
+                        },
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -80,32 +86,37 @@ class _YesNoQuestion extends State<YesNoQuestion> {
                             Text("Sim",
                                 style: TextStyle(
                                   fontFamily: 'Montserrat',
-                                  color: handleQuestions.questions[this.widget.index] == 1 ? Colors.white : Colors.black54,
-                                  fontSize: 14,
+                                  color: handleQuestions
+                                              .questions[this.widget.index] ==
+                                          1
+                                      ? Colors.white
+                                      : Colors.black54,
+                                  fontSize: 16,
                                   fontWeight: FontWeight.w500,
                                   fontStyle: FontStyle.normal,
                                   letterSpacing: -0.154,
-
-                                )
-                            ),
+                                )),
                           ],
                         ),
-                      )
-                  ),
+                      )),
                   AnimatedContainer(
                       duration: Duration(milliseconds: 200),
-                      width: 145,
-                      height: 40,
+                      width: MediaQuery.of(context).size.width / 2.5,
+                      height: MediaQuery.of(context).size.height / 17,
                       decoration: new BoxDecoration(
-                          color: handleQuestions.questions[this.widget.index] == 2 ? active : inactive,
-                          borderRadius: BorderRadius.circular(6)
-                      ),
+                          color:
+                              handleQuestions.questions[this.widget.index] == 2
+                                  ? active
+                                  : inactive,
+                          borderRadius: BorderRadius.circular(6)),
                       child: FlatButton(
                         onPressed: () {
                           setState(() {
-                            yesNo = 2;
+                            handleQuestions.questions[this.widget.index] == 2 ? yesNo = 0 : yesNo = 2;
                           });
+//                          answer(yesNo);
                           handleQuestions.setQuestions(widget.index, yesNo);
+                          print(handleQuestions.questions);
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -114,18 +125,19 @@ class _YesNoQuestion extends State<YesNoQuestion> {
                             Text("Não",
                                 style: TextStyle(
                                   fontFamily: 'Montserrat',
-                                  color: handleQuestions.questions[this.widget.index] == 2 ? Colors.white : Colors.black54,
-                                  fontSize: 14,
+                                  color: handleQuestions
+                                              .questions[this.widget.index] ==
+                                          2
+                                      ? Colors.white
+                                      : Colors.black54,
+                                  fontSize: 16,
                                   fontWeight: FontWeight.w500,
                                   fontStyle: FontStyle.normal,
                                   letterSpacing: -0.154,
-
-                                )
-                            ),
+                                )),
                           ],
                         ),
-                      )
-                  ),
+                      )),
                 ],
               ),
             )

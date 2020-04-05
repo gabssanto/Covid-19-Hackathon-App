@@ -1,13 +1,11 @@
 import 'package:covid19/global/generalAppBar.dart';
 import 'package:covid19/mobx/imports.dart';
-import 'package:covid19/pages/auto_avaliation/constants.dart';
-import 'package:covid19/pages/auto_avaliation/widgets/form.dart';
 import 'package:covid19/pages/auto_avaliation/widgets/symptomsQuestion.dart';
 import 'package:covid19/pages/auto_avaliation/widgets/textInput.dart';
-import 'package:covid19/pages/auto_avaliation/widgets/yesNoLastQuestion.dart';
 import 'package:covid19/pages/auto_avaliation/widgets/yesNoQuestion.dart';
-import 'package:covid19/pages/auto_avaliation/widgets/yesNoSubtitleQuestion.dart';
 import 'package:flutter/material.dart';
+import 'package:covid19/global/RedDialog.dart';
+import 'package:covid19/global/YellowDialog.dart';
 
 class AutoAvaliationPage1 extends StatefulWidget {
   @override
@@ -25,6 +23,8 @@ class _AutoAvaliationPage1State extends State<AutoAvaliationPage1> {
 
   int yesNo = 0;
 
+  int countSymtoms = 0;
+
   var _opacity = 1.0;
 
 
@@ -35,17 +35,31 @@ class _AutoAvaliationPage1State extends State<AutoAvaliationPage1> {
     handleQuestions.questions.add(0);
     handleQuestions.questions.add(0);
     handleQuestions.questions.add(0);
-    for(int i = 0; i <=7; i++) {
+    for (int i = 0; i <= 7; i++) {
       handleQuestions.questions.add(0);
     }
     print(handleQuestions.questions);
     super.initState();
   }
 
+  void countSymtomsFunction() {
+
+    for(int i = 0; i < selected.length; i++){
+      if(selected[i] == 1)
+        countSymtoms++;
+    }
+    for(int i = 5; i < handleQuestions.questions.length; i++){
+      if(handleQuestions.questions[i] == 1)
+        countSymtoms++;
+    }
+    print("TOTAL DE SINTOMAS: ${countSymtoms}");
+  }
+
+
   @override
   void dispose() {
-    if(handleQuestions.questions.length != 0) {
-      for(int i = 0; i < handleQuestions.questions.length; i++) {
+    if (handleQuestions.questions.length != 0) {
+      for (int i = 0; i < handleQuestions.questions.length; i++) {
         handleQuestions.questions.removeAt(i);
       }
     }
@@ -65,46 +79,66 @@ class _AutoAvaliationPage1State extends State<AutoAvaliationPage1> {
             child: ListView(
               children: <Widget>[
                 Container(
+                  width: MediaQuery.of(context).size.width / 1.15,
                   padding: EdgeInsets.only(bottom: 80),
-
                   child: Column(children: <Widget>[
                     Column(
                       children: <Widget>[
                         Column(
                           children: <Widget>[
                             Container(
+                              // Questao 01
+                              width: MediaQuery.of(context).size.width / 1.15,
                               margin: EdgeInsets.only(top: 15),
-                              child:
-                                  Text("Você já teve diagnóstico de coronavírus?",
-                                      style: TextStyle(
-                                        fontFamily: 'Montserrat',
-                                        color: Colors.black54,
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w600,
-                                        fontStyle: FontStyle.normal,
-                                        letterSpacing: -0.154,
-                                      )),
+                              child: Text(
+                                  "Você já teve diagnóstico de coronavírus?",
+                                  style: TextStyle(
+                                    fontFamily: 'Montserrat',
+                                    color: Colors.black54,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                    fontStyle: FontStyle.normal,
+                                    letterSpacing: -0.154,
+                                  )),
                             ),
                             Container(
+                              width: MediaQuery.of(context).size.width / 1.15,
                               margin: EdgeInsets.only(top: 15),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
                                   AnimatedContainer(
                                       duration: Duration(milliseconds: 200),
-                                      width: 145,
-                                      height: 40,
+                                      width: MediaQuery.of(context).size.width /
+                                          2.5,
+                                      height:
+                                          MediaQuery.of(context).size.height /
+                                              17,
                                       decoration: new BoxDecoration(
-                                          color: handleQuestions.questions[0] == 1
-                                              ? active
-                                              : inactive,
-                                          borderRadius: BorderRadius.circular(6)),
+                                          color:
+                                              handleQuestions.questions[0] == 1
+                                                  ? active
+                                                  : inactive,
+                                          borderRadius:
+                                              BorderRadius.circular(6)),
                                       child: FlatButton(
                                         onPressed: () {
                                           setState(() {
-                                            yesNo = 1;
+                                            handleQuestions.questions[0] == 1
+                                                ? yesNo = 0
+                                                : yesNo = 1;
                                           });
-                                          handleQuestions.setQuestions(0, yesNo);
+                                          handleQuestions.setQuestions(
+                                              0, yesNo);
+                                          for (int i = 1;
+                                              i <
+                                                  handleQuestions
+                                                      .questions.length;
+                                              i++) {
+                                            handleQuestions.setQuestions(i, 0);
+                                          }
+                                          print(handleQuestions.questions);
                                         },
                                         child: Row(
                                           crossAxisAlignment:
@@ -120,7 +154,7 @@ class _AutoAvaliationPage1State extends State<AutoAvaliationPage1> {
                                                           1
                                                       ? Colors.white
                                                       : Colors.black54,
-                                                  fontSize: 14,
+                                                  fontSize: 16,
                                                   fontWeight: FontWeight.w500,
                                                   fontStyle: FontStyle.normal,
                                                   letterSpacing: -0.154,
@@ -130,20 +164,35 @@ class _AutoAvaliationPage1State extends State<AutoAvaliationPage1> {
                                       )),
                                   AnimatedContainer(
                                       duration: Duration(milliseconds: 200),
-                                      width: 145,
-                                      height: 40,
+                                      width: MediaQuery.of(context).size.width /
+                                          2.5,
+                                      height:
+                                          MediaQuery.of(context).size.height /
+                                              17,
                                       decoration: new BoxDecoration(
-                                          color: handleQuestions.questions[0] == 2
-                                              ? active
-                                              : inactive,
-                                          borderRadius: BorderRadius.circular(6)),
+                                          color:
+                                              handleQuestions.questions[0] == 2
+                                                  ? active
+                                                  : inactive,
+                                          borderRadius:
+                                              BorderRadius.circular(6)),
                                       child: FlatButton(
                                         onPressed: () {
                                           setState(() {
-                                            yesNo = 2;
+                                            handleQuestions.questions[0] == 2
+                                                ? yesNo = 0
+                                                : yesNo = 2;
                                           });
-                                          handleQuestions.setQuestions(0, yesNo);
-
+                                          handleQuestions.setQuestions(
+                                              0, yesNo);
+                                          for (int i = 1;
+                                              i <
+                                                  handleQuestions
+                                                      .questions.length;
+                                              i++) {
+                                            handleQuestions.setQuestions(i, 0);
+                                          }
+                                          print(handleQuestions.questions);
                                         },
                                         child: Row(
                                           mainAxisAlignment:
@@ -159,7 +208,7 @@ class _AutoAvaliationPage1State extends State<AutoAvaliationPage1> {
                                                           2
                                                       ? Colors.white
                                                       : Colors.black54,
-                                                  fontSize: 14,
+                                                  fontSize: 16,
                                                   fontWeight: FontWeight.w500,
                                                   fontStyle: FontStyle.normal,
                                                   letterSpacing: -0.154,
@@ -177,102 +226,140 @@ class _AutoAvaliationPage1State extends State<AutoAvaliationPage1> {
                     handleQuestions.questions[0] == 1
                         ? Column(
                             children: <Widget>[
+                              // Questao 02.1
                               TextInputQuestion(
-                                title: 'Quando começou a sentir os sintomas?',
+                                title: 'Quando foi diagnosticado?',
                                 index: 1,
                               ),
+                              // Questao 03.1
                               Container(
-                                margin: EdgeInsets.only(top: 15, left: 25, right: 25),
-                                child: Text('Está em isolamento residencial ou internamento?',
+                                width: MediaQuery.of(context).size.width / 1.15,
+                                margin: EdgeInsets.only(top: 15),
+                                child: Text(
+                                    'Está em isolamento residencial ou internamento?',
                                     style: TextStyle(
                                       fontFamily: 'Montserrat',
                                       color: Colors.black54,
-                                      fontSize: 14,
+                                      fontSize: 16,
                                       fontWeight: FontWeight.w600,
                                       fontStyle: FontStyle.normal,
                                       letterSpacing: -0.154,
-
-                                    )
-                                ),
+                                    )),
                               ),
                               Container(
+                                width: MediaQuery.of(context).size.width / 1.15,
                                 margin: EdgeInsets.only(top: 15),
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
                                     AnimatedContainer(
                                         duration: Duration(milliseconds: 200),
-                                        width: 145,
-                                        height: 40,
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                2.5,
+                                        height:
+                                            MediaQuery.of(context).size.height /
+                                                17,
                                         decoration: new BoxDecoration(
-                                            color: handleQuestions.questions[2] == 1 ? active : inactive,
-                                            borderRadius: BorderRadius.circular(6)
-                                        ),
+                                            color:
+                                                handleQuestions.questions[2] ==
+                                                        1
+                                                    ? active
+                                                    : inactive,
+                                            borderRadius:
+                                                BorderRadius.circular(6)),
                                         child: FlatButton(
                                           onPressed: () {
                                             setState(() {
-                                              yesNo = 1;
-
+                                              handleQuestions.questions[2] == 1
+                                                  ? yesNo = 0
+                                                  : yesNo = 1;
                                             });
-                                            handleQuestions.setLastQuestion(2, yesNo, 2);
+                                            handleQuestions.setLastQuestion(
+                                                2, yesNo, 2);
+                                            print(handleQuestions.questions);
                                           },
                                           child: Row(
-                                            crossAxisAlignment: CrossAxisAlignment.center,
-                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
                                             children: <Widget>[
                                               Text("Sim",
                                                   style: TextStyle(
                                                     fontFamily: 'Montserrat',
-                                                    color: handleQuestions.questions[2] == 1 ? Colors.white : Colors.black54,
-                                                    fontSize: 14,
+                                                    color: handleQuestions
+                                                                .questions[2] ==
+                                                            1
+                                                        ? Colors.white
+                                                        : Colors.black54,
+                                                    fontSize: 16,
                                                     fontWeight: FontWeight.w500,
                                                     fontStyle: FontStyle.normal,
                                                     letterSpacing: -0.154,
-
-                                                  )
-                                              ),
+                                                  )),
                                             ],
                                           ),
-                                        )
-                                    ),
+                                        )),
                                     AnimatedContainer(
                                         duration: Duration(milliseconds: 200),
-                                        width: 145,
-                                        height: 40,
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                2.5,
+                                        height:
+                                            MediaQuery.of(context).size.height /
+                                                17,
                                         decoration: new BoxDecoration(
-                                            color: handleQuestions.questions[2] == 2 ? active : inactive,
-                                            borderRadius: BorderRadius.circular(6)
-                                        ),
+                                            color:
+                                                handleQuestions.questions[2] ==
+                                                        2
+                                                    ? active
+                                                    : inactive,
+                                            borderRadius:
+                                                BorderRadius.circular(6)),
                                         child: FlatButton(
                                           onPressed: () {
                                             setState(() {
-                                              yesNo = 2;
+                                              handleQuestions.questions[2] == 2
+                                                  ? yesNo = 0
+                                                  : yesNo = 2;
                                             });
-                                            handleQuestions.setLastQuestion(2, yesNo, 2);
-                                            if(
-                                            handleQuestions.questions[0] == 1 && handleQuestions.questions[1] != 0 && handleQuestions.questions[2] != 0) {
+                                            handleQuestions.setLastQuestion(
+                                                2, yesNo, 2);
+                                            print(handleQuestions.questions);
+                                            if (handleQuestions
+                                                        .questions[0] ==
+                                                    1 &&
+                                                handleQuestions.questions[1] !=
+                                                    0 &&
+                                                handleQuestions.questions[2] !=
+                                                    0) {
                                               handleQuestions.opacity = 1.0;
                                             }
                                           },
                                           child: Row(
-                                            mainAxisAlignment: MainAxisAlignment.center,
-                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
                                             children: <Widget>[
                                               Text("Não",
                                                   style: TextStyle(
                                                     fontFamily: 'Montserrat',
-                                                    color: handleQuestions.questions[2] == 2 ? Colors.white : Colors.black54,
-                                                    fontSize: 14,
+                                                    color: handleQuestions
+                                                                .questions[2] ==
+                                                            2
+                                                        ? Colors.white
+                                                        : Colors.black54,
+                                                    fontSize: 16,
                                                     fontWeight: FontWeight.w500,
                                                     fontStyle: FontStyle.normal,
                                                     letterSpacing: -0.154,
-
-                                                  )
-                                              ),
+                                                  )),
                                             ],
                                           ),
-                                        )
-                                    ),
+                                        )),
                                   ],
                                 ),
                               )
@@ -284,13 +371,17 @@ class _AutoAvaliationPage1State extends State<AutoAvaliationPage1> {
                                   Column(
                                     children: <Widget>[
                                       Container(
+                                        // Questao 02.2
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                1.15,
                                         margin: EdgeInsets.only(top: 15),
                                         child: Text(
-                                            "Você já teve diagnóstico de coronavírus?",
+                                            "Você é um caso suspeito de coronavírus?",
                                             style: TextStyle(
                                               fontFamily: 'Montserrat',
                                               color: Colors.black54,
-                                              fontSize: 14,
+                                              fontSize: 16,
                                               fontWeight: FontWeight.w600,
                                               fontStyle: FontStyle.normal,
                                               letterSpacing: -0.154,
@@ -298,15 +389,24 @@ class _AutoAvaliationPage1State extends State<AutoAvaliationPage1> {
                                       ),
                                       Container(
                                         margin: EdgeInsets.only(top: 15),
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                1.15,
                                         child: Row(
                                           mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
+                                              MainAxisAlignment.spaceBetween,
                                           children: <Widget>[
                                             AnimatedContainer(
                                                 duration:
                                                     Duration(milliseconds: 200),
-                                                width: 145,
-                                                height: 40,
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    2.5,
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height /
+                                                    17,
                                                 decoration: new BoxDecoration(
                                                     color: handleQuestions
                                                                 .questions[1] ==
@@ -314,21 +414,38 @@ class _AutoAvaliationPage1State extends State<AutoAvaliationPage1> {
                                                         ? active
                                                         : inactive,
                                                     borderRadius:
-                                                        BorderRadius.circular(6)),
+                                                        BorderRadius.circular(
+                                                            6)),
                                                 child: FlatButton(
                                                   onPressed: () {
                                                     setState(() {
-                                                      yesNo = 1;
+                                                      handleQuestions.questions[
+                                                                  1] ==
+                                                              1
+                                                          ? yesNo = 0
+                                                          : yesNo = 1;
                                                     });
-                                                    handleQuestions.setQuestions(
-                                                        1, yesNo);
-
+                                                    handleQuestions
+                                                        .setQuestions(1, yesNo);
+                                                    for (int i = 2;
+                                                        i <
+                                                            handleQuestions
+                                                                .questions
+                                                                .length;
+                                                        i++) {
+                                                      handleQuestions
+                                                          .setQuestions(i, 0);
+                                                    }
+                                                    print(handleQuestions
+                                                        .questions);
                                                   },
                                                   child: Row(
                                                     crossAxisAlignment:
-                                                        CrossAxisAlignment.center,
+                                                        CrossAxisAlignment
+                                                            .center,
                                                     mainAxisAlignment:
-                                                        MainAxisAlignment.center,
+                                                        MainAxisAlignment
+                                                            .center,
                                                     children: <Widget>[
                                                       Text("Sim",
                                                           style: TextStyle(
@@ -339,13 +456,15 @@ class _AutoAvaliationPage1State extends State<AutoAvaliationPage1> {
                                                                         1] ==
                                                                     1
                                                                 ? Colors.white
-                                                                : Colors.black54,
-                                                            fontSize: 14,
+                                                                : Colors
+                                                                    .black54,
+                                                            fontSize: 16,
                                                             fontWeight:
                                                                 FontWeight.w500,
-                                                            fontStyle:
-                                                                FontStyle.normal,
-                                                            letterSpacing: -0.154,
+                                                            fontStyle: FontStyle
+                                                                .normal,
+                                                            letterSpacing:
+                                                                -0.154,
                                                           )),
                                                     ],
                                                   ),
@@ -353,8 +472,14 @@ class _AutoAvaliationPage1State extends State<AutoAvaliationPage1> {
                                             AnimatedContainer(
                                                 duration:
                                                     Duration(milliseconds: 200),
-                                                width: 145,
-                                                height: 40,
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    2.5,
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height /
+                                                    17,
                                                 decoration: new BoxDecoration(
                                                     color: handleQuestions
                                                                 .questions[1] ==
@@ -362,21 +487,38 @@ class _AutoAvaliationPage1State extends State<AutoAvaliationPage1> {
                                                         ? active
                                                         : inactive,
                                                     borderRadius:
-                                                        BorderRadius.circular(6)),
+                                                        BorderRadius.circular(
+                                                            6)),
                                                 child: FlatButton(
                                                   onPressed: () {
                                                     setState(() {
-                                                      yesNo = 2;
+                                                      handleQuestions.questions[
+                                                                  1] ==
+                                                              2
+                                                          ? yesNo = 0
+                                                          : yesNo = 2;
                                                     });
-                                                    handleQuestions.setQuestions(
-                                                        1, yesNo);
-
+                                                    for (int i = 2;
+                                                        i <
+                                                            handleQuestions
+                                                                .questions
+                                                                .length;
+                                                        i++) {
+                                                      handleQuestions
+                                                          .setQuestions(i, 0);
+                                                    }
+                                                    handleQuestions
+                                                        .setQuestions(1, yesNo);
+                                                    print(handleQuestions
+                                                        .questions);
                                                   },
                                                   child: Row(
                                                     mainAxisAlignment:
-                                                        MainAxisAlignment.center,
+                                                        MainAxisAlignment
+                                                            .center,
                                                     crossAxisAlignment:
-                                                        CrossAxisAlignment.center,
+                                                        CrossAxisAlignment
+                                                            .center,
                                                     children: <Widget>[
                                                       Text("Não",
                                                           style: TextStyle(
@@ -387,13 +529,15 @@ class _AutoAvaliationPage1State extends State<AutoAvaliationPage1> {
                                                                         1] ==
                                                                     2
                                                                 ? Colors.white
-                                                                : Colors.black54,
-                                                            fontSize: 14,
+                                                                : Colors
+                                                                    .black54,
+                                                            fontSize: 16,
                                                             fontWeight:
                                                                 FontWeight.w500,
-                                                            fontStyle:
-                                                                FontStyle.normal,
-                                                            letterSpacing: -0.154,
+                                                            fontStyle: FontStyle
+                                                                .normal,
+                                                            letterSpacing:
+                                                                -0.154,
                                                           )),
                                                     ],
                                                   ),
@@ -405,111 +549,398 @@ class _AutoAvaliationPage1State extends State<AutoAvaliationPage1> {
                                   ),
                                   handleQuestions.questions[1] == 1
                                       ? Column(
-                                    children: <Widget>[
-                                      Container(
-                                        margin: EdgeInsets.only(top: 15, left: 25, right: 25),
-                                        child: Text('Está em isolamento residencial ou internamento?',
-                                            style: TextStyle(
-                                              fontFamily: 'Montserrat',
-                                              color: Colors.black54,
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.w600,
-                                              fontStyle: FontStyle.normal,
-                                              letterSpacing: -0.154,
-
-                                            )
-                                        ),
-                                      ),
-                                      Container(
-                                        margin: EdgeInsets.only(top: 15),
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceAround,
                                           children: <Widget>[
-                                            AnimatedContainer(
-                                                duration: Duration(milliseconds: 200),
-                                                width: 145,
-                                                height: 40,
-                                                decoration: new BoxDecoration(
-                                                    color: handleQuestions.questions[2] == 1 ? active : inactive,
-                                                    borderRadius: BorderRadius.circular(6)
-                                                ),
-                                                child: FlatButton(
-                                                  onPressed: () {
-                                                    setState(() {
-                                                      yesNo = 1;
-
-                                                    });
-                                                    handleQuestions.setLastQuestion(2, yesNo, 2);
-                                                  },
-                                                  child: Row(
-                                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                                    mainAxisAlignment: MainAxisAlignment.center,
-                                                    children: <Widget>[
-                                                      Text("Sim",
-                                                          style: TextStyle(
-                                                            fontFamily: 'Montserrat',
-                                                            color: handleQuestions.questions[2] == 1 ? Colors.white : Colors.black54,
-                                                            fontSize: 14,
-                                                            fontWeight: FontWeight.w500,
-                                                            fontStyle: FontStyle.normal,
-                                                            letterSpacing: -0.154,
-
-                                                          )
-                                                      ),
-                                                    ],
-                                                  ),
-                                                )
+                                            Container(
+                                              // Questao 03.2
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  1.15,
+                                              margin: EdgeInsets.only(
+                                                  top: 15, left: 25, right: 25),
+                                              child: Text(
+                                                  'Está em isolamento residencial ou internamento?',
+                                                  style: TextStyle(
+                                                    fontFamily: 'Montserrat',
+                                                    color: Colors.black54,
+                                                    fontSize: 16,
+                                                    fontWeight: FontWeight.w600,
+                                                    fontStyle: FontStyle.normal,
+                                                    letterSpacing: -0.154,
+                                                  )),
                                             ),
-                                            AnimatedContainer(
-                                                duration: Duration(milliseconds: 200),
-                                                width: 145,
-                                                height: 40,
-                                                decoration: new BoxDecoration(
-                                                    color: handleQuestions.questions[2] == 2 ? active : inactive,
-                                                    borderRadius: BorderRadius.circular(6)
-                                                ),
-                                                child: FlatButton(
-                                                  onPressed: () {
-                                                    setState(() {
-                                                      yesNo = 2;
-                                                    });
-                                                    handleQuestions.setLastQuestion(2, yesNo, 2);
-                                                    if(
-                                                    handleQuestions.questions[0] == 1 && handleQuestions.questions[1] != 0 && handleQuestions.questions[2] != 0) {
-                                                      handleQuestions.opacity = 1.0;
-                                                    }
-                                                  },
-                                                  child: Row(
-                                                    mainAxisAlignment: MainAxisAlignment.center,
-                                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                                    children: <Widget>[
-                                                      Text("Não",
-                                                          style: TextStyle(
-                                                            fontFamily: 'Montserrat',
-                                                            color: handleQuestions.questions[2] == 2 ? Colors.white : Colors.black54,
-                                                            fontSize: 14,
-                                                            fontWeight: FontWeight.w500,
-                                                            fontStyle: FontStyle.normal,
-                                                            letterSpacing: -0.154,
-
-                                                          )
-                                                      ),
-                                                    ],
-                                                  ),
-                                                )
-                                            ),
+                                            Container(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  1.15,
+                                              margin: EdgeInsets.only(top: 15),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: <Widget>[
+                                                  AnimatedContainer(
+                                                      duration: Duration(
+                                                          milliseconds: 200),
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width /
+                                                              2.5,
+                                                      height:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .height /
+                                                              17,
+                                                      decoration: new BoxDecoration(
+                                                          color: handleQuestions
+                                                                          .questions[
+                                                                      2] ==
+                                                                  1
+                                                              ? active
+                                                              : inactive,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(6)),
+                                                      child: FlatButton(
+                                                        onPressed: () {
+                                                          setState(() {
+                                                            handleQuestions.questions[
+                                                                        2] ==
+                                                                    1
+                                                                ? yesNo = 0
+                                                                : yesNo = 1;
+                                                          });
+                                                          handleQuestions
+                                                              .setLastQuestion(
+                                                                  2, yesNo, 2);
+                                                          print(handleQuestions
+                                                              .questions);
+                                                        },
+                                                        child: Row(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .center,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: <Widget>[
+                                                            Text("Sim",
+                                                                style:
+                                                                    TextStyle(
+                                                                  fontFamily:
+                                                                      'Montserrat',
+                                                                  color: handleQuestions.questions[
+                                                                              2] ==
+                                                                          1
+                                                                      ? Colors
+                                                                          .white
+                                                                      : Colors
+                                                                          .black54,
+                                                                  fontSize: 16,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                  fontStyle:
+                                                                      FontStyle
+                                                                          .normal,
+                                                                  letterSpacing:
+                                                                      -0.154,
+                                                                )),
+                                                          ],
+                                                        ),
+                                                      )),
+                                                  AnimatedContainer(
+                                                      duration: Duration(
+                                                          milliseconds: 200),
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width /
+                                                              2.5,
+                                                      height:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .height /
+                                                              17,
+                                                      decoration: new BoxDecoration(
+                                                          color: handleQuestions
+                                                                          .questions[
+                                                                      2] ==
+                                                                  2
+                                                              ? active
+                                                              : inactive,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(6)),
+                                                      child: FlatButton(
+                                                        onPressed: () {
+                                                          setState(() {
+                                                            handleQuestions.questions[
+                                                                        2] ==
+                                                                    2
+                                                                ? yesNo = 0
+                                                                : yesNo = 2;
+                                                          });
+                                                          handleQuestions
+                                                              .setLastQuestion(
+                                                                  2, yesNo, 2);
+                                                          if (handleQuestions.questions[0] == 1 &&
+                                                              handleQuestions
+                                                                          .questions[
+                                                                      1] !=
+                                                                  0 &&
+                                                              handleQuestions
+                                                                          .questions[
+                                                                      2] !=
+                                                                  0) {
+                                                            handleQuestions
+                                                                .opacity = 1.0;
+                                                          }
+                                                        },
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .center,
+                                                          children: <Widget>[
+                                                            Text("Não",
+                                                                style:
+                                                                    TextStyle(
+                                                                  fontFamily:
+                                                                      'Montserrat',
+                                                                  color: handleQuestions.questions[
+                                                                              2] ==
+                                                                          2
+                                                                      ? Colors
+                                                                          .white
+                                                                      : Colors
+                                                                          .black54,
+                                                                  fontSize: 16,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                  fontStyle:
+                                                                      FontStyle
+                                                                          .normal,
+                                                                  letterSpacing:
+                                                                      -0.154,
+                                                                )),
+                                                          ],
+                                                        ),
+                                                      )),
+                                                ],
+                                              ),
+                                            )
                                           ],
-                                        ),
-                                      )
-                                    ],
-                                  )
+                                        )
                                       : handleQuestions.questions[1] == 2
                                           ? Column(
                                               children: <Widget>[
-                                                YesNoQuestion(
-                                                  title:
+                                                Container(
+                                                  // Questao 03.2
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      1.15,
+                                                  margin: EdgeInsets.only(
+                                                      top: 15,
+                                                      left: 25,
+                                                      right: 25),
+                                                  child: Text(
                                                       'Está em isolamento residencial ou internamento?',
-                                                  index: 2,
+                                                      style: TextStyle(
+                                                        fontFamily:
+                                                            'Montserrat',
+                                                        color: Colors.black54,
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        fontStyle:
+                                                            FontStyle.normal,
+                                                        letterSpacing: -0.154,
+                                                      )),
+                                                ),
+                                                Container(
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      1.15,
+                                                  margin:
+                                                      EdgeInsets.only(top: 15),
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: <Widget>[
+                                                      AnimatedContainer(
+                                                          duration: Duration(
+                                                              milliseconds:
+                                                                  200),
+                                                          width: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width /
+                                                              2.5,
+                                                          height: MediaQuery
+                                                                      .of(
+                                                                          context)
+                                                                  .size
+                                                                  .height /
+                                                              17,
+                                                          decoration: new BoxDecoration(
+                                                              color: handleQuestions
+                                                                              .questions[
+                                                                          2] ==
+                                                                      1
+                                                                  ? active
+                                                                  : inactive,
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          6)),
+                                                          child: FlatButton(
+                                                            onPressed: () {
+                                                              setState(() {
+                                                                handleQuestions.questions[
+                                                                            2] ==
+                                                                        1
+                                                                    ? yesNo = 0
+                                                                    : yesNo = 1;
+                                                              });
+                                                              handleQuestions
+                                                                  .setLastQuestion(
+                                                                      2,
+                                                                      yesNo,
+                                                                      2);
+                                                              print(handleQuestions
+                                                                  .questions);
+                                                            },
+                                                            child: Row(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .center,
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .center,
+                                                              children: <
+                                                                  Widget>[
+                                                                Text("Sim",
+                                                                    style:
+                                                                        TextStyle(
+                                                                      fontFamily:
+                                                                          'Montserrat',
+                                                                      color: handleQuestions.questions[2] == 1
+                                                                          ? Colors
+                                                                              .white
+                                                                          : Colors
+                                                                              .black54,
+                                                                      fontSize:
+                                                                          16,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w500,
+                                                                      fontStyle:
+                                                                          FontStyle
+                                                                              .normal,
+                                                                      letterSpacing:
+                                                                          -0.154,
+                                                                    )),
+                                                              ],
+                                                            ),
+                                                          )),
+                                                      AnimatedContainer(
+                                                          duration: Duration(
+                                                              milliseconds:
+                                                                  200),
+                                                          width: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width /
+                                                              2.5,
+                                                          height: MediaQuery
+                                                                      .of(
+                                                                          context)
+                                                                  .size
+                                                                  .height /
+                                                              17,
+                                                          decoration: new BoxDecoration(
+                                                              color: handleQuestions
+                                                                              .questions[
+                                                                          2] ==
+                                                                      2
+                                                                  ? active
+                                                                  : inactive,
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          6)),
+                                                          child: FlatButton(
+                                                            onPressed: () {
+                                                              setState(() {
+                                                                handleQuestions.questions[
+                                                                            2] ==
+                                                                        2
+                                                                    ? yesNo = 0
+                                                                    : yesNo = 2;
+                                                              });
+                                                              handleQuestions
+                                                                  .setLastQuestion(
+                                                                      2,
+                                                                      yesNo,
+                                                                      2);
+                                                              if (handleQuestions.questions[0] == 1 &&
+                                                                  handleQuestions
+                                                                              .questions[
+                                                                          1] !=
+                                                                      0 &&
+                                                                  handleQuestions
+                                                                              .questions[
+                                                                          2] !=
+                                                                      0) {
+                                                                handleQuestions
+                                                                        .opacity =
+                                                                    1.0;
+                                                              }
+                                                            },
+                                                            child: Row(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .center,
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .center,
+                                                              children: <
+                                                                  Widget>[
+                                                                Text("Não",
+                                                                    style:
+                                                                        TextStyle(
+                                                                      fontFamily:
+                                                                          'Montserrat',
+                                                                      color: handleQuestions.questions[2] == 2
+                                                                          ? Colors
+                                                                              .white
+                                                                          : Colors
+                                                                              .black54,
+                                                                      fontSize:
+                                                                          16,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w500,
+                                                                      fontStyle:
+                                                                          FontStyle
+                                                                              .normal,
+                                                                      letterSpacing:
+                                                                          -0.154,
+                                                                    )),
+                                                              ],
+                                                            ),
+                                                          )),
+                                                    ],
+                                                  ),
                                                 ),
                                                 TextInputQuestion(
                                                   title:
@@ -526,6 +957,8 @@ class _AutoAvaliationPage1State extends State<AutoAvaliationPage1> {
                                                   title:
                                                       'Apresenta dificuldade para respirar?',
                                                   index: 5,
+//                                                    answer: (int value){
+//                                                    }
                                                 ),
                                                 YesNoQuestion(
                                                   title:
@@ -550,105 +983,204 @@ class _AutoAvaliationPage1State extends State<AutoAvaliationPage1> {
                                                 Column(
                                                   children: <Widget>[
                                                     Container(
-                                                      margin: EdgeInsets.only(top: 15, left: 25, right: 25),
-                                                      child: Text('Teve contato com pessoa que, nos últimos 14 dias, era caso suspeito ou confirmado para COVID-19?',
+                                                      margin: EdgeInsets.only(
+                                                          top: 15,
+                                                          left: 25,
+                                                          right: 25),
+                                                      child: Text(
+                                                          'Teve contato com pessoa que, nos últimos 14 dias, era caso suspeito ou confirmado para COVID-19?',
                                                           style: TextStyle(
-                                                            fontFamily: 'Montserrat',
-                                                            color: Colors.black54,
-                                                            fontSize: 14,
-                                                            fontWeight: FontWeight.w600,
-                                                            fontStyle: FontStyle.normal,
-                                                            letterSpacing: -0.154,
-
-                                                          )
-                                                      ),
+                                                            fontFamily:
+                                                                'Montserrat',
+                                                            color:
+                                                                Colors.black54,
+                                                            fontSize: 16,
+                                                            fontWeight:
+                                                                FontWeight.w600,
+                                                            fontStyle: FontStyle
+                                                                .normal,
+                                                            letterSpacing:
+                                                                -0.154,
+                                                          )),
                                                     ),
                                                     Container(
-                                                      margin: EdgeInsets.only(top: 10, left: 25, right: 25),
-                                                      child: Text("Como caso suspeito considera-se aquela pessoa que teve febre ou pelo menos um sintoma respiratório ou outros sinais e sintomas inespecíficos como cansaço, dor muscular/articular, dor de cabeça, calafrios, nódulos, diarreia, náusea, vômito e desidratação.",
+                                                      margin: EdgeInsets.only(
+                                                          top: 10,
+                                                          left: 25,
+                                                          right: 25),
+                                                      child: Text(
+                                                          "Como caso suspeito considera-se aquela pessoa que teve febre ou pelo menos um sintoma respiratório ou outros sinais e sintomas inespecíficos como cansaço, dor muscular/articular, dor de cabeça, calafrios, nódulos, diarreia, náusea, vômito e desidratação.",
                                                           style: TextStyle(
-                                                            fontFamily: 'Montserrat',
-                                                            color: Colors.black38,
+                                                            fontFamily:
+                                                                'Montserrat',
+                                                            color:
+                                                                Colors.black38,
                                                             fontSize: 14,
-                                                            fontWeight: FontWeight.w400,
-                                                            fontStyle: FontStyle.normal,
-                                                          )
-                                                      ),
+                                                            fontWeight:
+                                                                FontWeight.w400,
+                                                            fontStyle: FontStyle
+                                                                .normal,
+                                                          )),
                                                     ),
                                                     Container(
-                                                      margin: EdgeInsets.only(top: 15),
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width /
+                                                              1.15,
+                                                      margin: EdgeInsets.only(
+                                                          top: 15),
                                                       child: Row(
-                                                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
                                                         children: <Widget>[
                                                           AnimatedContainer(
-                                                              duration: Duration(milliseconds: 200),
-                                                              width: 145,
-                                                              height: 40,
+                                                              duration: Duration(
+                                                                  milliseconds:
+                                                                      200),
+                                                              width: MediaQuery
+                                                                          .of(
+                                                                              context)
+                                                                      .size
+                                                                      .width /
+                                                                  2.5,
+                                                              height:
+                                                                  MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .height /
+                                                                      17,
                                                               decoration: new BoxDecoration(
-                                                                  color: handleQuestions.questions[10] == 1 ? active : inactive,
-                                                                  borderRadius: BorderRadius.circular(6)
-                                                              ),
+                                                                  color: handleQuestions.questions[
+                                                                              10] ==
+                                                                          1
+                                                                      ? active
+                                                                      : inactive,
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              6)),
                                                               child: FlatButton(
                                                                 onPressed: () {
                                                                   setState(() {
-                                                                    yesNo = 1;
-
+                                                                    handleQuestions.questions[10] ==
+                                                                            1
+                                                                        ? yesNo =
+                                                                            0
+                                                                        : yesNo =
+                                                                            1;
                                                                   });
-                                                                  handleQuestions.setLastQuestion(10, yesNo, 10);
+                                                                  handleQuestions
+                                                                      .setLastQuestion(
+                                                                          10,
+                                                                          yesNo,
+                                                                          10);
+                                                                  print(handleQuestions
+                                                                      .questions);
                                                                 },
                                                                 child: Row(
-                                                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                                                  mainAxisAlignment: MainAxisAlignment.center,
-                                                                  children: <Widget>[
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .center,
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .center,
+                                                                  children: <
+                                                                      Widget>[
                                                                     Text("Sim",
-                                                                        style: TextStyle(
-                                                                          fontFamily: 'Montserrat',
-                                                                          color: handleQuestions.questions[10] == 1 ? Colors.white : Colors.black54,
-                                                                          fontSize: 14,
-                                                                          fontWeight: FontWeight.w500,
-                                                                          fontStyle: FontStyle.normal,
-                                                                          letterSpacing: -0.154,
-
-                                                                        )
-                                                                    ),
+                                                                        style:
+                                                                            TextStyle(
+                                                                          fontFamily:
+                                                                              'Montserrat',
+                                                                          color: handleQuestions.questions[10] == 1
+                                                                              ? Colors.white
+                                                                              : Colors.black54,
+                                                                          fontSize:
+                                                                              16,
+                                                                          fontWeight:
+                                                                              FontWeight.w500,
+                                                                          fontStyle:
+                                                                              FontStyle.normal,
+                                                                          letterSpacing:
+                                                                              -0.154,
+                                                                        )),
                                                                   ],
                                                                 ),
-                                                              )
-                                                          ),
+                                                              )),
                                                           AnimatedContainer(
-                                                              duration: Duration(milliseconds: 200),
-                                                              width: 145,
-                                                              height: 40,
+                                                              duration: Duration(
+                                                                  milliseconds:
+                                                                      200),
+                                                              width: MediaQuery
+                                                                          .of(
+                                                                              context)
+                                                                      .size
+                                                                      .width /
+                                                                  2.5,
+                                                              height:
+                                                                  MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .height /
+                                                                      17,
                                                               decoration: new BoxDecoration(
-                                                                  color: handleQuestions.questions[10] == 2 ? active : inactive,
-                                                                  borderRadius: BorderRadius.circular(6)
-                                                              ),
+                                                                  color: handleQuestions.questions[
+                                                                              10] ==
+                                                                          2
+                                                                      ? active
+                                                                      : inactive,
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              6)),
                                                               child: FlatButton(
                                                                 onPressed: () {
                                                                   setState(() {
-                                                                    yesNo = 2;
+                                                                    handleQuestions.questions[10] ==
+                                                                            2
+                                                                        ? yesNo =
+                                                                            0
+                                                                        : yesNo =
+                                                                            2;
                                                                   });
-                                                                  handleQuestions.setLastQuestion(10, yesNo, 10);
+                                                                  handleQuestions
+                                                                      .setLastQuestion(
+                                                                          10,
+                                                                          yesNo,
+                                                                          10);
+                                                                  print(handleQuestions
+                                                                      .questions);
                                                                 },
                                                                 child: Row(
-                                                                  mainAxisAlignment: MainAxisAlignment.center,
-                                                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                                                  children: <Widget>[
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .center,
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .center,
+                                                                  children: <
+                                                                      Widget>[
                                                                     Text("Não",
-                                                                        style: TextStyle(
-                                                                          fontFamily: 'Montserrat',
-                                                                          color: handleQuestions.questions[10] == 2 ? Colors.white : Colors.black54,
-                                                                          fontSize: 14,
-                                                                          fontWeight: FontWeight.w500,
-                                                                          fontStyle: FontStyle.normal,
-                                                                          letterSpacing: -0.154,
-
-                                                                        )
-                                                                    ),
+                                                                        style:
+                                                                            TextStyle(
+                                                                          fontFamily:
+                                                                              'Montserrat',
+                                                                          color: handleQuestions.questions[10] == 2
+                                                                              ? Colors.white
+                                                                              : Colors.black54,
+                                                                          fontSize:
+                                                                              16,
+                                                                          fontWeight:
+                                                                              FontWeight.w500,
+                                                                          fontStyle:
+                                                                              FontStyle.normal,
+                                                                          letterSpacing:
+                                                                              -0.154,
+                                                                        )),
                                                                   ],
                                                                 ),
-                                                              )
-                                                          ),
+                                                              )),
                                                         ],
                                                       ),
                                                     )
@@ -665,86 +1197,117 @@ class _AutoAvaliationPage1State extends State<AutoAvaliationPage1> {
               ],
             ),
           ),
-          handleQuestions.questions[0] == 1 && handleQuestions.questions[1] != 0 && handleQuestions.questions[2] != 0
-          || handleQuestions.questions[0] == 2 && handleQuestions.questions[1] == 1 && handleQuestions.questions[2] != 0
-          || handleQuestions.questions[0] == 2 && handleQuestions.questions[1] == 2 && handleQuestions.questions[2] != 0 //TODO: colocar itens 3 e 4 pq ainda nao validei tudo
-          && handleQuestions.questions[5] != 0 && handleQuestions.questions[6] != 0 && handleQuestions.questions[7] != 0
-          && handleQuestions.questions[8] != 0 && handleQuestions.questions[9] != 0 && handleQuestions.questions[10] != 0
-              ?
-          Positioned(
-            bottom: 10,
-            left: 15,
-            right: 15,
-            child: AnimatedOpacity(
-              duration: Duration(milliseconds: 200),
-              opacity: 1,
-              child: Container(
-                height: 45,
-                decoration: new BoxDecoration(
-                    color: active,
-                    borderRadius: BorderRadius.circular(6)
-                ),
-                child: FlatButton(
-                  onPressed: () {
-                    print(handleQuestions.questions);
-                  },
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Text("Confirmar",
-                          style: TextStyle(
-                            fontFamily: 'Montserrat',
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontWeight: FontWeight.w700,
-                            fontStyle: FontStyle.normal,
-                            letterSpacing: -0.154,
-
-                          )
-                      )
-                    ],
+          handleQuestions.questions[0] == 1 && handleQuestions.questions[1] != 0 && handleQuestions.questions[2] != 0 ||
+              handleQuestions.questions[0] == 2 && handleQuestions.questions[1] == 1 && handleQuestions.questions[2] != 0 ||
+                  handleQuestions.questions[0] == 2 &&
+                      handleQuestions.questions[1] == 2 &&
+                      handleQuestions.questions[2] != 0 &&
+                      handleQuestions.questions[3] != 0 &&
+                      handleQuestions.questions[5] != 0 &&
+                      handleQuestions.questions[6] != 0 &&
+                      handleQuestions.questions[7] != 0 &&
+                      handleQuestions.questions[8] != 0 &&
+                      handleQuestions.questions[9] != 0 &&
+                      handleQuestions.questions[10] != 0
+              ? Positioned(
+                  bottom: 10,
+                  left: 15,
+                  right: 15,
+                  child: AnimatedOpacity(
+                    duration: Duration(milliseconds: 200),
+                    opacity: 1,
+                    child: Container(
+                      height: 45,
+                      decoration: new BoxDecoration(
+                          color: active,
+                          borderRadius: BorderRadius.circular(6)),
+                      child: FlatButton(
+                        onPressed: () {
+                          countSymtomsFunction();
+                          showDialog(
+                              context: context,
+                              // ignore: missing_return
+                              builder: (BuildContext context) {
+                                if (handleQuestions.questions[0] == 1 &&
+                                    handleQuestions.questions[1] != 0 &&
+                                    handleQuestions.questions[2] != 0 || (handleQuestions.questions[0] == 2 &&
+                                    handleQuestions.questions[1] == 2 &&
+                                    handleQuestions.questions[2] != 0 &&
+                                    handleQuestions.questions[3] != 0 &&
+                                    handleQuestions.questions[5] != 0 &&
+                                    handleQuestions.questions[6] != 0 &&
+                                    handleQuestions.questions[7] != 0 &&
+                                    handleQuestions.questions[8] != 0 &&
+                                    handleQuestions.questions[9] != 0 &&
+                                    handleQuestions.questions[10] != 0 && countSymtoms>=3)) {
+                                  return RedDialog();
+                                } else if (handleQuestions.questions[0] == 2 &&
+                                    handleQuestions.questions[1] == 1 &&
+                                    handleQuestions.questions[2] != 0 ||(
+                                    handleQuestions.questions[1] == 2 &&
+                                    handleQuestions.questions[2] != 0 &&
+                                    handleQuestions.questions[3] != 0 &&
+                                    handleQuestions.questions[5] != 0 &&
+                                    handleQuestions.questions[6] != 0 &&
+                                    handleQuestions.questions[7] != 0 &&
+                                    handleQuestions.questions[8] != 0 &&
+                                    handleQuestions.questions[9] != 0 &&
+                                    handleQuestions.questions[10] != 0 && countSymtoms<3)) {
+                                  return YellowDialog();
+                                }
+                              });
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Text("Confirmar",
+                                style: TextStyle(
+                                  fontFamily: 'Montserrat',
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w700,
+                                  fontStyle: FontStyle.normal,
+                                  letterSpacing: -0.154,
+                                ))
+                          ],
+                        ),
+                      ),
+                    ),
                   ),
-                ),
-              ),
-            ),
-          )
-              :
-          Positioned(
-            bottom: 10,
-            left: 15,
-            right: 15,
-            child: AnimatedOpacity(
-              duration: Duration(milliseconds: 200),
-              opacity: 0.5,
-              child: Container(
-                height: 45,
-                decoration: new BoxDecoration(
-                    color: active,
-                    borderRadius: BorderRadius.circular(6)
-                ),
-                child: FlatButton(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Text("Confirmar",
-                          style: TextStyle(
-                            fontFamily: 'Montserrat',
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontWeight: FontWeight.w700,
-                            fontStyle: FontStyle.normal,
-                            letterSpacing: -0.154,
-
-                          )
-                      )
-                    ],
+                )
+              : Positioned(
+                  bottom: 10,
+                  left: 15,
+                  right: 15,
+                  child: AnimatedOpacity(
+                    duration: Duration(milliseconds: 200),
+                    opacity: 0.5,
+                    child: Container(
+                      height: 45,
+                      decoration: new BoxDecoration(
+                          color: active,
+                          borderRadius: BorderRadius.circular(6)),
+                      child: FlatButton(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Text("Confirmar",
+                                style: TextStyle(
+                                  fontFamily: 'Montserrat',
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w700,
+                                  fontStyle: FontStyle.normal,
+                                  letterSpacing: -0.154,
+                                ))
+                          ],
+                        ),
+                      ),
+                    ),
                   ),
-                ),
-              ),
-            ),
-          )
+                )
         ],
       ),
     );

@@ -45,7 +45,7 @@ class _YesNoSubtitleQuestion extends State<YesNoSubtitleQuestion> {
                   style: TextStyle(
                     fontFamily: 'Montserrat',
                     color: Colors.black54,
-                    fontSize: 14,
+                    fontSize: 16,
                     fontWeight: FontWeight.w600,
                     fontStyle: FontStyle.normal,
                     letterSpacing: -0.154,
@@ -66,14 +66,15 @@ class _YesNoSubtitleQuestion extends State<YesNoSubtitleQuestion> {
               ),
             ),
             Container(
+              width: MediaQuery.of(context).size.width / 1.15,
               margin: EdgeInsets.only(top: 15),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   AnimatedContainer(
                       duration: Duration(milliseconds: 200),
-                      width: 145,
-                      height: 40,
+                      width: MediaQuery.of(context).size.width / 2.5,
+                      height: MediaQuery.of(context).size.height / 17,
                       decoration: new BoxDecoration(
                           color: handleQuestions.questions[this.widget.index] == 1 ? active : inactive,
                           borderRadius: BorderRadius.circular(6)
@@ -95,7 +96,7 @@ class _YesNoSubtitleQuestion extends State<YesNoSubtitleQuestion> {
                                 style: TextStyle(
                                   fontFamily: 'Montserrat',
                                   color: handleQuestions.questions[this.widget.index] == 1 ? Colors.white : Colors.black54,
-                                  fontSize: 14,
+                                  fontSize: 16,
                                   fontWeight: FontWeight.w500,
                                   fontStyle: FontStyle.normal,
                                   letterSpacing: -0.154,
@@ -108,8 +109,8 @@ class _YesNoSubtitleQuestion extends State<YesNoSubtitleQuestion> {
                   ),
                   AnimatedContainer(
                       duration: Duration(milliseconds: 200),
-                      width: 145,
-                      height: 40,
+                      width: MediaQuery.of(context).size.width / 2.5,
+                      height: MediaQuery.of(context).size.height / 17,
                       decoration: new BoxDecoration(
                           color: handleQuestions.questions[this.widget.index] == 2 ? active : inactive,
                           borderRadius: BorderRadius.circular(6)
@@ -129,7 +130,7 @@ class _YesNoSubtitleQuestion extends State<YesNoSubtitleQuestion> {
                                 style: TextStyle(
                                   fontFamily: 'Montserrat',
                                   color: handleQuestions.questions[this.widget.index] == 2 ? Colors.white : Colors.black54,
-                                  fontSize: 14,
+                                  fontSize: 16,
                                   fontWeight: FontWeight.w500,
                                   fontStyle: FontStyle.normal,
                                   letterSpacing: -0.154,

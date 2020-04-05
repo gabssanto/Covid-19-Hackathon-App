@@ -15,7 +15,6 @@ class SymptomsQuestion extends StatefulWidget {
 }
 
 class _SymptomsQuestion extends State<SymptomsQuestion> {
-  int yesNo = 0;
 
   final active = Color(0xff27b3ff);
 
@@ -38,26 +37,28 @@ class _SymptomsQuestion extends State<SymptomsQuestion> {
     return Column(
       children: <Widget>[
         Container(
+          width: MediaQuery.of(context).size.width / 1.15,
           margin: EdgeInsets.only(top: 15),
           child: Text(this.widget.title,
               style: TextStyle(
                 fontFamily: 'Montserrat',
                 color: Colors.black54,
-                fontSize: 14,
+                fontSize: 16,
                 fontWeight: FontWeight.w600,
                 fontStyle: FontStyle.normal,
                 letterSpacing: -0.154,
               )),
         ),
         Container(
+          width: MediaQuery.of(context).size.width / 1.15,
           margin: EdgeInsets.only(top: 15),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               AnimatedContainer(
                   duration: Duration(milliseconds: 200),
-                  width: 145,
-                  height: 40,
+                  width: MediaQuery.of(context).size.width / 2.5,
+                  height: MediaQuery.of(context).size.height / 17,
                   decoration: new BoxDecoration(
                       color: widget.selected[0] == 1 ? active : inactive,
                       borderRadius: BorderRadius.circular(6)),
@@ -69,8 +70,8 @@ class _SymptomsQuestion extends State<SymptomsQuestion> {
                         } else
                           widget.selected[0] = 1;
                       });
-                      handleQuestions.setQuestions(widget.index, yesNo);
-                      print(widget.selected);
+                      handleQuestions.setQuestions(widget.index, widget.selected);
+                      print('DENTRO: ${handleQuestions.questions}');
                     },
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -82,7 +83,7 @@ class _SymptomsQuestion extends State<SymptomsQuestion> {
                               color: widget.selected[0] == 1
                                   ? Colors.white
                                   : Colors.black54,
-                              fontSize: 14,
+                              fontSize: 16,
                               fontWeight: FontWeight.w500,
                               fontStyle: FontStyle.normal,
                               letterSpacing: -0.154,
@@ -92,8 +93,8 @@ class _SymptomsQuestion extends State<SymptomsQuestion> {
                   )),
               AnimatedContainer(
                   duration: Duration(milliseconds: 200),
-                  width: 145,
-                  height: 40,
+                  width: MediaQuery.of(context).size.width / 2.5,
+                  height: MediaQuery.of(context).size.height / 17,
                   decoration: new BoxDecoration(
                       color: widget.selected[1] == 1 ? active : inactive,
                       borderRadius: BorderRadius.circular(6)),
@@ -105,8 +106,8 @@ class _SymptomsQuestion extends State<SymptomsQuestion> {
                         } else
                           widget.selected[1] = 1;
                       });
-                      handleQuestions.setQuestions(widget.index, yesNo);
-                      print(widget.selected);
+                      handleQuestions.setQuestions(widget.index, widget.selected);
+                      print('DENTRO: ${handleQuestions.questions}');
                     },
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -118,7 +119,7 @@ class _SymptomsQuestion extends State<SymptomsQuestion> {
                               color: widget.selected[1] == 1
                                   ? Colors.white
                                   : Colors.black54,
-                              fontSize: 14,
+                              fontSize: 16,
                               fontWeight: FontWeight.w500,
                               fontStyle: FontStyle.normal,
                               letterSpacing: -0.154,
@@ -131,13 +132,14 @@ class _SymptomsQuestion extends State<SymptomsQuestion> {
         ),
         Container(
           margin: EdgeInsets.only(top: 15),
+          width: MediaQuery.of(context).size.width / 1.15,
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               AnimatedContainer(
                   duration: Duration(milliseconds: 200),
-                  width: 145,
-                  height: 40,
+                  width: MediaQuery.of(context).size.width / 2.5,
+                  height: MediaQuery.of(context).size.height / 17,
                   decoration: new BoxDecoration(
                       color: widget.selected[2] == 1 ? active : inactive,
                       borderRadius: BorderRadius.circular(6)),
@@ -149,8 +151,8 @@ class _SymptomsQuestion extends State<SymptomsQuestion> {
                         } else
                           widget.selected[2] = 1;
                       });
-                      handleQuestions.setQuestions(widget.index, yesNo);
-                      print(widget.selected);
+                      handleQuestions.setQuestions(widget.index, widget.selected);
+                      print('DENTRO: ${handleQuestions.questions}');
                     },
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -162,7 +164,7 @@ class _SymptomsQuestion extends State<SymptomsQuestion> {
                               color: widget.selected[2] == 1
                                   ? Colors.white
                                   : Colors.black54,
-                              fontSize: 14,
+                              fontSize: 16,
                               fontWeight: FontWeight.w500,
                               fontStyle: FontStyle.normal,
                               letterSpacing: -0.154,
@@ -172,8 +174,8 @@ class _SymptomsQuestion extends State<SymptomsQuestion> {
                   )),
               AnimatedContainer(
                   duration: Duration(milliseconds: 200),
-                  width: 145,
-                  height: 40,
+                  width: MediaQuery.of(context).size.width / 2.5,
+                  height: MediaQuery.of(context).size.height / 17,
                   decoration: new BoxDecoration(
                       color: widget.selected[3] == 1 ? active : inactive,
                       borderRadius: BorderRadius.circular(6)),
@@ -185,8 +187,8 @@ class _SymptomsQuestion extends State<SymptomsQuestion> {
                         } else
                           widget.selected[3] = 1;
                       });
-                      handleQuestions.setQuestions(widget.index, yesNo);
-                      print(widget.selected);
+                      handleQuestions.setQuestions(widget.index, widget.selected);
+                      print('DENTRO: ${handleQuestions.questions}');
                     },
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -198,7 +200,7 @@ class _SymptomsQuestion extends State<SymptomsQuestion> {
                               color: widget.selected[3] == 1
                                   ? Colors.white
                                   : Colors.black54,
-                              fontSize: 14,
+                              fontSize: 16,
                               fontWeight: FontWeight.w500,
                               fontStyle: FontStyle.normal,
                               letterSpacing: -0.154,
@@ -211,13 +213,14 @@ class _SymptomsQuestion extends State<SymptomsQuestion> {
         ),
         Container(
           margin: EdgeInsets.only(top: 15),
+          width: MediaQuery.of(context).size.width / 1.15,
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               AnimatedContainer(
                   duration: Duration(milliseconds: 200),
-                  width: 145,
-                  height: 40,
+                  width: MediaQuery.of(context).size.width / 2.5,
+                  height: MediaQuery.of(context).size.height / 17,
                   decoration: new BoxDecoration(
                       color: widget.selected[4] == 1 ? active : inactive,
                       borderRadius: BorderRadius.circular(6)),
@@ -229,8 +232,8 @@ class _SymptomsQuestion extends State<SymptomsQuestion> {
                         } else
                           widget.selected[4] = 1;
                       });
-                      handleQuestions.setQuestions(widget.index, yesNo);
-                      print(widget.selected);
+                      handleQuestions.setQuestions(widget.index, widget.selected);
+                      print('DENTRO: ${handleQuestions.questions}');
                     },
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -242,7 +245,7 @@ class _SymptomsQuestion extends State<SymptomsQuestion> {
                               color: widget.selected[4] == 1
                                   ? Colors.white
                                   : Colors.black54,
-                              fontSize: 14,
+                              fontSize: 16,
                               fontWeight: FontWeight.w500,
                               fontStyle: FontStyle.normal,
                               letterSpacing: -0.154,
