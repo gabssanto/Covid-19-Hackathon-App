@@ -3,7 +3,10 @@ import 'package:covid19/global/backAppBar.dart';
 import 'package:covid19/global/loginAppBar.dart';
 import 'package:covid19/mobx/imports.dart';
 import 'package:covid19/pages/signup/widgets/BtnSignup.dart';
+import 'package:covid19/pages/signup/widgets/symptomsQuestion.dart';
 import 'package:flutter/material.dart';
+
+import '../../mobx/imports.dart';
 
 class SignUpPage extends StatefulWidget {
   SignUpPage({Key key}) : super(key: key);
@@ -28,6 +31,35 @@ class _SignupPage extends State<SignUpPage> {
   String _password;
   bool _hasChronicDisease;
   bool _termsChecked = false;
+
+  List selected = [0, 0, 0, 0, 0];
+
+  int yesNo = 0;
+
+  final active = Color(0xff27b3ff);
+
+  final inactive = Color(0xffe8e8e8);
+
+
+  @override
+  void initState() {
+    handleQuestions.opacity = false;
+    handleQuestions.clearQuestions();
+    handleQuestions.questions.add(0);
+    print(handleQuestions.questions);
+    super.initState();
+  }
+
+
+  @override
+  void dispose() {
+    if (handleQuestions.questions.length != 0) {
+      for (int i = 0; i < handleQuestions.questions.length; i++) {
+        handleQuestions.questions.removeAt(i);
+      }
+    }
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -472,85 +504,111 @@ class _SignupPage extends State<SignUpPage> {
                         SizedBox(
                           height: 10,
                         ),
-                        Text(
-                          'Apresenta alguma doença crônica?',
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(bottom: 15),
-                          width: MediaQuery.of(context).size.width / 1.2,
-                          height: MediaQuery.of(context).size.height / 15,
-                          child: Column(
-                            children: <Widget>[
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                        Column(
+                          children: <Widget>[
+                            Container(
+                              margin: EdgeInsets.only(top: 15),
+                              width: MediaQuery.of(context).size.width / 1.15,
+                              child: Text('Apresenta alguma doença crônica?',
+                                  style: TextStyle(
+                                    fontFamily: 'Montserrat',
+                                    color: Colors.black54,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                    fontStyle: FontStyle.normal,
+                                    letterSpacing: -0.154,
+                                  )),
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(top: 15),
+                              width: MediaQuery.of(context).size.width / 1.18,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
-                                  Container(
-                                    margin: EdgeInsets.only(top: 10),
-                                    width: 154,
-                                    height: 35,
-                                    decoration: new BoxDecoration(
-                                        color: Color(0xffe8e8e8),
-                                        borderRadius: BorderRadius.circular(6)),
-                                    child: FlatButton(
-                                      onPressed: () {
-                                        _hasChronicDisease = true;
-                                      },
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: <Widget>[
-                                          Text("Sim",
-                                              style: TextStyle(
-                                                fontFamily: 'Montserrat',
-                                                color: Colors.black38,
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.w500,
-                                                fontStyle: FontStyle.normal,
-                                                letterSpacing: -0.154,
-                                              )),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.only(top: 10),
-                                    width: 154,
-                                    height: 35,
-                                    decoration: new BoxDecoration(
-                                        color: Color(0xffe8e8e8),
-                                        borderRadius: BorderRadius.circular(6)),
-                                    child: FlatButton(
-                                      onPressed: () {
-                                        _hasChronicDisease = false;
-                                      },
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: <Widget>[
-                                          Text("Não",
-                                              style: TextStyle(
-                                                fontFamily: 'Montserrat',
-                                                color: Colors.black38,
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.w500,
-                                                fontStyle: FontStyle.normal,
-                                                letterSpacing: -0.154,
-                                              )),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
+                                  AnimatedContainer(
+                                      duration: Duration(milliseconds: 200),
+                                      width: MediaQuery.of(context).size.width / 2.5,
+                                      height: MediaQuery.of(context).size.height / 17,
+                                      decoration: new BoxDecoration(
+                                          color:
+                                          handleQuestions.questions[0] == 1
+                                              ? active
+                                              : inactive,
+                                          borderRadius: BorderRadius.circular(6)),
+                                      child: FlatButton(
+                                        onPressed: () {
+                                          setState(() {
+                                            handleQuestions.questions[0] == 1 ? yesNo = 0 : yesNo = 1;
+                                          });
+//                          answer(yesNo);
+                                          handleQuestions.setQuestions(0, yesNo);
+                                          print(handleQuestions.questions);
+                                        },
+                                        child: Row(
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: <Widget>[
+                                            Text("Sim",
+                                                style: TextStyle(
+                                                  fontFamily: 'Montserrat',
+                                                  color: handleQuestions
+                                                      .questions[0] ==
+                                                      1
+                                                      ? Colors.white
+                                                      : Colors.black54,
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w500,
+                                                  fontStyle: FontStyle.normal,
+                                                  letterSpacing: -0.154,
+                                                )),
+                                          ],
+                                        ),
+                                      )),
+                                  AnimatedContainer(
+                                      duration: Duration(milliseconds: 200),
+                                      width: MediaQuery.of(context).size.width / 2.5,
+                                      height: MediaQuery.of(context).size.height / 17,
+                                      decoration: new BoxDecoration(
+                                          color:
+                                          handleQuestions.questions[0] == 2
+                                              ? active
+                                              : inactive,
+                                          borderRadius: BorderRadius.circular(6)),
+                                      child: FlatButton(
+                                        onPressed: () {
+                                          setState(() {
+                                            handleQuestions.questions[0] == 2 ? yesNo = 0 : yesNo = 2;
+                                          });
+//                          answer(yesNo);
+                                          handleQuestions.setQuestions(0, yesNo);
+                                          print(handleQuestions.questions);
+                                        },
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          children: <Widget>[
+                                            Text("Não",
+                                                style: TextStyle(
+                                                  fontFamily: 'Montserrat',
+                                                  color: handleQuestions
+                                                      .questions[0] ==
+                                                      2
+                                                      ? Colors.white
+                                                      : Colors.black54,
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w500,
+                                                  fontStyle: FontStyle.normal,
+                                                  letterSpacing: -0.154,
+                                                )),
+                                          ],
+                                        ),
+                                      )),
                                 ],
                               ),
-                            ],
-                          ),
+                            )
+                          ],
                         ),
+                        handleQuestions.questions[0] == 1 ? SymptomsQuestion(title: 'Qual(is)?', index:1, selected: selected) : Container(),
                         SizedBox(
                           height: 10,
                         ),
