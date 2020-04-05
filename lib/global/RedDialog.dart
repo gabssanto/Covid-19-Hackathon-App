@@ -1,3 +1,4 @@
+import 'package:covid19/pages/home/home_page.dart';
 import 'package:flutter/material.dart';
 
 class RedDialog extends StatelessWidget {
@@ -49,7 +50,10 @@ class RedDialog extends StatelessWidget {
                   borderRadius: BorderRadius.circular(14)),
               child: FlatButton(
                 onPressed: () {
-                  Navigator.pop(context);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => HomePage()));
                 },
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,

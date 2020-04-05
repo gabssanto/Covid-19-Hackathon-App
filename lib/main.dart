@@ -1,5 +1,6 @@
 import 'package:covid19/pages/initialPage/initialPage.dart';
 import 'package:covid19/pages/login/login_page.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -14,6 +15,12 @@ class App extends StatelessWidget {
     ]);
 
     return MaterialApp(
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate
+      ],
+      supportedLocales: [const Locale('pt', 'BR')],
+
       title: 'Rastreando Covid-19',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(

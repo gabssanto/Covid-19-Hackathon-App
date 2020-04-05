@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:covid19/pages/home/home_page.dart';
 
 class YellowDialog extends StatelessWidget {
   @override
@@ -51,7 +52,10 @@ class YellowDialog extends StatelessWidget {
                   borderRadius: BorderRadius.circular(14)),
               child: FlatButton(
                 onPressed: () {
-                  Navigator.pop(context);
+    Navigator.push(
+    context,
+    MaterialPageRoute(
+    builder: (context) => HomePage()));
                 },
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,

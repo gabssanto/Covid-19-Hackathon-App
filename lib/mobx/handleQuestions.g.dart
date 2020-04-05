@@ -26,31 +26,85 @@ mixin _$HandleQuestions on _HandleQuestionsBase, Store {
     }, _$heightAtom, name: '${_$heightAtom.name}_set');
   }
 
-  final _$question1Atom = Atom(name: '_HandleQuestionsBase.question1');
+  final _$opacityAtom = Atom(name: '_HandleQuestionsBase.opacity');
 
   @override
-  bool get question1 {
-    _$question1Atom.context.enforceReadPolicy(_$question1Atom);
-    _$question1Atom.reportObserved();
-    return super.question1;
+  dynamic get opacity {
+    _$opacityAtom.context.enforceReadPolicy(_$opacityAtom);
+    _$opacityAtom.reportObserved();
+    return super.opacity;
   }
 
   @override
-  set question1(bool value) {
-    _$question1Atom.context.conditionallyRunInAction(() {
-      super.question1 = value;
-      _$question1Atom.reportChanged();
-    }, _$question1Atom, name: '${_$question1Atom.name}_set');
+  set opacity(dynamic value) {
+    _$opacityAtom.context.conditionallyRunInAction(() {
+      super.opacity = value;
+      _$opacityAtom.reportChanged();
+    }, _$opacityAtom, name: '${_$opacityAtom.name}_set');
+  }
+
+  final _$yesNoAtom = Atom(name: '_HandleQuestionsBase.yesNo');
+
+  @override
+  List<dynamic> get yesNo {
+    _$yesNoAtom.context.enforceReadPolicy(_$yesNoAtom);
+    _$yesNoAtom.reportObserved();
+    return super.yesNo;
+  }
+
+  @override
+  set yesNo(List<dynamic> value) {
+    _$yesNoAtom.context.conditionallyRunInAction(() {
+      super.yesNo = value;
+      _$yesNoAtom.reportChanged();
+    }, _$yesNoAtom, name: '${_$yesNoAtom.name}_set');
+  }
+
+  final _$questionsAtom = Atom(name: '_HandleQuestionsBase.questions');
+
+  @override
+  List<dynamic> get questions {
+    _$questionsAtom.context.enforceReadPolicy(_$questionsAtom);
+    _$questionsAtom.reportObserved();
+    return super.questions;
+  }
+
+  @override
+  set questions(List<dynamic> value) {
+    _$questionsAtom.context.conditionallyRunInAction(() {
+      super.questions = value;
+      _$questionsAtom.reportChanged();
+    }, _$questionsAtom, name: '${_$questionsAtom.name}_set');
   }
 
   final _$_HandleQuestionsBaseActionController =
       ActionController(name: '_HandleQuestionsBase');
 
   @override
-  void setHeight(dynamic height) {
+  void setQuestions(dynamic index, dynamic value) {
     final _$actionInfo = _$_HandleQuestionsBaseActionController.startAction();
     try {
-      return super.setHeight(height);
+      return super.setQuestions(index, value);
+    } finally {
+      _$_HandleQuestionsBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setLastQuestion(dynamic index, dynamic value, dynamic limit) {
+    final _$actionInfo = _$_HandleQuestionsBaseActionController.startAction();
+    try {
+      return super.setLastQuestion(index, value, limit);
+    } finally {
+      _$_HandleQuestionsBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void clearQuestions() {
+    final _$actionInfo = _$_HandleQuestionsBaseActionController.startAction();
+    try {
+      return super.clearQuestions();
     } finally {
       _$_HandleQuestionsBaseActionController.endAction(_$actionInfo);
     }
@@ -59,7 +113,7 @@ mixin _$HandleQuestions on _HandleQuestionsBase, Store {
   @override
   String toString() {
     final string =
-        'height: ${height.toString()},question1: ${question1.toString()}';
+        'height: ${height.toString()},opacity: ${opacity.toString()},yesNo: ${yesNo.toString()},questions: ${questions.toString()}';
     return '{$string}';
   }
 }
