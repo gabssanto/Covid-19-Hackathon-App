@@ -46,7 +46,7 @@ class InitialPage extends StatelessWidget {
                 ),
                 color: Color(0xff27b3ff),
                 child: Text(
-                  'Entrar',
+                  'Login',
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -80,7 +80,7 @@ class InitialPage extends StatelessWidget {
                 ),
                 color: Color(0xff27b3ff),
                 child: Text(
-                  'Cadastre-se',
+                  'Cadastrar',
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
