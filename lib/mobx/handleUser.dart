@@ -44,7 +44,7 @@ abstract class _HandleUserBase with Store {
 
   @action
   void setForm(name, email, cpf, phone, age, gender, cep, password,
-      numberOfpeople, chronicDisease, termsChecked) {
+      numberOfPeople, chronicDisease, termsChecked) {
     this.name = name;
     this.email = email;
     this.cpf = cpf;
