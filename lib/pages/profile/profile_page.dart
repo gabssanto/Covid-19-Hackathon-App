@@ -2,6 +2,8 @@ import 'package:covid19/global/backAppBar.dart';
 import 'package:covid19/global/userInfo.dart';
 import 'package:flutter/material.dart';
 
+import 'editProfilePage.dart';
+
 class ProfilePage extends StatefulWidget {
   @override
   _ProfilePageState createState() => _ProfilePageState();
@@ -81,7 +83,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             Container(
                               margin: EdgeInsets.only(top: 10, left: 10),
                               child: Text(
-                                globalUser.name,
+                                'globalUser.name',
                                 style: TextStyle(
                                   fontFamily: 'Montserrat',
                                   color: Colors.black54,
@@ -113,7 +115,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             Container(
                               margin: EdgeInsets.only(top: 10, left: 10),
                               child: Text(
-                                globalUser.cpf,
+                                'globalUser.cpf',
                                 style: TextStyle(
                                   fontFamily: 'Montserrat',
                                   color: Colors.black54,
@@ -145,7 +147,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             Container(
                               margin: EdgeInsets.only(top: 10, left: 10),
                               child: Text(
-                                globalUser.telephone,
+                                'globalUser.telephone',
                                 style: TextStyle(
                                   fontFamily: 'Montserrat',
                                   color: Colors.black54,
@@ -177,7 +179,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             Container(
                               margin: EdgeInsets.only(top: 10, left: 10),
                               child: Text(
-                                globalUser.age,
+                                'globalUser.age',
                                 style: TextStyle(
                                   fontFamily: 'Montserrat',
                                   color: Colors.black54,
@@ -227,7 +229,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             Container(
                               margin: EdgeInsets.only(top: 10),
                               child: Text(
-                                "${globalUser.residents} pessoas moram comigo",
+                                "${'globalUser.residents'} pessoas moram comigo",
                                 style: TextStyle(
                                   fontFamily: 'Montserrat',
                                   color: Colors.black54,
@@ -291,7 +293,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             Container(
                               margin: EdgeInsets.only(top: 10, left: 10),
                               child: Text(
-                                globalUser.neighborhood,
+                                'globalUser.neighborhood',
                                 style: TextStyle(
                                   fontFamily: 'Montserrat',
                                   color: Colors.black54,
@@ -316,7 +318,9 @@ class _ProfilePageState extends State<ProfilePage> {
                             borderRadius: BorderRadius.circular(13),
                           ),
                           child: FlatButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => EditProfilePage()));
+                            },
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.center,

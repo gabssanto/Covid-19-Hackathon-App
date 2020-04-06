@@ -637,7 +637,7 @@ class _SignupPage extends State<SignUpPage> {
                         ),
                         Container(margin: EdgeInsets.only(top: 30)),
                         BtnSignup(
-                          text: "Próximo",
+                          text: "Finalizar Cadastro",
                           onPressed: () {
                             FocusScope.of(context).unfocus();
                             this._validateInputs();
