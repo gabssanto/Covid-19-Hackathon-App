@@ -22,35 +22,39 @@ abstract class _HandleUserBase with Store {
   String phone;
 
   @observable
-  String age;
+  int age;
 
   @observable
-  String city;
+  String gender;
 
   @observable
-  String street;
-
-  @observable
-  String numberOfPeople;
+  String cep;
 
   @observable
   String password;
 
+  @observable
+  int numberOfPeople;
+
+  @observable
+  bool chronicDisease;
+
+  @observable
+  bool termsChecked;
+
   @action
-  void setForm1(name, email, cpf, phone, age) {
+  void setForm(name, email, cpf, phone, age, gender, cep, password,
+      numberOfPeople, chronicDisease, termsChecked) {
     this.name = name;
     this.email = email;
     this.cpf = cpf;
     this.phone = phone;
     this.age = age;
-  }
-
-  @action
-  void setForm2(city, street, numberOfpeople, password) {
-    this.city = city;
-    this.street = street;
+    this.cep = cep;
+    this.gender = gender;
     this.numberOfPeople = numberOfPeople;
+    this.chronicDisease = chronicDisease;
     this.password = password;
+    this.termsChecked = termsChecked;
   }
-
 }
