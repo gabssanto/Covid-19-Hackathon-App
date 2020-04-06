@@ -46,6 +46,7 @@ class _SignupPage extends State<SignUpPage> {
     handleQuestions.opacity = false;
     handleQuestions.clearQuestions();
     handleQuestions.questions.add(0);
+    handleQuestions.questions.add([0, 0, 0, 0, 0]);
     print(handleQuestions.questions);
     super.initState();
   }
@@ -348,8 +349,8 @@ class _SignupPage extends State<SignUpPage> {
                             child: TextFormField(
                               keyboardType: TextInputType.text,
                               decoration: new InputDecoration(
-                                hintText: 'Digite seu cep',
-                                labelText: 'Cep',
+                                hintText: 'Digite seu CEP',
+                                labelText: 'CEP',
                                 focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                         color: Color(0xff27b3ff), width: 1.0),
@@ -367,7 +368,7 @@ class _SignupPage extends State<SignUpPage> {
                                 RegExp pattern = new RegExp(r'^\d{5}-?\d{3}$');
                                 return pattern.hasMatch(cep.trim())
                                     ? null
-                                    : 'Cep inválido';
+                                    : 'CEP inválido';
                               },
                               onSaved: (String val) {
                                 _cep = val.trim();
@@ -540,7 +541,6 @@ class _SignupPage extends State<SignUpPage> {
                                           setState(() {
                                             handleQuestions.questions[0] == 1 ? yesNo = 0 : yesNo = 1;
                                           });
-//                          answer(yesNo);
                                           handleQuestions.setQuestions(0, yesNo);
                                           print(handleQuestions.questions);
                                         },
@@ -579,8 +579,9 @@ class _SignupPage extends State<SignUpPage> {
                                           setState(() {
                                             handleQuestions.questions[0] == 2 ? yesNo = 0 : yesNo = 2;
                                           });
-//                          answer(yesNo);
-                                          handleQuestions.setQuestions(0, yesNo);
+                                          handleQuestions.setQuestions(0, yes
+                                          selected = [0,0,0,0,0];
+                                          handleQuestions.setQuestions(1,selected);
                                           print(handleQuestions.questions);
                                         },
                                         child: Row(
