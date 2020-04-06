@@ -27,9 +27,8 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       resizeToAvoidBottomPadding: false,
-      appBar: LoginAppBar(
+      appBar: BackAppBar(
         title: 'Login',
-        canGoBack: true,
       ),
       body: Builder(
         builder: (BuildContext context) {

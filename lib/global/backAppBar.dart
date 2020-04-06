@@ -18,37 +18,36 @@ class BackAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Container(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.only(left: 10),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  IconButton(
-                      icon: Icon(Icons.arrow_back),
-                      iconSize: 30,
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      color: Color(0xff27b3ff)),
-                  Container(
-                    margin: EdgeInsets.only(left: 10),
-                    child: Text('$title',
-                        style: TextStyle(
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xff27b3ff))),
-                  )
-                ],
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              IconButton(
+                  icon: Icon(Icons.arrow_back_ios),
+                  iconSize: 30,
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  color: Color(0xff27b3ff)),
+              Container(
+                child: Text('$title',
+                    style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xff27b3ff))),
               ),
-            ),
-          ],
-        ),
+              IconButton(
+                  icon: Icon(Icons.arrow_back_ios),
+                  iconSize: 30,
+                  disabledColor: Color(0x00ffffff),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

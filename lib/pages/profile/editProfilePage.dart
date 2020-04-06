@@ -1,35 +1,42 @@
-import 'package:covid19/global/appSnackBar.dart';
 import 'package:covid19/global/backAppBar.dart';
-import 'package:covid19/global/loginAppBar.dart';
 import 'package:covid19/mobx/imports.dart';
-import 'package:covid19/pages/signup/widgets/BtnSignup.dart';
-import 'package:covid19/pages/signup/widgets/symptomsQuestion.dart';
+import 'package:covid19/pages/profile/symptomsQuestion.dart';
 import 'package:flutter/material.dart';
 
-import '../../mobx/imports.dart';
-
-class SignUpPage extends StatefulWidget {
-  SignUpPage({Key key}) : super(key: key);
-
+class EditProfilePage extends StatefulWidget {
   @override
-  _SignupPage createState() => _SignupPage();
+  _EditProfilePageState createState() => _EditProfilePageState();
 }
 
-class _SignupPage extends State<SignUpPage> {
-  final GlobalKey<FormState> _signupForm = GlobalKey<FormState>();
+class _EditProfilePageState extends State<EditProfilePage> {
+  final GlobalKey<FormState> _EditForm = GlobalKey<FormState>();
+
   final passKey = GlobalKey<FormFieldState>();
+
   bool _autoValidate = false;
+
   bool _obscureText = true;
+
   String _name;
+
   String _email;
+
   String _cpf;
+
   String _phone;
+
   int _age;
+
   String _gender;
+
   String _cep;
+
   int _numberOfPeople;
+
   String _password;
+
   bool _hasChronicDisease;
+
   bool _termsChecked = false;
 
   List selected = [0, 0, 0, 0, 0];
@@ -40,7 +47,6 @@ class _SignupPage extends State<SignUpPage> {
 
   final inactive = Color(0xffe8e8e8);
 
-
   @override
   void initState() {
     handleQuestions.opacity = false;
@@ -49,7 +55,6 @@ class _SignupPage extends State<SignUpPage> {
     print(handleQuestions.questions);
     super.initState();
   }
-
 
   @override
   void dispose() {
@@ -67,18 +72,18 @@ class _SignupPage extends State<SignUpPage> {
       resizeToAvoidBottomInset: false,
       resizeToAvoidBottomPadding: false,
       appBar: BackAppBar(
-        title: 'Cadastre-se',
+        title: 'Editar Perfil',
       ),
       body: Builder(builder: (BuildContext context) {
         return Form(
-            key: _signupForm,
+            key: _EditForm,
             autovalidate: _autoValidate,
             child: ListView(children: <Widget>[
               Container(
                   alignment: Alignment.center,
-                  margin: EdgeInsets.only(left: 30),
+                  margin: EdgeInsets.only(top: 10),
                   child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         Text('Informações Básicas',
                             style: TextStyle(
@@ -180,37 +185,37 @@ class _SignupPage extends State<SignUpPage> {
                                     r'^\d{3}\.?\d{3}\.?\d{3}\-?\d{2}$');
                                 return pattern.hasMatch(cpf.trim())
                                     ? (() {
-                                        cpf = cpf.trim().replaceAll(
-                                            new RegExp(r'[-\.]'), '');
-                                        int soma = 0;
-                                        var digito1;
-                                        var digito2;
-                                        var j = 10;
-                                        for (int i = 0; i < 9; i++) {
-                                          soma += int.parse(cpf[i]) * j;
-                                          j--;
-                                        }
-                                        soma %= 11;
-                                        soma < 2
-                                            ? digito1 = 0
-                                            : digito1 = 11 - soma;
-                                        if (digito1 == int.parse(cpf[9])) {
-                                          soma = 0;
-                                          j = 11;
-                                          for (int i = 0; i < 10; i++) {
-                                            soma += int.parse(cpf[i]) * j;
-                                            j--;
-                                          }
-                                          soma %= 11;
-                                          soma < 2
-                                              ? digito2 = 0
-                                              : digito2 = 11 - soma;
-                                        }
-                                        return digito1 == int.parse(cpf[9]) &&
-                                                digito2 == int.parse(cpf[10])
-                                            ? null
-                                            : 'CPF inválido';
-                                      })()
+                                  cpf = cpf.trim().replaceAll(
+                                      new RegExp(r'[-\.]'), '');
+                                  int soma = 0;
+                                  var digito1;
+                                  var digito2;
+                                  var j = 10;
+                                  for (int i = 0; i < 9; i++) {
+                                    soma += int.parse(cpf[i]) * j;
+                                    j--;
+                                  }
+                                  soma %= 11;
+                                  soma < 2
+                                      ? digito1 = 0
+                                      : digito1 = 11 - soma;
+                                  if (digito1 == int.parse(cpf[9])) {
+                                    soma = 0;
+                                    j = 11;
+                                    for (int i = 0; i < 10; i++) {
+                                      soma += int.parse(cpf[i]) * j;
+                                      j--;
+                                    }
+                                    soma %= 11;
+                                    soma < 2
+                                        ? digito2 = 0
+                                        : digito2 = 11 - soma;
+                                  }
+                                  return digito1 == int.parse(cpf[9]) &&
+                                      digito2 == int.parse(cpf[10])
+                                      ? null
+                                      : 'CPF inválido';
+                                })()
                                     : 'CPF inválido';
                               },
                               onSaved: (String val) {
@@ -276,8 +281,8 @@ class _SignupPage extends State<SignUpPage> {
                                 RegExp pattern = new RegExp(r'^\d{1,3}$');
                                 return pattern.hasMatch(idade.trim())
                                     ? (() => int.parse(idade.trim()) > 130
-                                        ? 'Idade inválida'
-                                        : null)()
+                                    ? 'Idade inválida'
+                                    : null)()
                                     : 'Idade inválida';
                               },
                               onSaved: (String val) {
@@ -311,9 +316,9 @@ class _SignupPage extends State<SignUpPage> {
                             ),
                             items: ['Masculino', 'Feminino', 'Outro']
                                 .map((String gender) => DropdownMenuItem(
-                                      child: Text(gender),
-                                      value: gender,
-                                    ))
+                              child: Text(gender),
+                              value: gender,
+                            ))
                                 .toList(),
                             onSaved: (gender) {
                               setState(() {
@@ -493,8 +498,8 @@ class _SignupPage extends State<SignUpPage> {
                                 RegExp pattern = new RegExp(r'^\d{1,2}$');
                                 return pattern.hasMatch(quantidade.trim())
                                     ? (() => int.parse(quantidade.trim()) > 50
-                                        ? 'Quantidade inválida'
-                                        : null)()
+                                    ? 'Quantidade inválida'
+                                    : null)()
                                     : 'Quantidade inválida';
                               },
                               onSaved: (String val) {
@@ -612,40 +617,72 @@ class _SignupPage extends State<SignUpPage> {
                         SizedBox(
                           height: 10,
                         ),
-                        Text('Termos e condições',
-                            style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                color: Color(0xff27b3ff))),
-                        CheckboxListTile(
-                          activeColor: Theme.of(context).accentColor,
-                          title: Text(
-                              'Eu li e concordo com os termos de serviço e uso'),
-                          value: _termsChecked,
-                          onChanged: (bool value) =>
-                              setState(() => _termsChecked = value),
-                          subtitle: !_termsChecked
-                              ? Padding(
-                                  padding: EdgeInsets.only(left: 12.0),
-                                  child: Text(
-                                    'Campo necessário',
-                                    style: TextStyle(
-                                        color: Color(0xFFe53935), fontSize: 12),
-                                  ),
-                                )
-                              : null,
+
+                        Padding(
+                          padding: EdgeInsets.only(
+                              top: 10, bottom: MediaQuery.of(context).viewInsets.bottom),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: <Widget>[
+                              SizedBox(
+                                  width: MediaQuery.of(context).size.width / 1.2,
+                                  height: MediaQuery.of(context).size.height / 15,
+                                  child: Container(
+                                    child: RaisedButton(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: new BorderRadius.circular(12.0),
+                                      ),
+                                      color: Color(0xff27b3ff),
+                                      child: Text('Salvar',
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white)),
+                                      onPressed: () {
+                                        FocusScope.of(context).unfocus();
+                                        this._validateInputs();
+                                      },
+                                    ),
+                                  ))
+                            ],
+                          ),
                         ),
-                        Container(margin: EdgeInsets.only(top: 30)),
-                        BtnSignup(
-                          text: "Finalizar Cadastro",
-                          onPressed: () {
-                            FocusScope.of(context).unfocus();
-                            this._validateInputs();
-                          },
-                        ),
-                        Container(
-                          alignment: Alignment.topCenter,
-                          padding: EdgeInsets.only(top: 10),
+                        Padding(
+                          padding: EdgeInsets.only(
+                              top: 10, bottom: 30),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: <Widget>[
+                              SizedBox(
+                                  width: MediaQuery.of(context).size.width / 1.2,
+                                  height: MediaQuery.of(context).size.height / 15,
+                                  child: Container(
+                                    decoration: new BoxDecoration(
+                                      color: Colors.white,
+                                      border: Border.all(
+                                        color: Color(0xff27b3ff),
+                                      ),
+                                      borderRadius: BorderRadius.circular(13),
+                                    ),
+                                    child: RaisedButton(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: new BorderRadius.circular(12.0),
+                                      ),
+                                      color: Colors.white,
+                                      child: Text('Sair da conta',
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                              color: Color(0xff27b3ff))),
+                                      onPressed: () {
+
+                                      },
+                                    ),
+                                  ))
+                            ],
+                          ),
                         ),
                       ])),
             ]));
@@ -654,8 +691,8 @@ class _SignupPage extends State<SignUpPage> {
   }
 
   void _validateInputs() {
-    if (_signupForm.currentState.validate() && _termsChecked) {
-      _signupForm.currentState.save();
+    if (_EditForm.currentState.validate() && _termsChecked) {
+      _EditForm.currentState.save();
 
       handleUser.setForm(_name, _email, _cpf, _phone, _age, _gender, _cep,
           _password, _numberOfPeople, _hasChronicDisease, _termsChecked);
