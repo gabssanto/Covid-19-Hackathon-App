@@ -1,47 +1,58 @@
-import 'package:covid19/global/appSnackBar.dart';
 import 'package:covid19/global/backAppBar.dart';
-import 'package:covid19/mobx/handleHttpConnections.dart';
 import 'package:covid19/mobx/imports.dart';
-import 'package:covid19/pages/home/home_page.dart';
-import 'package:covid19/pages/signup/constants.dart';
-import 'package:covid19/pages/signup/widgets/BtnSignup.dart';
-import 'package:covid19/pages/signup/widgets/chronicDiseasesQuestion.dart';
+import 'package:covid19/pages/profile/symptomsQuestion.dart';
 import 'package:flutter/material.dart';
 
-import '../../mobx/imports.dart';
-
-class SignUpPage extends StatefulWidget {
-  SignUpPage({Key key}) : super(key: key);
-
+class EditProfilePage extends StatefulWidget {
   @override
-  _SignupPage createState() => _SignupPage();
+  _EditProfilePageState createState() => _EditProfilePageState();
 }
 
-class _SignupPage extends State<SignUpPage> {
-  final GlobalKey<FormState> _signupForm = GlobalKey<FormState>();
+class _EditProfilePageState extends State<EditProfilePage> {
+  final GlobalKey<FormState> _EditForm = GlobalKey<FormState>();
+
   final passKey = GlobalKey<FormFieldState>();
+
   bool _autoValidate = false;
+
   bool _obscureText = true;
+
   String _name;
+
   String _email;
+
   String _cpf;
+
   String _phone;
+
   int _age;
+
   String _gender;
+
   String _cep;
+
   int _numberOfPeople;
+
   String _password;
+
+  bool _hasChronicDisease;
+
   bool _termsChecked = false;
 
-  List _selectedChronicDiseases = [0, 0, 0, 0, 0];
-  int _yesNo = 0;
+  List selected = [0, 0, 0, 0, 0];
+
+  int yesNo = 0;
+
+  final active = Color(0xff27b3ff);
+
+  final inactive = Color(0xffe8e8e8);
 
   @override
   void initState() {
     handleQuestions.opacity = false;
     handleQuestions.clearQuestions();
     handleQuestions.questions.add(0);
-    handleQuestions.questions.add([0, 0, 0, 0, 0]);
+    print(handleQuestions.questions);
     super.initState();
   }
 
@@ -61,18 +72,18 @@ class _SignupPage extends State<SignUpPage> {
       resizeToAvoidBottomInset: false,
       resizeToAvoidBottomPadding: false,
       appBar: BackAppBar(
-        title: 'Cadastre-se',
+        title: 'Editar Perfil',
       ),
       body: Builder(builder: (BuildContext context) {
         return Form(
-            key: _signupForm,
+            key: _EditForm,
             autovalidate: _autoValidate,
             child: ListView(children: <Widget>[
               Container(
                   alignment: Alignment.center,
-                  margin: EdgeInsets.only(left: 30),
+                  margin: EdgeInsets.only(top: 10),
                   child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         Text('Informações Básicas',
                             style: TextStyle(
@@ -174,37 +185,37 @@ class _SignupPage extends State<SignUpPage> {
                                     r'^\d{3}\.?\d{3}\.?\d{3}\-?\d{2}$');
                                 return pattern.hasMatch(cpf.trim())
                                     ? (() {
-                                        cpf = cpf.trim().replaceAll(
-                                            new RegExp(r'[-\.]'), '');
-                                        int soma = 0;
-                                        var digito1;
-                                        var digito2;
-                                        var j = 10;
-                                        for (int i = 0; i < 9; i++) {
-                                          soma += int.parse(cpf[i]) * j;
-                                          j--;
-                                        }
-                                        soma %= 11;
-                                        soma < 2
-                                            ? digito1 = 0
-                                            : digito1 = 11 - soma;
-                                        if (digito1 == int.parse(cpf[9])) {
-                                          soma = 0;
-                                          j = 11;
-                                          for (int i = 0; i < 10; i++) {
-                                            soma += int.parse(cpf[i]) * j;
-                                            j--;
-                                          }
-                                          soma %= 11;
-                                          soma < 2
-                                              ? digito2 = 0
-                                              : digito2 = 11 - soma;
-                                        }
-                                        return digito1 == int.parse(cpf[9]) &&
-                                                digito2 == int.parse(cpf[10])
-                                            ? null
-                                            : 'CPF inválido';
-                                      })()
+                                  cpf = cpf.trim().replaceAll(
+                                      new RegExp(r'[-\.]'), '');
+                                  int soma = 0;
+                                  var digito1;
+                                  var digito2;
+                                  var j = 10;
+                                  for (int i = 0; i < 9; i++) {
+                                    soma += int.parse(cpf[i]) * j;
+                                    j--;
+                                  }
+                                  soma %= 11;
+                                  soma < 2
+                                      ? digito1 = 0
+                                      : digito1 = 11 - soma;
+                                  if (digito1 == int.parse(cpf[9])) {
+                                    soma = 0;
+                                    j = 11;
+                                    for (int i = 0; i < 10; i++) {
+                                      soma += int.parse(cpf[i]) * j;
+                                      j--;
+                                    }
+                                    soma %= 11;
+                                    soma < 2
+                                        ? digito2 = 0
+                                        : digito2 = 11 - soma;
+                                  }
+                                  return digito1 == int.parse(cpf[9]) &&
+                                      digito2 == int.parse(cpf[10])
+                                      ? null
+                                      : 'CPF inválido';
+                                })()
                                     : 'CPF inválido';
                               },
                               onSaved: (String val) {
@@ -270,8 +281,8 @@ class _SignupPage extends State<SignUpPage> {
                                 RegExp pattern = new RegExp(r'^\d{1,3}$');
                                 return pattern.hasMatch(idade.trim())
                                     ? (() => int.parse(idade.trim()) > 130
-                                        ? 'Idade inválida'
-                                        : null)()
+                                    ? 'Idade inválida'
+                                    : null)()
                                     : 'Idade inválida';
                               },
                               onSaved: (String val) {
@@ -305,9 +316,9 @@ class _SignupPage extends State<SignUpPage> {
                             ),
                             items: ['Masculino', 'Feminino', 'Outro']
                                 .map((String gender) => DropdownMenuItem(
-                                      child: Text(gender),
-                                      value: gender,
-                                    ))
+                              child: Text(gender),
+                              value: gender,
+                            ))
                                 .toList(),
                             onSaved: (gender) {
                               setState(() {
@@ -342,8 +353,8 @@ class _SignupPage extends State<SignUpPage> {
                             child: TextFormField(
                               keyboardType: TextInputType.text,
                               decoration: new InputDecoration(
-                                hintText: 'Digite seu CEP',
-                                labelText: 'CEP',
+                                hintText: 'Digite seu cep',
+                                labelText: 'Cep',
                                 focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                         color: Color(0xff27b3ff), width: 1.0),
@@ -361,7 +372,7 @@ class _SignupPage extends State<SignUpPage> {
                                 RegExp pattern = new RegExp(r'^\d{5}-?\d{3}$');
                                 return pattern.hasMatch(cep.trim())
                                     ? null
-                                    : 'CEP inválido';
+                                    : 'Cep inválido';
                               },
                               onSaved: (String val) {
                                 _cep = val.trim();
@@ -487,8 +498,8 @@ class _SignupPage extends State<SignUpPage> {
                                 RegExp pattern = new RegExp(r'^\d{1,2}$');
                                 return pattern.hasMatch(quantidade.trim())
                                     ? (() => int.parse(quantidade.trim()) > 50
-                                        ? 'Quantidade inválida'
-                                        : null)()
+                                    ? 'Quantidade inválida'
+                                    : null)()
                                     : 'Quantidade inválida';
                               },
                               onSaved: (String val) {
@@ -517,47 +528,37 @@ class _SignupPage extends State<SignUpPage> {
                               margin: EdgeInsets.only(top: 15),
                               width: MediaQuery.of(context).size.width / 1.18,
                               child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
                                   AnimatedContainer(
                                       duration: Duration(milliseconds: 200),
-                                      width: MediaQuery.of(context).size.width /
-                                          2.5,
-                                      height:
-                                          MediaQuery.of(context).size.height /
-                                              17,
+                                      width: MediaQuery.of(context).size.width / 2.5,
+                                      height: MediaQuery.of(context).size.height / 17,
                                       decoration: new BoxDecoration(
                                           color:
-                                              handleQuestions.questions[0] == 1
-                                                  ? ConstantsSignupPage
-                                                      .activeButtonColor
-                                                  : ConstantsSignupPage
-                                                      .inactiveButtonColor,
-                                          borderRadius:
-                                              BorderRadius.circular(6)),
+                                          handleQuestions.questions[0] == 1
+                                              ? active
+                                              : inactive,
+                                          borderRadius: BorderRadius.circular(6)),
                                       child: FlatButton(
                                         onPressed: () {
                                           setState(() {
-                                            handleQuestions.questions[0] == 1
-                                                ? _yesNo = 0
-                                                : _yesNo = 1;
+                                            handleQuestions.questions[0] == 1 ? yesNo = 0 : yesNo = 1;
                                           });
-                                          handleQuestions.setQuestions(
-                                              0, _yesNo);
+//                          answer(yesNo);
+                                          handleQuestions.setQuestions(0, yesNo);
+                                          print(handleQuestions.questions);
                                         },
                                         child: Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          mainAxisAlignment: MainAxisAlignment.center,
                                           children: <Widget>[
                                             Text("Sim",
                                                 style: TextStyle(
                                                   fontFamily: 'Montserrat',
                                                   color: handleQuestions
-                                                              .questions[0] ==
-                                                          1
+                                                      .questions[0] ==
+                                                      1
                                                       ? Colors.white
                                                       : Colors.black54,
                                                   fontSize: 16,
@@ -570,51 +571,33 @@ class _SignupPage extends State<SignUpPage> {
                                       )),
                                   AnimatedContainer(
                                       duration: Duration(milliseconds: 200),
-                                      width: MediaQuery.of(context).size.width /
-                                          2.5,
-                                      height:
-                                          MediaQuery.of(context).size.height /
-                                              17,
+                                      width: MediaQuery.of(context).size.width / 2.5,
+                                      height: MediaQuery.of(context).size.height / 17,
                                       decoration: new BoxDecoration(
                                           color:
-                                              handleQuestions.questions[0] == 2
-                                                  ? ConstantsSignupPage
-                                                      .activeButtonColor
-                                                  : ConstantsSignupPage
-                                                      .inactiveButtonColor,
-                                          borderRadius:
-                                              BorderRadius.circular(6)),
+                                          handleQuestions.questions[0] == 2
+                                              ? active
+                                              : inactive,
+                                          borderRadius: BorderRadius.circular(6)),
                                       child: FlatButton(
                                         onPressed: () {
                                           setState(() {
-                                            handleQuestions.questions[0] == 2
-                                                ? _yesNo = 0
-                                                : _yesNo = 2;
+                                            handleQuestions.questions[0] == 2 ? yesNo = 0 : yesNo = 2;
                                           });
-                                          handleQuestions.setQuestions(
-                                              0, _yesNo);
-                                          _selectedChronicDiseases = [
-                                            0,
-                                            0,
-                                            0,
-                                            0,
-                                            0
-                                          ];
-                                          handleQuestions.setQuestions(
-                                              1, _selectedChronicDiseases);
+//                          answer(yesNo);
+                                          handleQuestions.setQuestions(0, yesNo);
+                                          print(handleQuestions.questions);
                                         },
                                         child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          crossAxisAlignment: CrossAxisAlignment.center,
                                           children: <Widget>[
                                             Text("Não",
                                                 style: TextStyle(
                                                   fontFamily: 'Montserrat',
                                                   color: handleQuestions
-                                                              .questions[0] ==
-                                                          2
+                                                      .questions[0] ==
+                                                      2
                                                       ? Colors.white
                                                       : Colors.black54,
                                                   fontSize: 16,
@@ -630,49 +613,76 @@ class _SignupPage extends State<SignUpPage> {
                             )
                           ],
                         ),
-                        handleQuestions.questions[0] == 1
-                            ? ChronicDiseasesQuestion(
-                                title: 'Qual(is)?',
-                                index: 1,
-                                selected: _selectedChronicDiseases)
-                            : SizedBox(),
+                        handleQuestions.questions[0] == 1 ? SymptomsQuestion(title: 'Qual(is)?', index:1, selected: selected) : Container(),
                         SizedBox(
                           height: 10,
                         ),
-                        Text('Termos e condições',
-                            style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                color: Color(0xff27b3ff))),
-                        CheckboxListTile(
-                          activeColor: Theme.of(context).accentColor,
-                          title: Text(
-                              'Eu li e concordo com os termos de serviço e uso'),
-                          value: _termsChecked,
-                          onChanged: (bool value) =>
-                              setState(() => _termsChecked = value),
-                          subtitle: !_termsChecked
-                              ? Padding(
-                                  padding: EdgeInsets.only(left: 12.0),
-                                  child: Text(
-                                    'Campo necessário',
-                                    style: TextStyle(
-                                        color: Color(0xFFe53935), fontSize: 12),
-                                  ),
-                                )
-                              : null,
+
+                        Padding(
+                          padding: EdgeInsets.only(
+                              top: 10, bottom: MediaQuery.of(context).viewInsets.bottom),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: <Widget>[
+                              SizedBox(
+                                  width: MediaQuery.of(context).size.width / 1.2,
+                                  height: MediaQuery.of(context).size.height / 15,
+                                  child: Container(
+                                    child: RaisedButton(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: new BorderRadius.circular(12.0),
+                                      ),
+                                      color: Color(0xff27b3ff),
+                                      child: Text('Salvar',
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white)),
+                                      onPressed: () {
+                                        FocusScope.of(context).unfocus();
+                                        this._validateInputs();
+                                      },
+                                    ),
+                                  ))
+                            ],
+                          ),
                         ),
-                        Container(margin: EdgeInsets.only(top: 30)),
-                        BtnSignup(
-                          text: "Finalizar Cadastro",
-                          onPressed: () {
-                            FocusScope.of(context).unfocus();
-                            _validateInputs(context);
-                          },
-                        ),
-                        Container(
-                          alignment: Alignment.topCenter,
-                          padding: EdgeInsets.only(top: 10),
+                        Padding(
+                          padding: EdgeInsets.only(
+                              top: 10, bottom: 30),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: <Widget>[
+                              SizedBox(
+                                  width: MediaQuery.of(context).size.width / 1.2,
+                                  height: MediaQuery.of(context).size.height / 15,
+                                  child: Container(
+                                    decoration: new BoxDecoration(
+                                      color: Colors.white,
+                                      border: Border.all(
+                                        color: Color(0xff27b3ff),
+                                      ),
+                                      borderRadius: BorderRadius.circular(13),
+                                    ),
+                                    child: RaisedButton(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: new BorderRadius.circular(12.0),
+                                      ),
+                                      color: Colors.white,
+                                      child: Text('Sair da conta',
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                              color: Color(0xff27b3ff))),
+                                      onPressed: () {
+
+                                      },
+                                    ),
+                                  ))
+                            ],
+                          ),
                         ),
                       ])),
             ]));
@@ -680,50 +690,20 @@ class _SignupPage extends State<SignUpPage> {
     );
   }
 
-  void _validateInputs(context) {
-    if (_signupForm.currentState.validate() && _termsChecked) {
-      _signupForm.currentState.save();
+  void _validateInputs() {
+    if (_EditForm.currentState.validate() && _termsChecked) {
+      _EditForm.currentState.save();
 
       handleUser.setForm(_name, _email, _cpf, _phone, _age, _gender, _cep,
-          _password, _numberOfPeople, _selectedChronicDiseases, _termsChecked);
+          _password, _numberOfPeople, _hasChronicDisease, _termsChecked);
 
-      _performSignup(context);
+      print(handleUser.toString());
+
+      FocusScope.of(context).unfocus();
     } else {
       setState(() {
         _autoValidate = true;
       });
-    }
-  }
-
-  _performSignup(context) async {
-    Scaffold.of(context).showSnackBar(
-      appSnackBar(
-        'Fazendo cadastro...',
-        isLoading: true,
-      ),
-    );
-    var signupSucceeded = await performUserSignUp();
-    Scaffold.of(context).hideCurrentSnackBar();
-    if (signupSucceeded) {
-      var loginSucceeded = await performUserLogin(
-        _cpf,
-        _password,
-      );
-      if (loginSucceeded) {
-        Navigator.of(context).pop();
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => HomePage(),
-          ),
-        );
-      }
-    } else {
-      Scaffold.of(context).showSnackBar(
-        appSnackBar(
-          'Erro interno no servidor',
-        ),
-      );
     }
   }
 }
