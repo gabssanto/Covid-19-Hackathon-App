@@ -36,8 +36,7 @@ abstract class _HandleUserBase with Store {
   @observable
   int numberOfPeople;
 
-  @observable
-  // Array com 5 possições que indicam quais sao as doenças cronicas que o usuario tem;
+  @observable   // Array com 5 possições que indicam quais sao as doenças cronicas que o usuario tem;
   List chronicDiseases;
 
   @observable

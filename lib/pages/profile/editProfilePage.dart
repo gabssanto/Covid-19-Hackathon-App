@@ -1,4 +1,7 @@
+import 'package:covid19/global/appSnackBar.dart';
 import 'package:covid19/global/backAppBar.dart';
+import 'package:covid19/global/userInfo.dart';
+import 'package:covid19/mobx/handleHttpConnections.dart';
 import 'package:covid19/mobx/imports.dart';
 import 'package:covid19/pages/profile/symptomsQuestion.dart';
 import 'package:flutter/material.dart';
@@ -35,11 +38,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
   String _password;
 
-  bool _hasChronicDisease;
+  List _selectedChronicDiseases = [0, 0, 0, 0, 0];
 
   bool _termsChecked = false;
 
-  List selected = [0, 0, 0, 0, 0];
+  //List selected = [0, 0, 0, 0, 0];
 
   int yesNo = 0;
 
@@ -98,8 +101,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                               obscureText: false,
                               keyboardType: TextInputType.text,
                               decoration: new InputDecoration(
-                                hintText: "Digite seu nome",
-                                labelText: "Nome",
+                                hintText: globalUser.name != null ? globalUser.name : "Digite seu nome",
+                                labelText: 'Nome',
                                 focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                         color: Color(0xff27b3ff), width: 1.0),
@@ -132,7 +135,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                               obscureText: false,
                               keyboardType: TextInputType.text,
                               decoration: new InputDecoration(
-                                hintText: "Digite seu e-mail",
+                                hintText: globalUser.email != null ? globalUser.email : "Digite seu e-mail",
                                 labelText: "Email",
                                 focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
@@ -163,73 +166,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             width: MediaQuery.of(context).size.width / 1.2,
                             height: MediaQuery.of(context).size.height / 15,
                             child: TextFormField(
-                              keyboardType: TextInputType.text,
-                              decoration: new InputDecoration(
-                                hintText: "Digite seu CPF",
-                                labelText: "CPF",
-                                focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Color(0xff27b3ff), width: 1.0),
-                                    borderRadius: BorderRadius.circular(12)),
-                                enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors.grey, width: 1.0),
-                                    borderRadius: BorderRadius.circular(12)),
-                                prefixIcon: Padding(
-                                  padding: EdgeInsets.only(top: 0),
-                                  child: Icon(Icons.person),
-                                ),
-                              ),
-                              validator: (String cpf) {
-                                RegExp pattern = new RegExp(
-                                    r'^\d{3}\.?\d{3}\.?\d{3}\-?\d{2}$');
-                                return pattern.hasMatch(cpf.trim())
-                                    ? (() {
-                                  cpf = cpf.trim().replaceAll(
-                                      new RegExp(r'[-\.]'), '');
-                                  int soma = 0;
-                                  var digito1;
-                                  var digito2;
-                                  var j = 10;
-                                  for (int i = 0; i < 9; i++) {
-                                    soma += int.parse(cpf[i]) * j;
-                                    j--;
-                                  }
-                                  soma %= 11;
-                                  soma < 2
-                                      ? digito1 = 0
-                                      : digito1 = 11 - soma;
-                                  if (digito1 == int.parse(cpf[9])) {
-                                    soma = 0;
-                                    j = 11;
-                                    for (int i = 0; i < 10; i++) {
-                                      soma += int.parse(cpf[i]) * j;
-                                      j--;
-                                    }
-                                    soma %= 11;
-                                    soma < 2
-                                        ? digito2 = 0
-                                        : digito2 = 11 - soma;
-                                  }
-                                  return digito1 == int.parse(cpf[9]) &&
-                                      digito2 == int.parse(cpf[10])
-                                      ? null
-                                      : 'CPF inválido';
-                                })()
-                                    : 'CPF inválido';
-                              },
-                              onSaved: (String val) {
-                                _cpf = val.trim();
-                              },
-                            )),
-                        Container(
-                            margin: EdgeInsets.only(top: 15),
-                            width: MediaQuery.of(context).size.width / 1.2,
-                            height: MediaQuery.of(context).size.height / 15,
-                            child: TextFormField(
                               keyboardType: TextInputType.phone,
                               decoration: new InputDecoration(
-                                hintText: "Digite seu telefone",
+                                hintText: globalUser.telephone != null ? globalUser.telephone : "Digite seu telefone",
                                 labelText: "Telefone",
                                 focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
@@ -262,7 +201,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             child: TextFormField(
                               keyboardType: TextInputType.number,
                               decoration: new InputDecoration(
-                                hintText: "Digite sua idade",
+                                hintText: globalUser.age != null ? globalUser.age : "Digite sua idade",
                                 labelText: "Idade",
                                 focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
@@ -299,7 +238,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             value: _gender,
                             decoration: new InputDecoration(
                               contentPadding: EdgeInsets.only(right: 10.0),
-                              hintText: "Selecionar gênero",
+                              hintText: globalUser.gender != null ? globalUser.gender : "Selecionar gênero",
                               labelText: "Gênero",
                               focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
@@ -353,8 +292,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             child: TextFormField(
                               keyboardType: TextInputType.text,
                               decoration: new InputDecoration(
-                                hintText: 'Digite seu cep',
-                                labelText: 'Cep',
+                                hintText: globalUser.cep != null ? globalUser.cep : 'Digite seu CEP',
+                                labelText: 'CEP',
                                 focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                         color: Color(0xff27b3ff), width: 1.0),
@@ -372,7 +311,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                 RegExp pattern = new RegExp(r'^\d{5}-?\d{3}$');
                                 return pattern.hasMatch(cep.trim())
                                     ? null
-                                    : 'Cep inválido';
+                                    : 'CEP inválido';
                               },
                               onSaved: (String val) {
                                 _cep = val.trim();
@@ -479,7 +418,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             child: TextFormField(
                               keyboardType: TextInputType.number,
                               decoration: new InputDecoration(
-                                hintText: "Digite a quantidade de pessoas",
+                                hintText: globalUser.residents != null ? globalUser.residents : "Digite a quantidade de pessoas",
                                 labelText: "Número de pessoas",
                                 focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
@@ -510,10 +449,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           height: 10,
                         ),
                         Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
                             Container(
                               margin: EdgeInsets.only(top: 15),
-                              width: MediaQuery.of(context).size.width / 1.15,
                               child: Text('Apresenta alguma doença crônica?',
                                   style: TextStyle(
                                     fontFamily: 'Montserrat',
@@ -613,7 +553,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             )
                           ],
                         ),
-                        handleQuestions.questions[0] == 1 ? SymptomsQuestion(title: 'Qual(is)?', index:1, selected: selected) : Container(),
+                        handleQuestions.questions[0] == 1 ? SymptomsQuestion(title: 'Qual(is)?', index:1, selected: _selectedChronicDiseases) : Container(),
                         SizedBox(
                           height: 10,
                         ),
@@ -641,7 +581,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                               color: Colors.white)),
                                       onPressed: () {
                                         FocusScope.of(context).unfocus();
-                                        this._validateInputs();
+                                        this._validateInputs(context);
                                       },
                                     ),
                                   ))
@@ -690,20 +630,40 @@ class _EditProfilePageState extends State<EditProfilePage> {
     );
   }
 
-  void _validateInputs() {
+  void _validateInputs(context) {
     if (_EditForm.currentState.validate() && _termsChecked) {
       _EditForm.currentState.save();
 
-      handleUser.setForm(_name, _email, _cpf, _phone, _age, _gender, _cep,
-          _password, _numberOfPeople, _hasChronicDisease, _termsChecked);
+      handleUser.setForm(_name, _email, handleUser.cpf, _phone, _age, _gender, _cep,
+          _password, _numberOfPeople, _selectedChronicDiseases, _termsChecked);
 
       print(handleUser.toString());
-
+      _performUpdate(context);
       FocusScope.of(context).unfocus();
     } else {
       setState(() {
         _autoValidate = true;
       });
+    }
+  }
+  _performUpdate(context) async {
+    Scaffold.of(context).showSnackBar(
+      appSnackBar(
+        'Atualizando dados...',
+        isLoading: true,
+      ),
+    );
+    var updateSucceeded = await performUserUpdate(handleUser.cpf, handleUser.password);
+    Scaffold.of(context).hideCurrentSnackBar();
+    if (updateSucceeded) {
+        Navigator.pop(context);
+        Navigator.pop(context);
+    } else {
+      Scaffold.of(context).showSnackBar(
+        appSnackBar(
+          'Erro interno no servidor',
+        ),
+      );
     }
   }
 }

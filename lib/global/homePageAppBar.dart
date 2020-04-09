@@ -10,7 +10,7 @@ String getGreetingName() {
     return "${str[0].toUpperCase()}${str.substring(1)}";
   }
 
-  final names = globalUser.name.split(' ').map((n) => capitalize(n)).toList();
+  final names = 'globalUser.name.split(' ').map((n) => capitalize(n)).toList()';
   return "${names[0]} ${names.length >= 2 ? names[1] : ''}";
 }
 
