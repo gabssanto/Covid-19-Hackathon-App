@@ -128,6 +128,7 @@ class _AutoAvaliationPage1State extends State<AutoAvaliationPage1> {
                                             handleQuestions.questions[0] == 1
                                                 ? yesNo = 0
                                                 : yesNo = 1;
+                                            handleQuestions.typeForm == 1;
                                           });
                                           handleQuestions.setQuestions(
                                               0, yesNo);
@@ -182,6 +183,7 @@ class _AutoAvaliationPage1State extends State<AutoAvaliationPage1> {
                                             handleQuestions.questions[0] == 2
                                                 ? yesNo = 0
                                                 : yesNo = 2;
+                                            handleQuestions.typeForm == 2;
                                           });
                                           handleQuestions.setQuestions(
                                               0, yesNo);
@@ -424,6 +426,7 @@ class _AutoAvaliationPage1State extends State<AutoAvaliationPage1> {
                                                               1
                                                           ? yesNo = 0
                                                           : yesNo = 1;
+                                                      handleQuestions.typeForm == 2;
                                                     });
                                                     handleQuestions
                                                         .setQuestions(1, yesNo);
@@ -497,6 +500,7 @@ class _AutoAvaliationPage1State extends State<AutoAvaliationPage1> {
                                                               2
                                                           ? yesNo = 0
                                                           : yesNo = 2;
+                                                      handleQuestions.typeForm == 3;
                                                     });
                                                     for (int i = 2;
                                                         i <

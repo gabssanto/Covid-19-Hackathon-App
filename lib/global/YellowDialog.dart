@@ -52,10 +52,8 @@ class YellowDialog extends StatelessWidget {
                   borderRadius: BorderRadius.circular(14)),
               child: FlatButton(
                 onPressed: () {
-    Navigator.push(
-    context,
-    MaterialPageRoute(
-    builder: (context) => HomePage()));
+                  Navigator.pop(context);
+                  Navigator.pop(context);
                 },
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
