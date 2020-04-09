@@ -179,21 +179,21 @@ mixin _$HandleUser on _HandleUserBase, Store {
     }, _$numberOfPeopleAtom, name: '${_$numberOfPeopleAtom.name}_set');
   }
 
-  final _$chronicDiseaseAtom = Atom(name: '_HandleUserBase.chronicDisease');
+  final _$chronicDiseasesAtom = Atom(name: '_HandleUserBase.chronicDiseases');
 
   @override
-  bool get chronicDisease {
-    _$chronicDiseaseAtom.context.enforceReadPolicy(_$chronicDiseaseAtom);
-    _$chronicDiseaseAtom.reportObserved();
-    return super.chronicDisease;
+  List<dynamic> get chronicDiseases {
+    _$chronicDiseasesAtom.context.enforceReadPolicy(_$chronicDiseasesAtom);
+    _$chronicDiseasesAtom.reportObserved();
+    return super.chronicDiseases;
   }
 
   @override
-  set chronicDisease(bool value) {
-    _$chronicDiseaseAtom.context.conditionallyRunInAction(() {
-      super.chronicDisease = value;
-      _$chronicDiseaseAtom.reportChanged();
-    }, _$chronicDiseaseAtom, name: '${_$chronicDiseaseAtom.name}_set');
+  set chronicDiseases(List<dynamic> value) {
+    _$chronicDiseasesAtom.context.conditionallyRunInAction(() {
+      super.chronicDiseases = value;
+      _$chronicDiseasesAtom.reportChanged();
+    }, _$chronicDiseasesAtom, name: '${_$chronicDiseasesAtom.name}_set');
   }
 
   final _$termsCheckedAtom = Atom(name: '_HandleUserBase.termsChecked');
@@ -218,21 +218,21 @@ mixin _$HandleUser on _HandleUserBase, Store {
 
   @override
   void setForm(
-      dynamic name,
-      dynamic email,
-      dynamic cpf,
-      dynamic phone,
-      dynamic age,
-      dynamic gender,
-      dynamic cep,
-      dynamic password,
-      dynamic numberOfPeople,
-      dynamic chronicDisease,
-      dynamic termsChecked) {
+      String name,
+      String email,
+      String cpf,
+      String phone,
+      int age,
+      String gender,
+      String cep,
+      String password,
+      int numberOfPeople,
+      List<dynamic> chronicDiseases,
+      bool termsChecked) {
     final _$actionInfo = _$_HandleUserBaseActionController.startAction();
     try {
       return super.setForm(name, email, cpf, phone, age, gender, cep, password,
-          numberOfPeople, chronicDisease, termsChecked);
+          numberOfPeople, chronicDiseases, termsChecked);
     } finally {
       _$_HandleUserBaseActionController.endAction(_$actionInfo);
     }
@@ -241,7 +241,7 @@ mixin _$HandleUser on _HandleUserBase, Store {
   @override
   String toString() {
     final string =
-        'userID: ${userID.toString()},name: ${name.toString()},email: ${email.toString()},cpf: ${cpf.toString()},phone: ${phone.toString()},age: ${age.toString()},gender: ${gender.toString()},cep: ${cep.toString()},password: ${password.toString()},numberOfPeople: ${numberOfPeople.toString()},chronicDisease: ${chronicDisease.toString()},termsChecked: ${termsChecked.toString()}';
+        'userID: ${userID.toString()},name: ${name.toString()},email: ${email.toString()},cpf: ${cpf.toString()},phone: ${phone.toString()},age: ${age.toString()},gender: ${gender.toString()},cep: ${cep.toString()},password: ${password.toString()},numberOfPeople: ${numberOfPeople.toString()},chronicDiseases: ${chronicDiseases.toString()},termsChecked: ${termsChecked.toString()}';
     return '{$string}';
   }
 }

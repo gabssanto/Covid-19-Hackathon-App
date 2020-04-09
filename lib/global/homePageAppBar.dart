@@ -1,8 +1,18 @@
 import 'package:covid19/global/dialogs/green.dart';
+import 'package:covid19/global/userInfo.dart';
 import 'package:covid19/pages/auto_avaliation/auto_avaliation_page.dart';
 import 'package:covid19/pages/profile/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+
+String getGreetingName() {
+  String capitalize(String str) {
+    return "${str[0].toUpperCase()}${str.substring(1)}";
+  }
+
+  final names = globalUser.name.split(' ').map((n) => capitalize(n)).toList();
+  return "${names[0]} ${names.length >= 2 ? names[1] : ''}";
+}
 
 class HomePageAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -51,8 +61,8 @@ class HomePageAppBar extends StatelessWidget implements PreferredSizeWidget {
                       color: Colors.white,
                       child: InkWell(
                         splashColor: Color.fromRGBO(1, 1, 1, 0),
-                        child: Icon(Icons.settings,
-                            size: 40, color: Colors.blue),
+                        child:
+                            Icon(Icons.settings, size: 40, color: Colors.blue),
                         onTap: () {
                           Navigator.push(
                               context,
@@ -73,7 +83,8 @@ class HomePageAppBar extends StatelessWidget implements PreferredSizeWidget {
               Container(
                 padding:
                     EdgeInsets.only(top: 10, left: 0, right: 40, bottom: 10),
-                child: Text("Olá Gabriel,\nComo está se sentindo hoje?",
+                child: Text(
+                    "Olá ${getGreetingName()},\nComo está se sentindo hoje?",
                     style: TextStyle(
                       fontFamily: 'Montserrat',
                       color: Color(0xff27b3ff),

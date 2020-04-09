@@ -1,6 +1,5 @@
 import 'package:covid19/global/appSnackBar.dart';
 import 'package:covid19/global/loginAppBar.dart';
-import 'package:covid19/global/userInfo.dart';
 import 'package:covid19/mobx/handleHttpConnections.dart';
 import 'package:covid19/pages/home/home_page.dart';
 import 'package:flutter/material.dart';
@@ -145,40 +144,8 @@ class _LoginPageState extends State<LoginPage> {
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.white)),
-                                onPressed: () async {
-                                  if (_loginForm.currentState.validate()) {
-                                    _loginForm.currentState.save();
-                                    FocusScope.of(context).unfocus();
-                                    Scaffold.of(context).showSnackBar(
-                                      appSnackBar(
-                                        'Fazendo login... ',
-                                        isLoading: true,
-                                      ),
-                                    );
-                                    var loginSucceeded = await performUserLogin(
-                                      _cpf,
-                                      _password,
-                                    );
-                                    Scaffold.of(context).hideCurrentSnackBar();
-                                    if (loginSucceeded) {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => HomePage(),
-                                        ),
-                                      );
-                                    } else {
-                                      Scaffold.of(context).showSnackBar(
-                                        appSnackBar(
-                                          'O cpf ou senha estão incorretos',
-                                        ),
-                                      );
-                                    }
-                                  } else {
-                                    setState(() {
-                                      _autoValidate = true;
-                                    });
-                                  }
+                                onPressed: () {
+                                  _validateInputs(context);
                                 },
                               ),
                             ),
@@ -198,5 +165,46 @@ class _LoginPageState extends State<LoginPage> {
         },
       ),
     );
+  }
+
+  void _validateInputs(context) {
+    if (_loginForm.currentState.validate()) {
+      _loginForm.currentState.save();
+      FocusScope.of(context).unfocus();
+      _performLogin(context);
+    } else {
+      setState(() {
+        _autoValidate = true;
+      });
+    }
+  }
+
+  void _performLogin(context) async {
+    Scaffold.of(context).showSnackBar(
+      appSnackBar(
+        'Fazendo login...',
+        isLoading: true,
+      ),
+    );
+    var loginSucceeded = await performUserLogin(
+      _cpf,
+      _password,
+    );
+    Scaffold.of(context).hideCurrentSnackBar();
+    if (loginSucceeded) {
+      Navigator.of(context).pop();
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => HomePage(),
+        ),
+      );
+    } else {
+      Scaffold.of(context).showSnackBar(
+        appSnackBar(
+          'Cpf ou senha estão incorretos',
+        ),
+      );
+    }
   }
 }

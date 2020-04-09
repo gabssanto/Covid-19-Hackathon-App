@@ -37,14 +37,25 @@ abstract class _HandleUserBase with Store {
   int numberOfPeople;
 
   @observable
-  bool chronicDisease;
+  // Array com 5 possições que indicam quais sao as doenças cronicas que o usuario tem;
+  List chronicDiseases;
 
   @observable
   bool termsChecked;
 
   @action
-  void setForm(name, email, cpf, phone, age, gender, cep, password,
-      numberOfPeople, chronicDisease, termsChecked) {
+  void setForm(
+      String name,
+      String email,
+      String cpf,
+      String phone,
+      int age,
+      String gender,
+      String cep,
+      String password,
+      int numberOfPeople,
+      List chronicDiseases,
+      bool termsChecked) {
     this.name = name;
     this.email = email;
     this.cpf = cpf;
@@ -53,8 +64,33 @@ abstract class _HandleUserBase with Store {
     this.cep = cep;
     this.gender = gender;
     this.numberOfPeople = numberOfPeople;
-    this.chronicDisease = chronicDisease;
+    this.chronicDiseases = chronicDiseases;
     this.password = password;
     this.termsChecked = termsChecked;
+  }
+
+  Map<String, dynamic> toJson() {
+    bool toBoolean(int val) {
+      return val == 0 ? false : true;
+    }
+
+    return {
+      'nome': name,
+      'email': email,
+      'cpf': cpf,
+      'telefone': phone,
+      'idade': age,
+      'cep': cep,
+      'genero': gender,
+      'residentes': numberOfPeople,
+      'doencas_cronicas': {
+        'diabetes': toBoolean(chronicDiseases[0]),
+        'hipertensao': toBoolean(chronicDiseases[1]),
+        'insuficiencia_cardiaca': toBoolean(chronicDiseases[2]),
+        'insuficiencia_renal': toBoolean(chronicDiseases[3]),
+        'respiratoria': toBoolean(chronicDiseases[4]),
+      },
+      'senha': password,
+    };
   }
 }
