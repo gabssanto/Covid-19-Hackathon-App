@@ -1,9 +1,11 @@
 import 'package:covid19/global/appSnackBar.dart';
 import 'package:covid19/global/backAppBar.dart';
-import 'package:covid19/global/loginAppBar.dart';
+import 'package:covid19/mobx/handleHttpConnections.dart';
 import 'package:covid19/mobx/imports.dart';
+import 'package:covid19/pages/home/home_page.dart';
+import 'package:covid19/pages/signup/constants.dart';
 import 'package:covid19/pages/signup/widgets/BtnSignup.dart';
-import 'package:covid19/pages/signup/widgets/symptomsQuestion.dart';
+import 'package:covid19/pages/signup/widgets/chronicDiseasesQuestion.dart';
 import 'package:flutter/material.dart';
 
 import '../../mobx/imports.dart';
@@ -29,27 +31,19 @@ class _SignupPage extends State<SignUpPage> {
   String _cep;
   int _numberOfPeople;
   String _password;
-  bool _hasChronicDisease;
   bool _termsChecked = false;
 
-  List selected = [0, 0, 0, 0, 0];
-
-  int yesNo = 0;
-
-  final active = Color(0xff27b3ff);
-
-  final inactive = Color(0xffe8e8e8);
-
+  List _selectedChronicDiseases = [0, 0, 0, 0, 0];
+  int _yesNo = 0;
 
   @override
   void initState() {
     handleQuestions.opacity = false;
     handleQuestions.clearQuestions();
     handleQuestions.questions.add(0);
-    print(handleQuestions.questions);
+    handleQuestions.questions.add([0, 0, 0, 0, 0]);
     super.initState();
   }
-
 
   @override
   void dispose() {
@@ -348,8 +342,8 @@ class _SignupPage extends State<SignUpPage> {
                             child: TextFormField(
                               keyboardType: TextInputType.text,
                               decoration: new InputDecoration(
-                                hintText: 'Digite seu cep',
-                                labelText: 'Cep',
+                                hintText: 'Digite seu CEP',
+                                labelText: 'CEP',
                                 focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                         color: Color(0xff27b3ff), width: 1.0),
@@ -367,7 +361,7 @@ class _SignupPage extends State<SignUpPage> {
                                 RegExp pattern = new RegExp(r'^\d{5}-?\d{3}$');
                                 return pattern.hasMatch(cep.trim())
                                     ? null
-                                    : 'Cep inválido';
+                                    : 'CEP inválido';
                               },
                               onSaved: (String val) {
                                 _cep = val.trim();
@@ -523,37 +517,47 @@ class _SignupPage extends State<SignUpPage> {
                               margin: EdgeInsets.only(top: 15),
                               width: MediaQuery.of(context).size.width / 1.18,
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
                                   AnimatedContainer(
                                       duration: Duration(milliseconds: 200),
-                                      width: MediaQuery.of(context).size.width / 2.5,
-                                      height: MediaQuery.of(context).size.height / 17,
+                                      width: MediaQuery.of(context).size.width /
+                                          2.5,
+                                      height:
+                                          MediaQuery.of(context).size.height /
+                                              17,
                                       decoration: new BoxDecoration(
                                           color:
-                                          handleQuestions.questions[0] == 1
-                                              ? active
-                                              : inactive,
-                                          borderRadius: BorderRadius.circular(6)),
+                                              handleQuestions.questions[0] == 1
+                                                  ? ConstantsSignupPage
+                                                      .activeButtonColor
+                                                  : ConstantsSignupPage
+                                                      .inactiveButtonColor,
+                                          borderRadius:
+                                              BorderRadius.circular(6)),
                                       child: FlatButton(
                                         onPressed: () {
                                           setState(() {
-                                            handleQuestions.questions[0] == 1 ? yesNo = 0 : yesNo = 1;
+                                            handleQuestions.questions[0] == 1
+                                                ? _yesNo = 0
+                                                : _yesNo = 1;
                                           });
-//                          answer(yesNo);
-                                          handleQuestions.setQuestions(0, yesNo);
-                                          print(handleQuestions.questions);
+                                          handleQuestions.setQuestions(
+                                              0, _yesNo);
                                         },
                                         child: Row(
-                                          crossAxisAlignment: CrossAxisAlignment.center,
-                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
                                           children: <Widget>[
                                             Text("Sim",
                                                 style: TextStyle(
                                                   fontFamily: 'Montserrat',
                                                   color: handleQuestions
-                                                      .questions[0] ==
-                                                      1
+                                                              .questions[0] ==
+                                                          1
                                                       ? Colors.white
                                                       : Colors.black54,
                                                   fontSize: 16,
@@ -566,33 +570,51 @@ class _SignupPage extends State<SignUpPage> {
                                       )),
                                   AnimatedContainer(
                                       duration: Duration(milliseconds: 200),
-                                      width: MediaQuery.of(context).size.width / 2.5,
-                                      height: MediaQuery.of(context).size.height / 17,
+                                      width: MediaQuery.of(context).size.width /
+                                          2.5,
+                                      height:
+                                          MediaQuery.of(context).size.height /
+                                              17,
                                       decoration: new BoxDecoration(
                                           color:
-                                          handleQuestions.questions[0] == 2
-                                              ? active
-                                              : inactive,
-                                          borderRadius: BorderRadius.circular(6)),
+                                              handleQuestions.questions[0] == 2
+                                                  ? ConstantsSignupPage
+                                                      .activeButtonColor
+                                                  : ConstantsSignupPage
+                                                      .inactiveButtonColor,
+                                          borderRadius:
+                                              BorderRadius.circular(6)),
                                       child: FlatButton(
                                         onPressed: () {
                                           setState(() {
-                                            handleQuestions.questions[0] == 2 ? yesNo = 0 : yesNo = 2;
+                                            handleQuestions.questions[0] == 2
+                                                ? _yesNo = 0
+                                                : _yesNo = 2;
                                           });
-//                          answer(yesNo);
-                                          handleQuestions.setQuestions(0, yesNo);
-                                          print(handleQuestions.questions);
+                                          handleQuestions.setQuestions(
+                                              0, _yesNo);
+                                          _selectedChronicDiseases = [
+                                            0,
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                          ];
+                                          handleQuestions.setQuestions(
+                                              1, _selectedChronicDiseases);
                                         },
                                         child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
                                           children: <Widget>[
                                             Text("Não",
                                                 style: TextStyle(
                                                   fontFamily: 'Montserrat',
                                                   color: handleQuestions
-                                                      .questions[0] ==
-                                                      2
+                                                              .questions[0] ==
+                                                          2
                                                       ? Colors.white
                                                       : Colors.black54,
                                                   fontSize: 16,
@@ -608,7 +630,12 @@ class _SignupPage extends State<SignUpPage> {
                             )
                           ],
                         ),
-                        handleQuestions.questions[0] == 1 ? SymptomsQuestion(title: 'Qual(is)?', index:1, selected: selected) : Container(),
+                        handleQuestions.questions[0] == 1
+                            ? ChronicDiseasesQuestion(
+                                title: 'Qual(is)?',
+                                index: 1,
+                                selected: _selectedChronicDiseases)
+                            : SizedBox(),
                         SizedBox(
                           height: 10,
                         ),
@@ -640,7 +667,7 @@ class _SignupPage extends State<SignUpPage> {
                           text: "Finalizar Cadastro",
                           onPressed: () {
                             FocusScope.of(context).unfocus();
-                            this._validateInputs();
+                            _validateInputs(context);
                           },
                         ),
                         Container(
@@ -653,20 +680,50 @@ class _SignupPage extends State<SignUpPage> {
     );
   }
 
-  void _validateInputs() {
+  void _validateInputs(context) {
     if (_signupForm.currentState.validate() && _termsChecked) {
       _signupForm.currentState.save();
 
       handleUser.setForm(_name, _email, _cpf, _phone, _age, _gender, _cep,
-          _password, _numberOfPeople, _hasChronicDisease, _termsChecked);
+          _password, _numberOfPeople, _selectedChronicDiseases, _termsChecked);
 
-      print(handleUser.toString());
-
-      FocusScope.of(context).unfocus();
+      _performSignup(context);
     } else {
       setState(() {
         _autoValidate = true;
       });
+    }
+  }
+
+  _performSignup(context) async {
+    Scaffold.of(context).showSnackBar(
+      appSnackBar(
+        'Fazendo cadastro...',
+        isLoading: true,
+      ),
+    );
+    var signupSucceeded = await performUserSignUp();
+    Scaffold.of(context).hideCurrentSnackBar();
+    if (signupSucceeded) {
+      var loginSucceeded = await performUserLogin(
+        _cpf,
+        _password,
+      );
+      if (loginSucceeded) {
+        Navigator.of(context).pop();
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => HomePage(),
+          ),
+        );
+      }
+    } else {
+      Scaffold.of(context).showSnackBar(
+        appSnackBar(
+          'Erro interno no servidor',
+        ),
+      );
     }
   }
 }

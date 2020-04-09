@@ -16,6 +16,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+    print(globalUser.toString());
     return Scaffold(
       appBar: BackAppBar(
         title: 'Perfil',
@@ -179,6 +180,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             Container(
                               margin: EdgeInsets.only(top: 10, left: 10),
                               child: Text(
+
                                 'globalUser.age',
                                 style: TextStyle(
                                   fontFamily: 'Montserrat',
@@ -192,38 +194,6 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                           ],
                         ),
-//                        Row(
-//                          children: <Widget>[
-//                            Container(
-//                              margin: EdgeInsets.only(top: 10),
-//                              child: Text(
-//                                "Gênero:",
-//                                style: TextStyle(
-//                                  fontFamily: 'Montserrat',
-//                                  color: Colors.black54,
-//                                  fontSize: 18,
-//                                  fontWeight: FontWeight.bold,
-//                                  fontStyle: FontStyle.normal,
-//                                  letterSpacing: -0.231,
-//                                ),
-//                              ),
-//                            ),
-//                            Container(
-//                              margin: EdgeInsets.only(top: 10, left: 10),
-//                              child: Text(
-//                                globalUser.,
-//                                style: TextStyle(
-//                                  fontFamily: 'Montserrat',
-//                                  color: Colors.black54,
-//                                  fontSize: 18,
-//                                  fontWeight: FontWeight.w600,
-//                                  fontStyle: FontStyle.normal,
-//                                  letterSpacing: -0.231,
-//                                ),
-//                              ),
-//                            ),
-//                          ],
-//                        ),
                         Row(
                           children: <Widget>[
                             Container(
@@ -242,44 +212,12 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                           ],
                         ),
-//                        Row(
-//                          children: <Widget>[
-//                            Container(
-//                              margin: EdgeInsets.only(top: 10),
-//                              child: Text(
-//                                "CEP:",
-//                                style: TextStyle(
-//                                  fontFamily: 'Montserrat',
-//                                  color: Colors.black54,
-//                                  fontSize: 18,
-//                                  fontWeight: FontWeight.bold,
-//                                  fontStyle: FontStyle.normal,
-//                                  letterSpacing: -0.231,
-//                                ),
-//                              ),
-//                            ),
-//                            Container(
-//                              margin: EdgeInsets.only(top: 10, left: 10),
-//                              child: Text(
-//                                "12345-678",
-//                                style: TextStyle(
-//                                  fontFamily: 'Montserrat',
-//                                  color: Colors.black54,
-//                                  fontSize: 18,
-//                                  fontWeight: FontWeight.w600,
-//                                  fontStyle: FontStyle.normal,
-//                                  letterSpacing: -0.231,
-//                                ),
-//                              ),
-//                            ),
-//                          ],
-//                        ),
                         Row(
                           children: <Widget>[
                             Container(
                               margin: EdgeInsets.only(top: 10),
                               child: Text(
-                                "Bairro:",
+                                "CEP:",
                                 style: TextStyle(
                                   fontFamily: 'Montserrat',
                                   color: Colors.black54,
