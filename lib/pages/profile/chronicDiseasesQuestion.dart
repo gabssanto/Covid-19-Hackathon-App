@@ -1,25 +1,19 @@
-import 'package:covid19/main.dart';
 import 'package:covid19/mobx/imports.dart';
+import 'package:covid19/pages/signup/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 
-class SymptomsQuestion extends StatefulWidget {
+class ChronicDiseasesQuestion extends StatefulWidget {
   final title;
   final index;
   final selected;
 
-  SymptomsQuestion({this.title, this.index, this.selected});
+  ChronicDiseasesQuestion({this.title, this.index, this.selected});
 
   @override
-  _SymptomsQuestion createState() => _SymptomsQuestion();
+  _ChronicDiseasesQuestion createState() => _ChronicDiseasesQuestion();
 }
 
-class _SymptomsQuestion extends State<SymptomsQuestion> {
-
-  final active = Color(0xff27b3ff);
-
-  final inactive = Color(0xffe8e8e8);
-
+class _ChronicDiseasesQuestion extends State<ChronicDiseasesQuestion> {
   @override
   void initState() {
     handleQuestions.questions.add(0);
@@ -35,10 +29,9 @@ class _SymptomsQuestion extends State<SymptomsQuestion> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         Container(
+          width: MediaQuery.of(context).size.width / 1.15,
           margin: EdgeInsets.only(top: 15),
           child: Text(this.widget.title,
               style: TextStyle(
@@ -61,17 +54,17 @@ class _SymptomsQuestion extends State<SymptomsQuestion> {
                   width: MediaQuery.of(context).size.width / 2.5,
                   height: MediaQuery.of(context).size.height / 17,
                   decoration: new BoxDecoration(
-                      color: widget.selected[0] == 1 ? active : inactive,
+                      color: widget.selected[0] == 1
+                          ? ConstantsSignupPage.activeButtonColor
+                          : ConstantsSignupPage.inactiveButtonColor,
                       borderRadius: BorderRadius.circular(6)),
                   child: FlatButton(
                     onPressed: () {
                       setState(() {
-                        if (widget.selected[0] == 1) {
-                          widget.selected[0] = 0;
-                        } else
-                          widget.selected[0] = 1;
+                        widget.selected[0] = widget.selected[0] == 1 ? 0 : 1;
                       });
-                      handleQuestions.setQuestions(widget.index, widget.selected);
+                      handleQuestions.setQuestions(
+                          widget.index, widget.selected);
                     },
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -96,18 +89,17 @@ class _SymptomsQuestion extends State<SymptomsQuestion> {
                   width: MediaQuery.of(context).size.width / 2.5,
                   height: MediaQuery.of(context).size.height / 17,
                   decoration: new BoxDecoration(
-                      color: widget.selected[1] == 1 ? active : inactive,
+                      color: widget.selected[1] == 1
+                          ? ConstantsSignupPage.activeButtonColor
+                          : ConstantsSignupPage.inactiveButtonColor,
                       borderRadius: BorderRadius.circular(6)),
                   child: FlatButton(
                     onPressed: () {
                       setState(() {
-                        if (widget.selected[1] == 1) {
-                          widget.selected[1] = 0;
-                        } else
-                          widget.selected[1] = 1;
+                        widget.selected[1] = widget.selected[1] == 1 ? 0 : 1;
                       });
-                      handleQuestions.setQuestions(widget.index, widget.selected);
-                      print('DENTRO: ${handleQuestions.questions}');
+                      handleQuestions.setQuestions(
+                          widget.index, widget.selected);
                     },
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -141,18 +133,17 @@ class _SymptomsQuestion extends State<SymptomsQuestion> {
                   width: MediaQuery.of(context).size.width / 2.5,
                   height: MediaQuery.of(context).size.height / 12,
                   decoration: new BoxDecoration(
-                      color: widget.selected[2] == 1 ? active : inactive,
+                      color: widget.selected[2] == 1
+                          ? ConstantsSignupPage.activeButtonColor
+                          : ConstantsSignupPage.inactiveButtonColor,
                       borderRadius: BorderRadius.circular(6)),
                   child: FlatButton(
                     onPressed: () {
                       setState(() {
-                        if (widget.selected[2] == 1) {
-                          widget.selected[2] = 0;
-                        } else
-                          widget.selected[2] = 1;
+                        widget.selected[2] = widget.selected[2] == 1 ? 0 : 1;
                       });
-                      handleQuestions.setQuestions(widget.index, widget.selected);
-                      print('DENTRO: ${handleQuestions.questions}');
+                      handleQuestions.setQuestions(
+                          widget.index, widget.selected);
                     },
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -178,17 +169,17 @@ class _SymptomsQuestion extends State<SymptomsQuestion> {
                   width: MediaQuery.of(context).size.width / 2.5,
                   height: MediaQuery.of(context).size.height / 12,
                   decoration: new BoxDecoration(
-                      color: widget.selected[3] == 1 ? active : inactive,
+                      color: widget.selected[3] == 1
+                          ? ConstantsSignupPage.activeButtonColor
+                          : ConstantsSignupPage.inactiveButtonColor,
                       borderRadius: BorderRadius.circular(6)),
                   child: FlatButton(
                     onPressed: () {
                       setState(() {
-                        if (widget.selected[3] == 1) {
-                          widget.selected[3] = 0;
-                        } else
-                          widget.selected[3] = 1;
+                        widget.selected[3] = widget.selected[3] == 1 ? 0 : 1;
                       });
-                      handleQuestions.setQuestions(widget.index, widget.selected);
+                      handleQuestions.setQuestions(
+                          widget.index, widget.selected);
                     },
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -223,18 +214,17 @@ class _SymptomsQuestion extends State<SymptomsQuestion> {
                   width: MediaQuery.of(context).size.width / 1.18,
                   height: MediaQuery.of(context).size.height / 17,
                   decoration: new BoxDecoration(
-                      color: widget.selected[4] == 1 ? active : inactive,
+                      color: widget.selected[4] == 1
+                          ? ConstantsSignupPage.activeButtonColor
+                          : ConstantsSignupPage.inactiveButtonColor,
                       borderRadius: BorderRadius.circular(6)),
                   child: FlatButton(
                     onPressed: () {
                       setState(() {
-                        if (widget.selected[4] == 1) {
-                          widget.selected[4] = 0;
-                        } else
-                          widget.selected[4] = 1;
+                        widget.selected[4] = widget.selected[4] == 1 ? 0 : 1;
                       });
-                      handleQuestions.setQuestions(widget.index, widget.selected);
-                      print('DENTRO: ${handleQuestions.questions}');
+                      handleQuestions.setQuestions(
+                          widget.index, widget.selected);
                     },
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,

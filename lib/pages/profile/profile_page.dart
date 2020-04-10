@@ -23,292 +23,233 @@ class _ProfilePageState extends State<ProfilePage> {
       ),
       body: Container(
         height: double.infinity,
-        color: Color(0xffefefef),
         child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Container(
               margin: EdgeInsets.only(top: 10, bottom: 10),
               width: MediaQuery.of(context).size.width - 50,
-              height: MediaQuery.of(context).size.height - 350,
-              decoration: new BoxDecoration(
-                  color: Colors.white, borderRadius: BorderRadius.circular(12)),
+              height: MediaQuery.of(context).size.height,
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  Container(
-                    margin: EdgeInsets.only(top: 0, left: 20, right: 20),
-                    width: MediaQuery.of(context).size.width,
+                  Text('Informações',
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xff27b3ff))),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
+                        margin: EdgeInsets.only(top: 10),
+                        child: Text(
+                          "Nome:",
+                          style: TextStyle(
+                            fontFamily: 'Montserrat',
+                            color: Colors.black54,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            fontStyle: FontStyle.normal,
+                            letterSpacing: -0.231,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(top: 10, left: 10),
+                        child: Text(
+                          'globalUser.name',
+                          style: TextStyle(
+                            fontFamily: 'Montserrat',
+                            color: Colors.black54,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
+                            fontStyle: FontStyle.normal,
+                            letterSpacing: -0.231,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Container(
+                        margin: EdgeInsets.only(top: 10),
+                        child: Text(
+                          "CPF:",
+                          style: TextStyle(
+                            fontFamily: 'Montserrat',
+                            color: Colors.black54,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            fontStyle: FontStyle.normal,
+                            letterSpacing: -0.231,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(top: 10, left: 10),
+                        child: Text(
+                          'globalUser.cpf',
+                          style: TextStyle(
+                            fontFamily: 'Montserrat',
+                            color: Colors.black54,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
+                            fontStyle: FontStyle.normal,
+                            letterSpacing: -0.231,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Container(
+                        margin: EdgeInsets.only(top: 10),
+                        child: Text(
+                          "Telefone:",
+                          style: TextStyle(
+                            fontFamily: 'Montserrat',
+                            color: Colors.black54,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            fontStyle: FontStyle.normal,
+                            letterSpacing: -0.231,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(top: 10, left: 10),
+                        child: Text(
+                          'globalUser.telephone',
+                          style: TextStyle(
+                            fontFamily: 'Montserrat',
+                            color: Colors.black54,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
+                            fontStyle: FontStyle.normal,
+                            letterSpacing: -0.231,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Container(
+                        margin: EdgeInsets.only(top: 10),
+                        child: Text(
+                          "Idade:",
+                          style: TextStyle(
+                            fontFamily: 'Montserrat',
+                            color: Colors.black54,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            fontStyle: FontStyle.normal,
+                            letterSpacing: -0.231,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(top: 10, left: 10),
+                        child: Text(
+
+                          'globalUser.age',
+                          style: TextStyle(
+                            fontFamily: 'Montserrat',
+                            color: Colors.black54,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
+                            fontStyle: FontStyle.normal,
+                            letterSpacing: -0.231,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Container(
+                        margin: EdgeInsets.only(top: 10),
+                        child: Text(
+                          "${'globalUser.residents'} pessoas moram comigo",
+                          style: TextStyle(
+                            fontFamily: 'Montserrat',
+                            color: Colors.black54,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            fontStyle: FontStyle.normal,
+                            letterSpacing: -0.231,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Container(
+                        margin: EdgeInsets.only(top: 10),
+                        child: Text(
+                          "CEP:",
+                          style: TextStyle(
+                            fontFamily: 'Montserrat',
+                            color: Colors.black54,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            fontStyle: FontStyle.normal,
+                            letterSpacing: -0.231,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(top: 10, left: 10),
+                        child: Text(
+                          'globalUser.neighborhood',
+                          style: TextStyle(
+                            fontFamily: 'Montserrat',
+                            color: Colors.black54,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
+                            fontStyle: FontStyle.normal,
+                            letterSpacing: -0.231,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                        top: 20, bottom: MediaQuery.of(context).viewInsets.bottom),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Container(
-                              margin: EdgeInsets.only(top: 5),
-                              child: Text("Supeito de Covid-19",
-                                  style: TextStyle(
-                                    fontFamily: 'Montserrat',
-                                    color: Color(0xffffb027),
-                                    fontSize: 28,
-                                    fontWeight: FontWeight.w600,
-                                    fontStyle: FontStyle.normal,
-                                    letterSpacing: -0.165,
-                                  )),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            Container(
-                              margin: EdgeInsets.only(top: 10),
-                              child: Text(
-                                "Nome:",
-                                style: TextStyle(
-                                  fontFamily: 'Montserrat',
-                                  color: Colors.black54,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  fontStyle: FontStyle.normal,
-                                  letterSpacing: -0.231,
+                        SizedBox(
+                            width: MediaQuery.of(context).size.width / 1.2,
+                            height: MediaQuery.of(context).size.height / 15,
+                            child: Container(
+                              child: RaisedButton(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: new BorderRadius.circular(12.0),
                                 ),
+                                color: Color(0xff27b3ff),
+                                child: Text('Editar Perfil',
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white)),
+                                onPressed: () {
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => EditProfilePage()));
+                                },
                               ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(top: 10, left: 10),
-                              child: Text(
-                                'globalUser.name',
-                                style: TextStyle(
-                                  fontFamily: 'Montserrat',
-                                  color: Colors.black54,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w600,
-                                  fontStyle: FontStyle.normal,
-                                  letterSpacing: -0.231,
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                        Row(
-                          children: <Widget>[
-                            Container(
-                              margin: EdgeInsets.only(top: 10),
-                              child: Text(
-                                "CPF:",
-                                style: TextStyle(
-                                  fontFamily: 'Montserrat',
-                                  color: Colors.black54,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  fontStyle: FontStyle.normal,
-                                  letterSpacing: -0.231,
-                                ),
-                              ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(top: 10, left: 10),
-                              child: Text(
-                                'globalUser.cpf',
-                                style: TextStyle(
-                                  fontFamily: 'Montserrat',
-                                  color: Colors.black54,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w600,
-                                  fontStyle: FontStyle.normal,
-                                  letterSpacing: -0.231,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: <Widget>[
-                            Container(
-                              margin: EdgeInsets.only(top: 10),
-                              child: Text(
-                                "Telefone:",
-                                style: TextStyle(
-                                  fontFamily: 'Montserrat',
-                                  color: Colors.black54,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  fontStyle: FontStyle.normal,
-                                  letterSpacing: -0.231,
-                                ),
-                              ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(top: 10, left: 10),
-                              child: Text(
-                                'globalUser.telephone',
-                                style: TextStyle(
-                                  fontFamily: 'Montserrat',
-                                  color: Colors.black54,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w600,
-                                  fontStyle: FontStyle.normal,
-                                  letterSpacing: -0.231,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: <Widget>[
-                            Container(
-                              margin: EdgeInsets.only(top: 10),
-                              child: Text(
-                                "Idade:",
-                                style: TextStyle(
-                                  fontFamily: 'Montserrat',
-                                  color: Colors.black54,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  fontStyle: FontStyle.normal,
-                                  letterSpacing: -0.231,
-                                ),
-                              ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(top: 10, left: 10),
-                              child: Text(
-
-                                'globalUser.age',
-                                style: TextStyle(
-                                  fontFamily: 'Montserrat',
-                                  color: Colors.black54,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w600,
-                                  fontStyle: FontStyle.normal,
-                                  letterSpacing: -0.231,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: <Widget>[
-                            Container(
-                              margin: EdgeInsets.only(top: 10),
-                              child: Text(
-                                "${'globalUser.residents'} pessoas moram comigo",
-                                style: TextStyle(
-                                  fontFamily: 'Montserrat',
-                                  color: Colors.black54,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  fontStyle: FontStyle.normal,
-                                  letterSpacing: -0.231,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: <Widget>[
-                            Container(
-                              margin: EdgeInsets.only(top: 10),
-                              child: Text(
-                                "CEP:",
-                                style: TextStyle(
-                                  fontFamily: 'Montserrat',
-                                  color: Colors.black54,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  fontStyle: FontStyle.normal,
-                                  letterSpacing: -0.231,
-                                ),
-                              ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(top: 10, left: 10),
-                              child: Text(
-                                'globalUser.neighborhood',
-                                style: TextStyle(
-                                  fontFamily: 'Montserrat',
-                                  color: Colors.black54,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w600,
-                                  fontStyle: FontStyle.normal,
-                                  letterSpacing: -0.231,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(top: 15, bottom: 10),
-                          width: MediaQuery.of(context).size.width,
-                          height: MediaQuery.of(context).size.height / 18,
-                          decoration: new BoxDecoration(
-                            color: Color(0xff27b3ff),
-                            border: Border.all(
-                              color: Color(0xff27b3ff),
-                            ),
-                            borderRadius: BorderRadius.circular(13),
-                          ),
-                          child: FlatButton(
-                            onPressed: () {
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => EditProfilePage()));
-                            },
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Text(
-                                  "Editar Perfil",
-                                  style: TextStyle(
-                                    fontFamily: 'Montserrat',
-                                    color: Colors.white,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                    fontStyle: FontStyle.normal,
-                                    letterSpacing: -0.176,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Container(
-                          width: MediaQuery.of(context).size.width,
-                          height: MediaQuery.of(context).size.height / 18,
-                          decoration: new BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(
-                              color: Color(0xff27b3ff),
-                            ),
-                            borderRadius: BorderRadius.circular(13),
-                          ),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Text(
-                                "Sair da conta",
-                                style: TextStyle(
-                                  fontFamily: 'Montserrat',
-                                  color: Color(0xff27b3ff),
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                  fontStyle: FontStyle.normal,
-                                  letterSpacing: -0.176,
-                                ),
-                              ),
-                            ],
-                          ),
-                        )
+                            ))
                       ],
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
@@ -317,8 +258,6 @@ class _ProfilePageState extends State<ProfilePage> {
       ),
     );
   }
-
-  void _validateInputs() {}
 }
 
 /*

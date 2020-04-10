@@ -658,6 +658,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
     if (updateSucceeded) {
       Navigator.pop(context);
       Navigator.pop(context);
+
     } else {
       Scaffold.of(context).showSnackBar(
         appSnackBar(
