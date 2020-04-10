@@ -656,8 +656,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
     var updateSucceeded = await performUserUpdate(handleUser.cpf, handleUser.password);
     Scaffold.of(context).hideCurrentSnackBar();
     if (updateSucceeded) {
-        Navigator.pop(context);
-        Navigator.pop(context);
+      Navigator.pop(context);
+      Navigator.pop(context);
+
     } else {
       Scaffold.of(context).showSnackBar(
         appSnackBar(
