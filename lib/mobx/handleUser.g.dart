@@ -97,69 +97,52 @@ mixin _$HandleUser on _HandleUserBase, Store {
   final _$ageAtom = Atom(name: '_HandleUserBase.age');
 
   @override
-  String get age {
+  int get age {
     _$ageAtom.context.enforceReadPolicy(_$ageAtom);
     _$ageAtom.reportObserved();
     return super.age;
   }
 
   @override
-  set age(String value) {
+  set age(int value) {
     _$ageAtom.context.conditionallyRunInAction(() {
       super.age = value;
       _$ageAtom.reportChanged();
     }, _$ageAtom, name: '${_$ageAtom.name}_set');
   }
 
-  final _$cityAtom = Atom(name: '_HandleUserBase.city');
+  final _$genderAtom = Atom(name: '_HandleUserBase.gender');
 
   @override
-  String get city {
-    _$cityAtom.context.enforceReadPolicy(_$cityAtom);
-    _$cityAtom.reportObserved();
-    return super.city;
+  String get gender {
+    _$genderAtom.context.enforceReadPolicy(_$genderAtom);
+    _$genderAtom.reportObserved();
+    return super.gender;
   }
 
   @override
-  set city(String value) {
-    _$cityAtom.context.conditionallyRunInAction(() {
-      super.city = value;
-      _$cityAtom.reportChanged();
-    }, _$cityAtom, name: '${_$cityAtom.name}_set');
+  set gender(String value) {
+    _$genderAtom.context.conditionallyRunInAction(() {
+      super.gender = value;
+      _$genderAtom.reportChanged();
+    }, _$genderAtom, name: '${_$genderAtom.name}_set');
   }
 
-  final _$streetAtom = Atom(name: '_HandleUserBase.street');
+  final _$cepAtom = Atom(name: '_HandleUserBase.cep');
 
   @override
-  String get street {
-    _$streetAtom.context.enforceReadPolicy(_$streetAtom);
-    _$streetAtom.reportObserved();
-    return super.street;
-  }
-
-  @override
-  set street(String value) {
-    _$streetAtom.context.conditionallyRunInAction(() {
-      super.street = value;
-      _$streetAtom.reportChanged();
-    }, _$streetAtom, name: '${_$streetAtom.name}_set');
-  }
-
-  final _$numberOfPeopleAtom = Atom(name: '_HandleUserBase.numberOfPeople');
-
-  @override
-  String get numberOfPeople {
-    _$numberOfPeopleAtom.context.enforceReadPolicy(_$numberOfPeopleAtom);
-    _$numberOfPeopleAtom.reportObserved();
-    return super.numberOfPeople;
+  String get cep {
+    _$cepAtom.context.enforceReadPolicy(_$cepAtom);
+    _$cepAtom.reportObserved();
+    return super.cep;
   }
 
   @override
-  set numberOfPeople(String value) {
-    _$numberOfPeopleAtom.context.conditionallyRunInAction(() {
-      super.numberOfPeople = value;
-      _$numberOfPeopleAtom.reportChanged();
-    }, _$numberOfPeopleAtom, name: '${_$numberOfPeopleAtom.name}_set');
+  set cep(String value) {
+    _$cepAtom.context.conditionallyRunInAction(() {
+      super.cep = value;
+      _$cepAtom.reportChanged();
+    }, _$cepAtom, name: '${_$cepAtom.name}_set');
   }
 
   final _$passwordAtom = Atom(name: '_HandleUserBase.password');
@@ -179,26 +162,77 @@ mixin _$HandleUser on _HandleUserBase, Store {
     }, _$passwordAtom, name: '${_$passwordAtom.name}_set');
   }
 
+  final _$numberOfPeopleAtom = Atom(name: '_HandleUserBase.numberOfPeople');
+
+  @override
+  int get numberOfPeople {
+    _$numberOfPeopleAtom.context.enforceReadPolicy(_$numberOfPeopleAtom);
+    _$numberOfPeopleAtom.reportObserved();
+    return super.numberOfPeople;
+  }
+
+  @override
+  set numberOfPeople(int value) {
+    _$numberOfPeopleAtom.context.conditionallyRunInAction(() {
+      super.numberOfPeople = value;
+      _$numberOfPeopleAtom.reportChanged();
+    }, _$numberOfPeopleAtom, name: '${_$numberOfPeopleAtom.name}_set');
+  }
+
+  final _$chronicDiseasesAtom = Atom(name: '_HandleUserBase.chronicDiseases');
+
+  @override
+  List<dynamic> get chronicDiseases {
+    _$chronicDiseasesAtom.context.enforceReadPolicy(_$chronicDiseasesAtom);
+    _$chronicDiseasesAtom.reportObserved();
+    return super.chronicDiseases;
+  }
+
+  @override
+  set chronicDiseases(List<dynamic> value) {
+    _$chronicDiseasesAtom.context.conditionallyRunInAction(() {
+      super.chronicDiseases = value;
+      _$chronicDiseasesAtom.reportChanged();
+    }, _$chronicDiseasesAtom, name: '${_$chronicDiseasesAtom.name}_set');
+  }
+
+  final _$termsCheckedAtom = Atom(name: '_HandleUserBase.termsChecked');
+
+  @override
+  bool get termsChecked {
+    _$termsCheckedAtom.context.enforceReadPolicy(_$termsCheckedAtom);
+    _$termsCheckedAtom.reportObserved();
+    return super.termsChecked;
+  }
+
+  @override
+  set termsChecked(bool value) {
+    _$termsCheckedAtom.context.conditionallyRunInAction(() {
+      super.termsChecked = value;
+      _$termsCheckedAtom.reportChanged();
+    }, _$termsCheckedAtom, name: '${_$termsCheckedAtom.name}_set');
+  }
+
   final _$_HandleUserBaseActionController =
       ActionController(name: '_HandleUserBase');
 
   @override
-  void setForm1(
-      dynamic name, dynamic email, dynamic cpf, dynamic phone, dynamic age) {
+  void setForm(
+      String name,
+      String email,
+      String cpf,
+      String phone,
+      int age,
+      String gender,
+      String cep,
+      String password,
+      int numberOfPeople,
+      List<dynamic> chronicDiseases,
+      bool termsChecked) {
     final _$actionInfo = _$_HandleUserBaseActionController.startAction();
     try {
-      return super.setForm1(name, email, cpf, phone, age);
-    } finally {
-      _$_HandleUserBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void setForm2(
-      dynamic city, dynamic street, dynamic numberOfpeople, dynamic password) {
-    final _$actionInfo = _$_HandleUserBaseActionController.startAction();
-    try {
-      return super.setForm2(city, street, numberOfpeople, password);
+      return super.setForm(name, email, cpf, phone, age, gender, cep, password,
+          numberOfPeople, chronicDiseases, termsChecked);
     } finally {
       _$_HandleUserBaseActionController.endAction(_$actionInfo);
     }
@@ -207,7 +241,7 @@ mixin _$HandleUser on _HandleUserBase, Store {
   @override
   String toString() {
     final string =
-        'userID: ${userID.toString()},name: ${name.toString()},email: ${email.toString()},cpf: ${cpf.toString()},phone: ${phone.toString()},age: ${age.toString()},city: ${city.toString()},street: ${street.toString()},numberOfPeople: ${numberOfPeople.toString()},password: ${password.toString()}';
+        'userID: ${userID.toString()},name: ${name.toString()},email: ${email.toString()},cpf: ${cpf.toString()},phone: ${phone.toString()},age: ${age.toString()},gender: ${gender.toString()},cep: ${cep.toString()},password: ${password.toString()},numberOfPeople: ${numberOfPeople.toString()},chronicDiseases: ${chronicDiseases.toString()},termsChecked: ${termsChecked.toString()}';
     return '{$string}';
   }
 }

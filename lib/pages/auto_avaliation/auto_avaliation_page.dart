@@ -4,8 +4,8 @@ import 'package:covid19/pages/auto_avaliation/widgets/symptomsQuestion.dart';
 import 'package:covid19/pages/auto_avaliation/widgets/textInput.dart';
 import 'package:covid19/pages/auto_avaliation/widgets/yesNoQuestion.dart';
 import 'package:flutter/material.dart';
-import 'package:covid19/global/RedDialog.dart';
-import 'package:covid19/global/YellowDialog.dart';
+import 'package:covid19/global/dialogs/red.dart';
+import 'package:covid19/global/dialogs/yellow.dart';
 
 class AutoAvaliationPage1 extends StatefulWidget {
   @override

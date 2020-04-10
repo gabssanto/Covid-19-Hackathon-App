@@ -1,72 +1,82 @@
 import 'dart:convert';
 
 class UserInfo {
-  String name,
-      email,
-      cpf,
-      telephone,
-      age,
-      city,
-      neighborhood,
-      password;
-  List<dynamic> answers;
-  int residents;
+  final String name, email, cpf, telephone, gender, cep, password;
+  final chronicDiseases;
+  final int residents, age;
 
-  fromJson(dynamic response) {
-    var data = response['message'];
-    this.name = data['nome'].toString();
-    this.email = data['email'].toString();
-    this.cpf = data['cpf'].toString();
-    this.telephone = data['telefone'].toString();
-    this.age = data['idade'].toString();
-    this.city = data['cidade_municipio'].toString();
-    this.neighborhood = data['bairro'].toString();
-    this.password = data['senha'].toString();
-    this.answers = jsonDecode(data['respostas'].toString());
-    this.residents = int.parse(data['residentes'].toString());
+  UserInfo({
+    this.name,
+    this.email,
+    this.cpf,
+    this.telephone,
+    this.age,
+    this.gender,
+    this.cep,
+    this.password,
+    this.residents,
+    this.chronicDiseases,
+  });
+
+  factory UserInfo.fromJson(Map<String, dynamic> json) {
+    return UserInfo(
+      name: json['nome'] as String,
+      email: json['email'] as String,
+      cpf: json['cpf'] as String,
+      telephone: json['telefone'] as String,
+      age: json['idade'] as int,
+      gender: json['genero'] as String,
+      cep: json['cep'] as String,
+      password: json['senha'] as String,
+      residents: json['residentes'] as int,
+      chronicDiseases: {
+        'diabetes':
+            (json['doencas_cronicas']['diabetes'] as String).toLowerCase() ==
+                'true',
+        'hipertensao':
+            (json['doencas_cronicas']['hipertensao'] as String).toLowerCase() ==
+                'true',
+        'insuficiencia_cardiaca':
+            (json['doencas_cronicas']['insuficiencia_cardiaca'] as String)
+                    .toLowerCase() ==
+                'true',
+        'insuficiencia_renal':
+            (json['doencas_cronicas']['insuficiencia_renal'] as String)
+                    .toLowerCase() ==
+                'true',
+        'respiratoria': (json['doencas_cronicas']['respiratoria'] as String)
+                .toLowerCase() ==
+            'true',
+      },
+    );
   }
 
-  Map toMap(double latitude, double longitude, double precision) {
-    Map location = {
-      'latitude': latitude,
-      'longitude': longitude,
-      'precisao': precision
-    };
+  Map<String, dynamic> toJson() => {
+        'nome': name,
+        'email': email,
+        'cpf': cpf,
+        'telefone': telephone,
+        'idade': age,
+        'genero': gender,
+        'cep': cep,
+        'senha': password,
+        'residentes': residents,
+        'respostas': email,
+        'doencas_cronicas': chronicDiseases,
+      };
 
-    Map result = {
-      'nome': this.name,
-      'email': this.email,
-      'cpf': this.cpf,
-      'telefone': this.telephone,
-      'idade': this.age,
-      'cidade_municipio': this.city,
-      'bairro': this.neighborhood,
-      'residentes': this.residents,
-      'senha': this.password,
-      'respostas': this.answers.join(','),
-      'local': jsonEncode(location)
-    };
-
-    return result;
-  }
-
-  @override
-  toString() {
-    return this.name +
-        ' ' +
-        this.cpf +
-        ' ' +
-        this.telephone +
-        ' ' +
-        this.age +
-        ' ' +
-        this.city +
-        ' ' +
-        this.neighborhood +
-        ' ' +
-        this.residents.toString() +
-        ' ';
-  }
+  String toString() => """
+  name: $name
+  email: $email,
+  cpf: $cpf,
+  telephone: $telephone,
+  age: $age,
+  gender: $gender,
+  cep: $cep,
+  password: $password,
+  residents: $residents,
+  chronicDiseases: $chronicDiseases
+""";
 }
 
 var globalUser = new UserInfo();
