@@ -3,7 +3,7 @@ import 'package:covid19/mobx/imports.dart';
 import 'package:dio/dio.dart';
 
 // para acessar o localhost da máquina é com esse ip: http://10.0.2.2:PORT
-const String _devUrl = 'http://10.0.2.2:3333';
+const String _devUrl = 'http://10.0.2.2:3636';
 // const String _prodUrl = 'https://covid19-backend-node.herokuapp.com';
 
 Future<bool> performUserLogin(String cpf, String password) async {
@@ -30,6 +30,27 @@ Future<bool> performUserSignUp() async {
     var response = await dio.post(
       _devUrl + _endPoint,
       data: userBody,
+    );
+    if (response.statusCode == 201) {
+      globalUser = UserInfo.fromJson(response.data['message']);
+      return true;
+    }
+    throw Exception(response.data['message']);
+  } catch (e) {
+    print(e);
+    return false;
+  }
+}
+
+Future<bool> performAutoAvaliation() async {
+  final formBody = handleQuestions.toJson();
+  var _endPoint = '/api/forms/';
+  var dio = new Dio();
+  dio.options.headers['Content-Type'] = 'application/x-www-form-urlencoded';
+  try {
+    var response = await dio.post(
+      _devUrl + _endPoint,
+      data: formBody,
     );
     if (response.statusCode == 201) {
       globalUser = UserInfo.fromJson(response.data['message']);
