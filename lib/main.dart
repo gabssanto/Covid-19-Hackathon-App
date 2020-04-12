@@ -1,4 +1,3 @@
-import 'package:covid19/pages/home/home_page.dart';
 import 'package:covid19/pages/initialPage/initialPage.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/material.dart';

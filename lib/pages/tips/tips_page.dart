@@ -13,23 +13,33 @@ class TipsPage extends StatelessWidget {
         appBar: BackAppBar(
           title: 'Dicas',
         ),
-        body: Container(
-            padding: EdgeInsets.only(top: 10),
-            child: GestureDetector(
-              child: FutureBuilder<List<TipItem>>(
-                future: fetchTips(context: context),
-                builder: (context, snapshot) {
-                  if (snapshot.hasError) print(snapshot.error);
+        body: _body(context));
+  }
 
-                  return snapshot.hasData
-                      ? TipsList(tips: (() {
-                          snapshot.data.shuffle();
-                          return snapshot.data;
-                        })())
-                      : Center(child: CircularProgressIndicator());
-                },
-              ),
-            )));
+  _body(BuildContext context) {
+    return SafeArea(
+      child: Container(
+        child: GestureDetector(
+          child: _buildTipsList(context),
+        ),
+      ),
+    );
+  }
+
+  _buildTipsList(context) {
+    return FutureBuilder<List<TipItem>>(
+      future: fetchTips(context: context),
+      builder: (context, snapshot) {
+        if (snapshot.hasError) print(snapshot.error);
+
+        return snapshot.hasData
+            ? TipsList(tips: (() {
+                snapshot.data.shuffle();
+                return snapshot.data;
+              })())
+            : Center(child: CircularProgressIndicator());
+      },
+    );
   }
 }
 

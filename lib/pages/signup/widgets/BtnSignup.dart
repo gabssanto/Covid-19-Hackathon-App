@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 class BtnSignup extends StatelessWidget {
   final String text;
   final Function onPressed;
+  final color;
 
-  BtnSignup({this.text, this.onPressed});
+  BtnSignup({this.text, this.onPressed, this.color});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +24,7 @@ class BtnSignup extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: new BorderRadius.circular(12.0),
                   ),
-                  color: Color(0xff27b3ff),
+                  color: color,
                   child: Text(text,
                       style: TextStyle(
                           fontSize: 16,

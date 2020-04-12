@@ -4,19 +4,9 @@ import 'package:flutter/material.dart';
 
 import 'editProfilePage.dart';
 
-class ProfilePage extends StatefulWidget {
-  @override
-  _ProfilePageState createState() => _ProfilePageState();
-}
-
-class _ProfilePageState extends State<ProfilePage> {
-  final GlobalKey<FormState> _profileForm = GlobalKey<FormState>();
-  bool _autoValidate = false;
-  final passKey = GlobalKey<FormFieldState>();
-
+class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    print(globalUser.toString());
     return Scaffold(
       appBar: BackAppBar(
         title: 'Perfil',
@@ -47,7 +37,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       Container(
                         margin: EdgeInsets.only(top: 10),
                         child: Text(
-                          "Nome:",
+                          'Nome:',
                           style: TextStyle(
                             fontFamily: 'Montserrat',
                             color: Colors.black54,
@@ -61,7 +51,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       Container(
                         margin: EdgeInsets.only(top: 10, left: 10),
                         child: Text(
-                          'globalUser.name',
+                          '${globalUser.name}',
                           style: TextStyle(
                             fontFamily: 'Montserrat',
                             color: Colors.black54,
@@ -79,7 +69,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       Container(
                         margin: EdgeInsets.only(top: 10),
                         child: Text(
-                          "CPF:",
+                          'CPF:',
                           style: TextStyle(
                             fontFamily: 'Montserrat',
                             color: Colors.black54,
@@ -93,7 +83,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       Container(
                         margin: EdgeInsets.only(top: 10, left: 10),
                         child: Text(
-                          'globalUser.cpf',
+                          '${globalUser.cpf}',
                           style: TextStyle(
                             fontFamily: 'Montserrat',
                             color: Colors.black54,
@@ -111,7 +101,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       Container(
                         margin: EdgeInsets.only(top: 10),
                         child: Text(
-                          "Telefone:",
+                          'Telefone:',
                           style: TextStyle(
                             fontFamily: 'Montserrat',
                             color: Colors.black54,
@@ -125,7 +115,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       Container(
                         margin: EdgeInsets.only(top: 10, left: 10),
                         child: Text(
-                          'globalUser.telephone',
+                          '${globalUser.telephone}',
                           style: TextStyle(
                             fontFamily: 'Montserrat',
                             color: Colors.black54,
@@ -143,7 +133,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       Container(
                         margin: EdgeInsets.only(top: 10),
                         child: Text(
-                          "Idade:",
+                          'Idade:',
                           style: TextStyle(
                             fontFamily: 'Montserrat',
                             color: Colors.black54,
@@ -157,8 +147,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       Container(
                         margin: EdgeInsets.only(top: 10, left: 10),
                         child: Text(
-
-                          'globalUser.age',
+                          '${globalUser.age}',
                           style: TextStyle(
                             fontFamily: 'Montserrat',
                             color: Colors.black54,
@@ -176,7 +165,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       Container(
                         margin: EdgeInsets.only(top: 10),
                         child: Text(
-                          "${'globalUser.residents'} pessoas moram comigo",
+                          '${globalUser.residents} pessoa${globalUser.residents > 1 ? 's' : ''} moram comigo',
                           style: TextStyle(
                             fontFamily: 'Montserrat',
                             color: Colors.black54,
@@ -194,7 +183,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       Container(
                         margin: EdgeInsets.only(top: 10),
                         child: Text(
-                          "CEP:",
+                          'CEP:',
                           style: TextStyle(
                             fontFamily: 'Montserrat',
                             color: Colors.black54,
@@ -208,7 +197,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       Container(
                         margin: EdgeInsets.only(top: 10, left: 10),
                         child: Text(
-                          'globalUser.neighborhood',
+                          '${globalUser.cep}',
                           style: TextStyle(
                             fontFamily: 'Montserrat',
                             color: Colors.black54,
@@ -223,7 +212,8 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                   Padding(
                     padding: EdgeInsets.only(
-                        top: 20, bottom: MediaQuery.of(context).viewInsets.bottom),
+                        top: 20,
+                        bottom: MediaQuery.of(context).viewInsets.bottom),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -243,7 +233,11 @@ class _ProfilePageState extends State<ProfilePage> {
                                         fontWeight: FontWeight.bold,
                                         color: Colors.white)),
                                 onPressed: () {
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => EditProfilePage()));
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              EditProfilePage()));
                                 },
                               ),
                             ))
@@ -262,7 +256,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
 /*
 Container(
-                                    child: Text("Segurança",
+                                    child: Text('Segurança',
                                         style: TextStyle(
                                           fontFamily: 'Montserrat',
                                           color: Color(0xff27b3ff),
@@ -338,7 +332,7 @@ Container(
 
                                   Container(
                                     margin: EdgeInsets.only(top: 5, bottom: 15),
-                                    child: Text("Digite aqui para mudar a senha",
+                                    child: Text('Digite aqui para mudar a senha',
                                         style: TextStyle(
                                           fontFamily: 'Montserrat',
                                           color: Colors.black38,
@@ -374,7 +368,7 @@ Container(
                                             CrossAxisAlignment.center,
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         children: <Widget>[
-                                          Text("Salvar",
+                                          Text('Salvar',
                                               style: TextStyle(
                                                 fontFamily: 'Montserrat',
                                                 color: Colors.white,

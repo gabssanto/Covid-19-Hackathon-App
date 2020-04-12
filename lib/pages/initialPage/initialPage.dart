@@ -1,10 +1,22 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:covid19/global/locationInfo.dart';
 import 'package:covid19/pages/login/login_page.dart';
 import 'package:covid19/pages/signup/signup_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class InitialPage extends StatelessWidget {
+class InitialPage extends StatefulWidget {
+  @override
+  _InitialPage createState() => _InitialPage();
+}
+
+class _InitialPage extends State<InitialPage> {
+  @override
+  void initState() {
+    super.initState();
+    globalLocation.getLocation();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

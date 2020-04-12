@@ -1,8 +1,9 @@
 import 'package:covid19/global/appSnackBar.dart';
 import 'package:covid19/global/backAppBar.dart';
 import 'package:covid19/global/userInfo.dart';
-import 'package:covid19/mobx/handleHttpConnections.dart';
+import 'package:covid19/global/handleHttpConnections.dart';
 import 'package:covid19/mobx/imports.dart';
+import 'package:covid19/pages/profile/chronicDiseasesQuestion.dart';
 import 'package:covid19/pages/profile/symptomsQuestion.dart';
 import 'package:flutter/material.dart';
 
@@ -12,42 +13,22 @@ class EditProfilePage extends StatefulWidget {
 }
 
 class _EditProfilePageState extends State<EditProfilePage> {
-  final GlobalKey<FormState> _EditForm = GlobalKey<FormState>();
-
+  final GlobalKey<FormState> _editForm = GlobalKey<FormState>();
   final passKey = GlobalKey<FormFieldState>();
-
   bool _autoValidate = false;
-
   bool _obscureText = true;
-
   String _name;
-
   String _email;
-
-  String _cpf;
-
   String _phone;
-
   int _age;
-
   String _gender;
-
   String _cep;
-
   int _numberOfPeople;
-
   String _password;
-
   List _selectedChronicDiseases = [0, 0, 0, 0, 0];
-
-  bool _termsChecked = false;
-
-  //List selected = [0, 0, 0, 0, 0];
-
-  int yesNo = 0;
+  int _yesNo = 0;
 
   final active = Color(0xff27b3ff);
-
   final inactive = Color(0xffe8e8e8);
 
   @override
@@ -75,18 +56,18 @@ class _EditProfilePageState extends State<EditProfilePage> {
       resizeToAvoidBottomInset: false,
       resizeToAvoidBottomPadding: false,
       appBar: BackAppBar(
-        title: 'Editar Perfil',
+        title: 'Cadastre-se',
       ),
       body: Builder(builder: (BuildContext context) {
         return Form(
-            key: _EditForm,
+            key: _editForm,
             autovalidate: _autoValidate,
             child: ListView(children: <Widget>[
               Container(
                   alignment: Alignment.center,
-                  margin: EdgeInsets.only(top: 10),
+                  margin: EdgeInsets.only(left: 30),
                   child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text('Informações Básicas',
                             style: TextStyle(
@@ -101,8 +82,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                               obscureText: false,
                               keyboardType: TextInputType.text,
                               decoration: new InputDecoration(
-                                hintText: globalUser.name != null ? globalUser.name : "Digite seu nome",
-                                labelText: 'Nome',
+                                hintText: globalUser.name ?? "Digite seu nome",
+                                labelText: "Nome",
                                 focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                         color: Color(0xff27b3ff), width: 1.0),
@@ -135,7 +116,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                               obscureText: false,
                               keyboardType: TextInputType.text,
                               decoration: new InputDecoration(
-                                hintText: globalUser.email != null ? globalUser.email : "Digite seu e-mail",
+                                hintText:
+                                    globalUser.email ?? "Digite seu e-mail",
                                 labelText: "Email",
                                 focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
@@ -168,7 +150,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             child: TextFormField(
                               keyboardType: TextInputType.phone,
                               decoration: new InputDecoration(
-                                hintText: globalUser.telephone != null ? globalUser.telephone : "Digite seu telefone",
+                                hintText: globalUser.telephone ??
+                                    "Digite seu telefone",
                                 labelText: "Telefone",
                                 focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
@@ -201,7 +184,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             child: TextFormField(
                               keyboardType: TextInputType.number,
                               decoration: new InputDecoration(
-                                hintText: globalUser.age != null ? globalUser.age : "Digite sua idade",
+                                hintText:
+                                    '${globalUser.age}' ?? "Digite sua idade",
                                 labelText: "Idade",
                                 focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
@@ -220,8 +204,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                 RegExp pattern = new RegExp(r'^\d{1,3}$');
                                 return pattern.hasMatch(idade.trim())
                                     ? (() => int.parse(idade.trim()) > 130
-                                    ? 'Idade inválida'
-                                    : null)()
+                                        ? 'Idade inválida'
+                                        : null)()
                                     : 'Idade inválida';
                               },
                               onSaved: (String val) {
@@ -238,7 +222,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             value: _gender,
                             decoration: new InputDecoration(
                               contentPadding: EdgeInsets.only(right: 10.0),
-                              hintText: globalUser.gender != null ? globalUser.gender : "Selecionar gênero",
+                              hintText:
+                                  globalUser.gender ?? "Selecionar gênero",
                               labelText: "Gênero",
                               focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
@@ -255,9 +240,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             ),
                             items: ['Masculino', 'Feminino', 'Outro']
                                 .map((String gender) => DropdownMenuItem(
-                              child: Text(gender),
-                              value: gender,
-                            ))
+                                      child: Text(gender),
+                                      value: gender,
+                                    ))
                                 .toList(),
                             onSaved: (gender) {
                               setState(() {
@@ -290,9 +275,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             width: MediaQuery.of(context).size.width / 1.2,
                             height: MediaQuery.of(context).size.height / 15,
                             child: TextFormField(
-                              keyboardType: TextInputType.text,
+                              keyboardType: TextInputType.number,
                               decoration: new InputDecoration(
-                                hintText: globalUser.cep != null ? globalUser.cep : 'Digite seu CEP',
+                                hintText: globalUser.cpf ?? 'Digite seu CEP',
                                 labelText: 'CEP',
                                 focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
@@ -418,7 +403,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             child: TextFormField(
                               keyboardType: TextInputType.number,
                               decoration: new InputDecoration(
-                                hintText: globalUser.residents != null ? globalUser.residents : "Digite a quantidade de pessoas",
+                                hintText: '${globalUser.residents}' ??
+                                    "Digite a quantidade de pessoas",
                                 labelText: "Número de pessoas",
                                 focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
@@ -437,8 +423,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                 RegExp pattern = new RegExp(r'^\d{1,2}$');
                                 return pattern.hasMatch(quantidade.trim())
                                     ? (() => int.parse(quantidade.trim()) > 50
-                                    ? 'Quantidade inválida'
-                                    : null)()
+                                        ? 'Quantidade inválida'
+                                        : null)()
                                     : 'Quantidade inválida';
                               },
                               onSaved: (String val) {
@@ -449,11 +435,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           height: 10,
                         ),
                         Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
                             Container(
                               margin: EdgeInsets.only(top: 15),
+                              width: MediaQuery.of(context).size.width / 1.15,
                               child: Text('Apresenta alguma doença crônica?',
                                   style: TextStyle(
                                     fontFamily: 'Montserrat',
@@ -468,37 +453,45 @@ class _EditProfilePageState extends State<EditProfilePage> {
                               margin: EdgeInsets.only(top: 15),
                               width: MediaQuery.of(context).size.width / 1.18,
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
                                   AnimatedContainer(
                                       duration: Duration(milliseconds: 200),
-                                      width: MediaQuery.of(context).size.width / 2.5,
-                                      height: MediaQuery.of(context).size.height / 17,
+                                      width: MediaQuery.of(context).size.width /
+                                          2.5,
+                                      height:
+                                          MediaQuery.of(context).size.height /
+                                              17,
                                       decoration: new BoxDecoration(
                                           color:
-                                          handleQuestions.questions[0] == 1
-                                              ? active
-                                              : inactive,
-                                          borderRadius: BorderRadius.circular(6)),
+                                              handleQuestions.questions[0] == 1
+                                                  ? active
+                                                  : inactive,
+                                          borderRadius:
+                                              BorderRadius.circular(6)),
                                       child: FlatButton(
                                         onPressed: () {
                                           setState(() {
-                                            handleQuestions.questions[0] == 1 ? yesNo = 0 : yesNo = 1;
+                                            handleQuestions.questions[0] == 1
+                                                ? _yesNo = 0
+                                                : _yesNo = 1;
                                           });
-//                          answer(yesNo);
-                                          handleQuestions.setQuestions(0, yesNo);
-                                          print(handleQuestions.questions);
+                                          handleQuestions.setQuestions(
+                                              0, _yesNo);
                                         },
                                         child: Row(
-                                          crossAxisAlignment: CrossAxisAlignment.center,
-                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
                                           children: <Widget>[
                                             Text("Sim",
                                                 style: TextStyle(
                                                   fontFamily: 'Montserrat',
                                                   color: handleQuestions
-                                                      .questions[0] ==
-                                                      1
+                                                              .questions[0] ==
+                                                          1
                                                       ? Colors.white
                                                       : Colors.black54,
                                                   fontSize: 16,
@@ -511,33 +504,49 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                       )),
                                   AnimatedContainer(
                                       duration: Duration(milliseconds: 200),
-                                      width: MediaQuery.of(context).size.width / 2.5,
-                                      height: MediaQuery.of(context).size.height / 17,
+                                      width: MediaQuery.of(context).size.width /
+                                          2.5,
+                                      height:
+                                          MediaQuery.of(context).size.height /
+                                              17,
                                       decoration: new BoxDecoration(
                                           color:
-                                          handleQuestions.questions[0] == 2
-                                              ? active
-                                              : inactive,
-                                          borderRadius: BorderRadius.circular(6)),
+                                              handleQuestions.questions[0] == 2
+                                                  ? active
+                                                  : inactive,
+                                          borderRadius:
+                                              BorderRadius.circular(6)),
                                       child: FlatButton(
                                         onPressed: () {
                                           setState(() {
-                                            handleQuestions.questions[0] == 2 ? yesNo = 0 : yesNo = 2;
+                                            handleQuestions.questions[0] == 2
+                                                ? _yesNo = 0
+                                                : _yesNo = 2;
                                           });
-//                          answer(yesNo);
-                                          handleQuestions.setQuestions(0, yesNo);
-                                          print(handleQuestions.questions);
+                                          handleQuestions.setQuestions(
+                                              0, _yesNo);
+                                          _selectedChronicDiseases = [
+                                            0,
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                          ];
+                                          handleQuestions.setQuestions(
+                                              1, _selectedChronicDiseases);
                                         },
                                         child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
                                           children: <Widget>[
                                             Text("Não",
                                                 style: TextStyle(
                                                   fontFamily: 'Montserrat',
                                                   color: handleQuestions
-                                                      .questions[0] ==
-                                                      2
+                                                              .questions[0] ==
+                                                          2
                                                       ? Colors.white
                                                       : Colors.black54,
                                                   fontSize: 16,
@@ -553,25 +562,33 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             )
                           ],
                         ),
-                        handleQuestions.questions[0] == 1 ? SymptomsQuestion(title: 'Qual(is)?', index:1, selected: _selectedChronicDiseases) : Container(),
+                        handleQuestions.questions[0] == 1
+                            ? ChronicDiseasesQuestion(
+                                title: 'Qual(is)?',
+                                index: 1,
+                                selected: _selectedChronicDiseases)
+                            : SizedBox(),
                         SizedBox(
                           height: 10,
                         ),
-
                         Padding(
                           padding: EdgeInsets.only(
-                              top: 10, bottom: MediaQuery.of(context).viewInsets.bottom),
+                              top: 10,
+                              bottom: MediaQuery.of(context).viewInsets.bottom),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: <Widget>[
                               SizedBox(
-                                  width: MediaQuery.of(context).size.width / 1.2,
-                                  height: MediaQuery.of(context).size.height / 15,
+                                  width:
+                                      MediaQuery.of(context).size.width / 1.2,
+                                  height:
+                                      MediaQuery.of(context).size.height / 15,
                                   child: Container(
                                     child: RaisedButton(
                                       shape: RoundedRectangleBorder(
-                                        borderRadius: new BorderRadius.circular(12.0),
+                                        borderRadius:
+                                            new BorderRadius.circular(12.0),
                                       ),
                                       color: Color(0xff27b3ff),
                                       child: Text('Salvar',
@@ -589,15 +606,16 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.only(
-                              top: 10, bottom: 30),
+                          padding: EdgeInsets.only(top: 10, bottom: 30),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: <Widget>[
                               SizedBox(
-                                  width: MediaQuery.of(context).size.width / 1.2,
-                                  height: MediaQuery.of(context).size.height / 15,
+                                  width:
+                                      MediaQuery.of(context).size.width / 1.2,
+                                  height:
+                                      MediaQuery.of(context).size.height / 15,
                                   child: Container(
                                     decoration: new BoxDecoration(
                                       color: Colors.white,
@@ -608,7 +626,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                     ),
                                     child: RaisedButton(
                                       shape: RoundedRectangleBorder(
-                                        borderRadius: new BorderRadius.circular(12.0),
+                                        borderRadius:
+                                            new BorderRadius.circular(12.0),
                                       ),
                                       color: Colors.white,
                                       child: Text('Sair da conta',
@@ -616,9 +635,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                               fontSize: 16,
                                               fontWeight: FontWeight.bold,
                                               color: Color(0xff27b3ff))),
-                                      onPressed: () {
-
-                                      },
+                                      onPressed: () {},
                                     ),
                                   ))
                             ],
@@ -631,13 +648,23 @@ class _EditProfilePageState extends State<EditProfilePage> {
   }
 
   void _validateInputs(context) {
-    if (_EditForm.currentState.validate() && _termsChecked) {
-      _EditForm.currentState.save();
+    if (_editForm.currentState.validate()) {
+      _editForm.currentState.save();
 
-      handleUser.setForm(_name, _email, handleUser.cpf, _phone, _age, _gender, _cep,
-          _password, _numberOfPeople, _selectedChronicDiseases, _termsChecked);
+      handleUser.setForm(
+        _name,
+        _email,
+        handleUser.cpf,
+        _phone,
+        _age,
+        _gender,
+        _cep,
+        _password,
+        _numberOfPeople,
+        _selectedChronicDiseases,
+        handleUser.termsChecked,
+      );
 
-      print(handleUser.toString());
       _performUpdate(context);
       FocusScope.of(context).unfocus();
     } else {
@@ -646,6 +673,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
       });
     }
   }
+
   _performUpdate(context) async {
     Scaffold.of(context).showSnackBar(
       appSnackBar(
@@ -653,12 +681,12 @@ class _EditProfilePageState extends State<EditProfilePage> {
         isLoading: true,
       ),
     );
-    var updateSucceeded = await performUserUpdate(handleUser.cpf, handleUser.password);
+    var updateSucceeded =
+        await performUserUpdate(handleUser.cpf, handleUser.password);
     Scaffold.of(context).hideCurrentSnackBar();
     if (updateSucceeded) {
       Navigator.pop(context);
       Navigator.pop(context);
-
     } else {
       Scaffold.of(context).showSnackBar(
         appSnackBar(

@@ -30,6 +30,7 @@ class BackAppBar extends StatelessWidget implements PreferredSizeWidget {
                   icon: Icon(Icons.arrow_back_ios),
                   iconSize: 30,
                   onPressed: () {
+                    WidgetsBinding.instance.focusManager.primaryFocus?.unfocus();
                     Navigator.pop(context);
                   },
                   color: Color(0xff27b3ff)),
@@ -41,9 +42,9 @@ class BackAppBar extends StatelessWidget implements PreferredSizeWidget {
                         color: Color(0xff27b3ff))),
               ),
               IconButton(
-                  icon: Icon(Icons.arrow_back_ios),
-                  iconSize: 30,
-                  disabledColor: Color(0x00ffffff),
+                icon: Icon(Icons.arrow_back_ios),
+                iconSize: 30,
+                disabledColor: Color(0x00ffffff),
               ),
             ],
           ),

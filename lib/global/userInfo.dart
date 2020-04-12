@@ -1,9 +1,8 @@
-import 'dart:convert';
-
 class UserInfo {
   final String name, email, cpf, telephone, gender, cep, password;
   final chronicDiseases;
   final int residents, age;
+  String token;
 
   UserInfo({
     this.name,
@@ -29,25 +28,7 @@ class UserInfo {
       cep: json['cep'] as String,
       password: json['senha'] as String,
       residents: json['residentes'] as int,
-      chronicDiseases: {
-        'diabetes':
-            (json['doencas_cronicas']['diabetes'] as String).toLowerCase() ==
-                'true',
-        'hipertensao':
-            (json['doencas_cronicas']['hipertensao'] as String).toLowerCase() ==
-                'true',
-        'insuficiencia_cardiaca':
-            (json['doencas_cronicas']['insuficiencia_cardiaca'] as String)
-                    .toLowerCase() ==
-                'true',
-        'insuficiencia_renal':
-            (json['doencas_cronicas']['insuficiencia_renal'] as String)
-                    .toLowerCase() ==
-                'true',
-        'respiratoria': (json['doencas_cronicas']['respiratoria'] as String)
-                .toLowerCase() ==
-            'true',
-      },
+      chronicDiseases: json['doencas_cronicas'],
     );
   }
 
@@ -65,8 +46,9 @@ class UserInfo {
         'doencas_cronicas': chronicDiseases,
       };
 
-  String toString() => """
-  name: $name
+  String toString() => """UserInfo: {
+  token: $token,
+  name: $name,
   email: $email,
   cpf: $cpf,
   telephone: $telephone,
@@ -76,7 +58,7 @@ class UserInfo {
   password: $password,
   residents: $residents,
   chronicDiseases: $chronicDiseases
-""";
+}""";
 }
 
-var globalUser = new UserInfo();
+UserInfo globalUser;

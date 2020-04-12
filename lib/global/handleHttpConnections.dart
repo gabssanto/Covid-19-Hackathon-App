@@ -1,17 +1,25 @@
+import 'package:covid19/global/locationInfo.dart';
 import 'package:covid19/global/userInfo.dart';
 import 'package:covid19/mobx/imports.dart';
 import 'package:dio/dio.dart';
 
-// para acessar o localhost da máquina é com esse ip: http://10.0.2.2:PORT
-const String _devUrl = 'http://10.0.2.2:3636';
-// const String _prodUrl = 'https://covid19-backend-node.herokuapp.com';
+const _LOCAL_EMULATOR_URL = 'http://10.0.2.2';
+const _LOCAL_SERVER_PORT = 3333;
+const _PROD_URL = 'https://covid19-backend-node.herokuapp.com';
+
+const _isDev = true;
+const _apiUrl = _isDev ? '$_LOCAL_EMULATOR_URL:$_LOCAL_SERVER_PORT' : _PROD_URL;
 
 Future<bool> performUserLogin(String cpf, String password) async {
   var _endPoint = '/api/users/$cpf/$password';
+  var dio = new Dio();
   try {
-    var response = await Dio().get(_devUrl + _endPoint);
+    final token = await _generateJwtToken(cpf, password);
+    dio.options.headers['Authorization'] = 'Bearer $token';
+    var response = await dio.get(_apiUrl + _endPoint);
     if (response.statusCode == 200) {
       globalUser = UserInfo.fromJson(response.data['message']);
+      globalUser.token = globalUser.token ?? token;
       return true;
     }
     throw Exception(response.data['message']);
@@ -21,18 +29,30 @@ Future<bool> performUserLogin(String cpf, String password) async {
   }
 }
 
+Future<String> _generateJwtToken(String cpf, String password) async {
+  var dio = new Dio();
+  var response = await dio.get(_apiUrl + '/authenticate/$cpf/$password');
+  if (response.statusCode == 200) {
+    return response.data['message'];
+  }
+  throw Exception(response.data['message']);
+}
+
 Future<bool> performUserSignUp() async {
   final userBody = handleUser.toJson();
+  globalLocation.name = 'Local de Cadastro';
+  userBody['local_registro'] = globalLocation.toJson();
   var _endPoint = '/api/users/';
   var dio = new Dio();
   dio.options.headers['Content-Type'] = 'application/x-www-form-urlencoded';
   try {
     var response = await dio.post(
-      _devUrl + _endPoint,
+      _apiUrl + _endPoint,
       data: userBody,
     );
     if (response.statusCode == 201) {
-      globalUser = UserInfo.fromJson(response.data['message']);
+      globalUser = UserInfo.fromJson(userBody);
+      globalUser.token = await _generateJwtToken(globalUser.cpf, globalUser.password);
       return true;
     }
     throw Exception(response.data['message']);
@@ -46,14 +66,23 @@ Future<bool> performUserUpdate(String cpf, String password) async {
   final userBody = handleUser.toJson();
   var _endPoint = '/api/users/$cpf/$password';
   var dio = new Dio();
+  dio.options.headers['Authorization'] = 'Bearer ${globalUser.token}';
   dio.options.headers['Content-Type'] = 'application/x-www-form-urlencoded';
   try {
-    //var response = await Dio().get(_devUrl + _endPoint);
     var response = await dio.put(
-      _devUrl + _endPoint,
+      _apiUrl + _endPoint,
       data: userBody,
     );
-    if (response.statusCode == 200) {
+    if (response.statusCode == 202) {
+      globalUser = UserInfo.fromJson(userBody);
+      return true;
+    }
+    throw Exception(response.data['message']);
+  } catch (e) {
+    print(e);
+    return false;
+  }
+}
 
 Future<bool> performAutoAvaliation() async {
   final formBody = handleQuestions.toJson();
@@ -62,11 +91,10 @@ Future<bool> performAutoAvaliation() async {
   dio.options.headers['Content-Type'] = 'application/x-www-form-urlencoded';
   try {
     var response = await dio.post(
-      _devUrl + _endPoint,
+      _apiUrl + _endPoint,
       data: formBody,
     );
     if (response.statusCode == 201) {
-
       globalUser = UserInfo.fromJson(response.data['message']);
       return true;
     }
@@ -75,6 +103,4 @@ Future<bool> performAutoAvaliation() async {
     print(e);
     return false;
   }
-
 }
-

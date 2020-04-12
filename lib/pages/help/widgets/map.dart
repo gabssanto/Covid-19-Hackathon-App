@@ -115,7 +115,7 @@ class UBSMapState extends State<UBSMap> {
     String nomeLogradouros = await DefaultAssetBundle.of(context)
         .loadString(ConstantsHelpPage.nomeLogradourosTxt);
     String numTelefone = await DefaultAssetBundle.of(context)
-        .loadString('assets/nu_telefone.txt');
+        .loadString(ConstantsHelpPage.numTelefoneTxt);
     String coCeps = await DefaultAssetBundle.of(context)
         .loadString(ConstantsHelpPage.coCepsTxt);
     String ufs = await DefaultAssetBundle.of(context)
