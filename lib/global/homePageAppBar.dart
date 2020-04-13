@@ -11,7 +11,7 @@ String getGreetingName() {
   }
 
   final names = globalUser.name.split(' ').map((n) => capitalize(n)).toList();
-  return "${names[0]} ${names.length >= 2 ? names[1] : ''}";
+  return "${names[0]}${names.length >= 2 ? ' $names[1]' : ''}";
 }
 
 class HomePageAppBar extends StatelessWidget implements PreferredSizeWidget {

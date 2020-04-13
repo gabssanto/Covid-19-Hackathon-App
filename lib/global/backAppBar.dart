@@ -30,6 +30,7 @@ class BackAppBar extends StatelessWidget implements PreferredSizeWidget {
                   icon: Icon(Icons.arrow_back_ios),
                   iconSize: 30,
                   onPressed: () {
+                    FocusScope.of(context).unfocus();
                     WidgetsBinding.instance.focusManager.primaryFocus?.unfocus();
                     Navigator.pop(context);
                   },

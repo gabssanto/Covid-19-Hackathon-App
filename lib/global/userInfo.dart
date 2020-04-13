@@ -2,7 +2,6 @@ class UserInfo {
   final String name, email, cpf, telephone, gender, cep, password;
   final chronicDiseases;
   final int residents, age;
-  String token;
 
   UserInfo({
     this.name,
@@ -47,7 +46,6 @@ class UserInfo {
       };
 
   String toString() => """UserInfo: {
-  token: $token,
   name: $name,
   email: $email,
   cpf: $cpf,

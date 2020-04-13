@@ -1,7 +1,5 @@
-import 'package:covid19/main.dart';
 import 'package:covid19/mobx/imports.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 
 class SymptomsQuestion extends StatefulWidget {
   final title;

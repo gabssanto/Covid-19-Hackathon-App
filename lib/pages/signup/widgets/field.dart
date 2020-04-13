@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-class SignUpTextField extends StatelessWidget {
+class SignupFormField extends StatelessWidget {
   final String hint, label;
   final validator, onSaved;
   final icon;
   final suffixIcon;
-  final obscureText;
+  final bool obscureText;
   final inputType;
-  final key;
+  final controller;
 
-  SignUpTextField({
+  SignupFormField({
     this.hint,
     this.label,
     this.validator,
@@ -18,7 +18,7 @@ class SignUpTextField extends StatelessWidget {
     this.suffixIcon,
     this.obscureText,
     this.inputType,
-    this.key,
+    this.controller,
   });
 
   @override
@@ -28,7 +28,7 @@ class SignUpTextField extends StatelessWidget {
         width: MediaQuery.of(context).size.width / 1.2,
         height: MediaQuery.of(context).size.height / 15,
         child: TextFormField(
-          key: key,
+          controller: controller,
           obscureText: obscureText ?? false,
           keyboardType: inputType ?? TextInputType.text,
           decoration: new InputDecoration(
